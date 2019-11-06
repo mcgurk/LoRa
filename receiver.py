@@ -39,43 +39,27 @@ class mylora(LoRa):
 
     def on_rx_done(self):
         BOARD.led_on()
-        #print("koe:", self.rx_is_good())
-        #print(self.get_dio_mapping())
-        #print(self.get_rx_header_cnt())
-        #print(self.get_modem_status())
-        #self.set_dio_mapping_2()
-        #print(self.dio_mapping[0])
-        #print(self.dio_mapping[1])
-        #print(self.dio_mapping[2])
-        #print(self.dio_mapping[3])
-        print(self.get_irq_flags())
-        #print("\nRxDone")
-        time.sleep(1)
+        print(datetime.datetime.now())
+        #print(self.spi.xfer([0x1C, 0])[1]) # REG.LORA.MODEM_CONFIG_2
         self.clear_irq_flags(RxDone=1, ValidHeader=1)
-        print(self.get_irq_flags())
-        #print(self)
-        #print(self.get_mode())
-        #print(MODE.lookup[self.get_mode()])
-
-        #payload = self.read_payload(nocheck=True )# Receive INF
         payload = self.read_payload(nocheck=False )# Receive INF
         print ("Receive: ")
-        #mens=bytes(payload).decode("utf-8",'ignore')
-        #mens=mens[2:-1] #to discard \x00\x00 and \x00 at the end
-        mens=payload
-        print(mens)
-        if (mens):
-          mens2=bytes(payload).decode("utf-8",'ignore')
-          print(mens2)
-        print(self.get_modem_config_1())
-        print(self.get_modem_config_2())
+        print(payload)
+        if (payload):
+          print("counter:", payload[0])
+          print((payload[1]*256+payload[2])/10.0, "°C")
+          print((payload[3]*256+payload[4])/10.0, "%rh")
+          #mens=bytes(payload).decode("utf-8",'ignore')
+          #print(mens)
+        #print(self.get_modem_config_1())
+        #print(self.get_modem_config_2())
         BOARD.led_off()
-        if mens=="INF":
-            print("Received data request INF")
-            time.sleep(2)
-            print ("Send mens: DATA RASPBERRY PI")
-            self.write_payload([255, 255, 0, 0, 68, 65, 84, 65, 32, 82, 65, 83, 80, 66, 69, 82, 82, 89, 32, 80, 73, 0]) # Send DATA RASPBERRY PI
-            self.set_mode(MODE.TX)
+        #if mens=="INF":
+        #    print("Received data request INF")
+        #    time.sleep(2)
+        #    print ("Send mens: DATA RASPBERRY PI")
+        #    self.write_payload([255, 255, 0, 0, 68, 65, 84, 65, 32, 82, 65, 83, 80, 66, 69, 82, $
+        #    self.set_mode(MODE.TX)
         time.sleep(2)
         self.reset_ptr_rx()
         self.set_mode(MODE.RXCONT)
@@ -114,14 +98,13 @@ class mylora(LoRa):
 
 #lora = mylora(verbose=False)
 lora = mylora(verbose=True)
-#args = parser.parse_args(lora) # configs in LoRaArgumentParser.py
-
-#     Slow+long range  Bw = 125 kHz, Cr = 4/8, Sf = 4096chips/symbol, CRC on. 13 dBm
 #lora.set_pa_config(pa_select=1, max_power=21, output_power=15)
 lora.set_freq(868.0)
 lora.set_bw(BW.BW125)
 lora.set_spreading_factor(10)
 lora.set_sync_word(0x77)
+
+print(datetime.datetime.now())
 
 assert(lora.get_agc_auto_on() == 1)
 
