@@ -68,3 +68,17 @@ DIO0 (IRQ) -> D1 (GPIO5)
 GND -> 6
 3.3V -> 1
 
+
+# Misc
+
+address byte
+node id
+nodeaddress
+page 77
+
+sync word
+page 74
+
+spi
+page 80
+
