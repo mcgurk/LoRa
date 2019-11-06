@@ -120,13 +120,8 @@ lora = mylora(verbose=True)
 #lora.set_pa_config(pa_select=1, max_power=21, output_power=15)
 lora.set_freq(868.0)
 lora.set_bw(BW.BW125)
-lora.set_spreading_factor(7)
-#lora.set_coding_rate(CODING_RATE.CR4_8)
-#lora.set_spreading_factor(12)
-#lora.set_rx_crc(False)
-#lora.set_rx_crc(True)
-#lora.set_pa_config(pa_select=1)
-
+lora.set_spreading_factor(10)
+lora.set_sync_word(0x77)
 
 assert(lora.get_agc_auto_on() == 1)
 
