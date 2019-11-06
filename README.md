@@ -84,3 +84,5 @@ page 74
 spi
 page 80
 
+RegSyncWord (0x39) 7-0 SyncWord rw 0x12 LoRa Sync Word
+(Value 0x34 is reserved for LoRaWAN networks)
