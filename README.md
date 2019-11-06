@@ -57,6 +57,8 @@ LED -> 33 (*GPIO13)
 
 https://github.com/sandeepmistry/arduino-LoRa
 
+https://github.com/sandeepmistry/arduino-LoRa/blob/master/API.md
+
 PITI VALKKAA "LOLIN(WEMOS) D1 R2 & mini" JOTTA EI KAADU! "WeMos D1 R1" Kaatuu!!!
 (Arduino IDE:n librarymanagerista tulee eri versio kuin mitä github:ssa on ?!?!)
 MISO (SPI) -> D6 (GPIO12)
