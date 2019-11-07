@@ -72,14 +72,17 @@ DHT sensor library for ESPx by beegee_tokyo 1.17.0
 
 PITI VALKKAA "LOLIN(WEMOS) D1 R2 & mini" JOTTA EI KAADU! "WeMos D1 R1" Kaatuu!!!
 (Arduino IDE:n librarymanagerista tulee eri versio kuin mitä github:ssa on ?!?!)
-MISO (SPI) -> D6 (GPIO12)
-MOSI (SPI) -> D7 (GPIO13)
-SCK/SCLK (SPI) -> D5 (GPIO14)
-NSS/SS/CS (SPI) -> D8 (GPIO15)
-RESET -> D2 (GPIO4)
-DIO0 (IRQ) -> D1 (GPIO5)
-GND -> 6
-3.3V -> 1
+
+RFM95 | Wemos D1 R2 & mini
+--- | ---
+MISO (SPI) | D6 (GPIO12)
+MOSI (SPI) | D7 (GPIO13)
+SCK/SCLK (SPI) | D5 (GPIO14)
+NSS/SS/CS (SPI) | D8 (GPIO15)
+RESET | D2 (GPIO4)
+DIO0 (IRQ) | D1 (GPIO5)
+GND | 6
+3.3V | 1
 
 
 # Misc
