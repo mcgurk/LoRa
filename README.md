@@ -37,7 +37,7 @@ https://www.mouser.com/datasheet/2/761/down-767039.pdf
  +-----+-----+---------+------+---+---Pi 2---+---+------+---------+-----+-----+
 ```
 
-| RF95 / "BOARD_DRAGINO_PIHAT" | Raspi 2 |
+| RF95 / "BOARD_DRAGINO_PIHAT" | Raspi 2 (physical pin number in gpio header) |
 | --- | --- |
 | MISO (SPI) (ruskea) | 21 (*GPIO9) |
 | MOSI (SPI) (oranssi) | 19 (*GPIO10) |
@@ -52,7 +52,7 @@ https://www.mouser.com/datasheet/2/761/down-767039.pdf
 | DIO2 (valkoinen) | 12 (*GPIO18) |
 | DIO3 (valko/sini) | 13 (*GPIO27) |
 | LED | 33 (*GPIO13) |
-
+** Notice! *GPIO's are not GPIO's, they are BCM-numbers **
 
 ## Arduino IDE / ESP8266 / Wemos
 
