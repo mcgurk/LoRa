@@ -73,6 +73,7 @@ Open Boards Manager from Tools > Board menu and install esp8266 platform.
 ### Arduino IDE settings
 Select right board from board settings (in my case "LOLIN(WEMOS) D1 R2 & mini"). Wrong board might give weird results.
 
+### Wiring
 RFM95 | Wemos D1 R2 & mini
 --- | ---
 MISO (SPI) | D6 (GPIO12)
