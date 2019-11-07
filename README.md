@@ -48,6 +48,7 @@ https://www.mouser.com/datasheet/2/761/down-767039.pdf
 | GND (musta) | 6 |
 | 3.3V (punainen) | 1 |
 
+| --- | --- |
 | DIO1 (purppura) | 11 (*GPIO17) |
 | DIO2 (valkoinen) | 12 (*GPIO18) |
 | DIO3 (valko/sini) | 13 (*GPIO27) |
