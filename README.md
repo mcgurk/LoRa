@@ -60,6 +60,8 @@ Start Arduino and open the Preferences window.
 Enter https://arduino.esp8266.com/stable/package_esp8266com_index.json into the Additional Board Manager URLs field. You can add multiple URLs, separating them with commas.
 Open Boards Manager from Tools > Board menu and install esp8266 platform (and don't forget to select your ESP8266 board from Tools > Board menu after installation).
 
+LoRa by Sandeep Mistry (0.7.0)
+
 https://github.com/sandeepmistry/arduino-LoRa
 
 https://github.com/sandeepmistry/arduino-LoRa/blob/master/API.md
