@@ -65,8 +65,8 @@ Open Boards Manager from Tools > Board menu and install esp8266 platform.
 
 ### Libraries
 - LoRa by Sandeep Mistry (0.7.0)
- - https://github.com/sandeepmistry/arduino-LoRa
- - https://github.com/sandeepmistry/arduino-LoRa/blob/master/API.md
+  - https://github.com/sandeepmistry/arduino-LoRa
+  - https://github.com/sandeepmistry/arduino-LoRa/blob/master/API.md
 - Optional: DHT sensor library for ESPx by beegee_tokyo 1.17.0
 
 
