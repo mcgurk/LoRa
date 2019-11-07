@@ -56,22 +56,20 @@ https://www.mouser.com/datasheet/2/761/down-767039.pdf
 
 ## Arduino IDE / ESP8266 / Wemos
 
-Install the current upstream Arduino IDE at the 1.8.7 level or later. The current version is on the Arduino website.
-Start Arduino and open the Preferences window.
-Enter https://arduino.esp8266.com/stable/package_esp8266com_index.json into the Additional Board Manager URLs field. You can add multiple URLs, separating them with commas.
-Open Boards Manager from Tools > Board menu and install esp8266 platform (and don't forget to select your ESP8266 board from Tools > Board menu after installation).
+### ESP8266 support for Aduino IDE
 
-LoRa by Sandeep Mistry (0.7.0)
+Start Arduino and open the Preferences window. Enter https://arduino.esp8266.com/stable/package_esp8266com_index.json into the Additional Board Manager URLs field (you can add multiple URLs, separating them with commas).
+Open Boards Manager from Tools > Board menu and install esp8266 platform.
 
-https://github.com/sandeepmistry/arduino-LoRa
-
-https://github.com/sandeepmistry/arduino-LoRa/blob/master/API.md
-
-DHT sensor library for ESPx by beegee_tokyo 1.17.0
+### Libraries
+-LoRa by Sandeep Mistry (0.7.0)
+--https://github.com/sandeepmistry/arduino-LoRa
+--https://github.com/sandeepmistry/arduino-LoRa/blob/master/API.md
+-Optional: DHT sensor library for ESPx by beegee_tokyo 1.17.0
 
 
-PITI VALKKAA "LOLIN(WEMOS) D1 R2 & mini" JOTTA EI KAADU! "WeMos D1 R1" Kaatuu!!!
-(Arduino IDE:n librarymanagerista tulee eri versio kuin mitä github:ssa on ?!?!)
+### Arduino IDE settings
+Select right board from board settings (in my case "LOLIN(WEMOS) D1 R2 & mini"). Wrong board might give weird results.
 
 RFM95 | Wemos D1 R2 & mini
 --- | ---
