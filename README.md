@@ -37,20 +37,21 @@ https://www.mouser.com/datasheet/2/761/down-767039.pdf
  +-----+-----+---------+------+---+---Pi 2---+---+------+---------+-----+-----+
 ```
 
-RF95 / "BOARD_DRAGINO_PIHAT" -> Raspi 2
-MISO (SPI) (ruskea) -> 21 (*GPIO9)
-MOSI (SPI) (oranssi) -> 19 (*GPIO10)
-SCK/SCLK (SPI) (keltainen) -> 23 (*GPIO11)
-RESET (sininen) -> 15 (*GPIO22)
-NSS/SS/CS (SPI) (vihreä) -> 24 (*GPIO8)
-DIO0 (IRQ) (harmaa) -> 7 (*GPIO4)
-GND (musta) -> 6
-3.3V (punainen) -> 1
+| RF95 / "BOARD_DRAGINO_PIHAT" | Raspi 2 |
+| --- | --- |
+| MISO (SPI) (ruskea) | 21 (*GPIO9) |
+| MOSI (SPI) (oranssi) | 19 (*GPIO10) |
+| SCK/SCLK (SPI) (keltainen) | 23 (*GPIO11) |
+| RESET (sininen) | 15 (*GPIO22) |
+| NSS/SS/CS (SPI) (vihreä) | 24 (*GPIO8) |
+| DIO0 (IRQ) (harmaa) | 7 (*GPIO4) |
+| GND (musta) | 6 |
+| 3.3V (punainen) | 1 |
 
-DIO1 (purppura) -> 11 (*GPIO17)
-DIO2 (valkoinen) -> 12 (*GPIO18)
-DIO3 (valko/sini) -> 13 (*GPIO27)
-LED -> 33 (*GPIO13)
+| DIO1 (purppura) | 11 (*GPIO17) |
+| DIO2 (valkoinen) | 12 (*GPIO18) |
+| DIO3 (valko/sini) | 13 (*GPIO27) |
+| LED | 33 (*GPIO13) |
 
 
 ## Arduino IDE / ESP8266 / Wemos
