@@ -47,7 +47,6 @@ https://www.mouser.com/datasheet/2/761/down-767039.pdf
 | DIO0 (IRQ) (harmaa) | 7 (*GPIO4) |
 | GND (musta) | 6 |
 | 3.3V (punainen) | 1 |
-
 | --- | --- |
 | DIO1 (purppura) | 11 (*GPIO17) |
 | DIO2 (valkoinen) | 12 (*GPIO18) |
