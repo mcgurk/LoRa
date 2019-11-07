@@ -4,12 +4,15 @@
 
 DHTesp dht;
 
-uint16_t counter = 0;
-//uint8_t counter = 0;
+//uint16_t counter = 0;
+uint8_t counter = 0;
 
 void setup() {
   dht.setup(D0, DHTesp::DHT22);
 
+  pinMode(D4, OUTPUT); //GPIO2, blue led
+  digitalWrite(D4, LOW);
+  
   Serial.begin(115200);
   while (!Serial);
 
@@ -49,19 +52,21 @@ void loop() {
   Serial.println(humidity);
     
   // send packet
+  digitalWrite(D4, HIGH);
   LoRa.beginPacket(); //0 = ExplicitHeaderModeOn, 1 = ImplicitHeaderModeOn
   // ExplicitHeaderModeOn: RegModemConfig 1 (0x1D) Bit 0 (ImplicitHeaderModeOn) = 0 //header includes coding rate and crc (page 29)
   //LoRa.print("McGurk - ");
-  //LoRa.write((uint8_t*)&temperature, 2);
-  //LoRa.write((uint8_t*)&humidity, 2);
   LoRa.write(counter);
-  LoRa.write(temperature>>8);
+  LoRa.write((uint8_t*)&temperature, 2);
+  LoRa.write((uint8_t*)&humidity, 2);
+  /*LoRa.write(temperature>>8);
   LoRa.write(temperature&0xff);
   LoRa.write(humidity>>8);
-  LoRa.write(humidity&0xff);
+  LoRa.write(humidity&0xff);*/
   //LoRa.print("hello ");
   //LoRa.print(counter);
   LoRa.endPacket();
+  digitalWrite(D4, LOW);
 
   counter++;
 
