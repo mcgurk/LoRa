@@ -47,7 +47,7 @@ https://www.mouser.com/datasheet/2/761/down-767039.pdf
 | DIO0 (IRQ) (harmaa) | 7 (*GPIO4) |
 | GND (musta) | 6 |
 | 3.3V (punainen) | 1 |
-| --- | --- |
+| Optional |
 | DIO1 (purppura) | 11 (*GPIO17) |
 | DIO2 (valkoinen) | 12 (*GPIO18) |
 | DIO3 (valko/sini) | 13 (*GPIO27) |
@@ -81,8 +81,8 @@ SCK/SCLK (SPI) | D5 (GPIO14)
 NSS/SS/CS (SPI) | D8 (GPIO15)
 RESET | D2 (GPIO4)
 DIO0 (IRQ) | D1 (GPIO5)
-GND | 6
-3.3V | 1
+GND | G
+3.3V | 3V3
 
 
 # Misc
