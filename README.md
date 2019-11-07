@@ -56,6 +56,8 @@ https://www.mouser.com/datasheet/2/761/down-767039.pdf
 
 ## Arduino IDE / ESP8266 / Wemos
 
+https://wiki.wemos.cc/products:retired:d1_mini_v2.2.0https://wiki.wemos.cc/products:retired:d1_mini_v2.2.0
+
 ### ESP8266 support for Aduino IDE
 
 Start Arduino and open the Preferences window. Enter https://arduino.esp8266.com/stable/package_esp8266com_index.json into the Additional Board Manager URLs field (you can add multiple URLs, separating them with commas).
