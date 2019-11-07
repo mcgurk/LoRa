@@ -22,6 +22,8 @@
 # <http://www.gnu.org/licenses/>.
 
 import time
+import datetime
+import struct
 from SX127x.LoRa import *
 #from SX127x.LoRaArgumentParser import LoRaArgumentParser
 from SX127x.board_config import BOARD
@@ -47,8 +49,10 @@ class mylora(LoRa):
         print(payload)
         if (payload):
           print("counter:", payload[0])
-          print((payload[1]*256+payload[2])/10.0, "°C")
-          print((payload[3]*256+payload[4])/10.0, "%rh")
+          t = struct.unpack('>h', bytearray([payload[1], payload[2]]))[0]/10.0
+          print(t, "°C")
+          #print((payload[1]*256+payload[2])/10.0, "°C")
+          #print((payload[3]*256+payload[4])/10.0, "%rh")
           #mens=bytes(payload).decode("utf-8",'ignore')
           #print(mens)
         #print(self.get_modem_config_1())
