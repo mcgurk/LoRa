@@ -8,6 +8,8 @@ uint16_t counter = 0;
 //uint8_t counter = 0;
 
 void setup() {
+  dht.setup(D0, DHTesp::DHT22);
+
   Serial.begin(115200);
   while (!Serial);
 
@@ -23,8 +25,8 @@ void setup() {
   //LoRa.setSpreadingFactor(7); // 7-12 (6 is special case) (page 27)
   LoRa.setSpreadingFactor(10);
   LoRa.setCodingRate4(8);
-  //LoRa.setTxPower(2); // PA_BOOST: 0-20, 0dBm...20dBm, RegPaDac (0x4D) bits 2-0, RegOcp (0x0B) bit 0-5 
-  LoRa.setTxPower(14);
+  //LoRa.setTxPower(2); // PA_BOOST: 2-20, 0dBm...20dBm, RegPaDac (0x4D) bits 2-0, RegOcp (0x0B) bit 0-5 
+  LoRa.setTxPower(4);
   //LoRa.setTxPower(0,0);
   // https://www.mouser.com/datasheet/2/761/down-767039.pdf
   // register table summary: page 90
@@ -35,8 +37,6 @@ void setup() {
   LoRa.setSyncWord(0x77);
   
   LoRa.dumpRegisters(Serial);
-
-  dht.setup(D0, DHTesp::DHT22);
 }
 
 void loop() {
