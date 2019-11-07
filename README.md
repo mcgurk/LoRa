@@ -53,7 +53,7 @@ https://www.mouser.com/datasheet/2/761/down-767039.pdf
 | DIO3 (valko/sini) | 13 (*GPIO27) |
 | LED | 33 (*GPIO13) |
 
-**Notice! *GPIO's are not GPIO's, they are BCM-numbers**
+**Notice! \*GPIO's are not GPIO's, they are BCM-numbers**
 
 ## Arduino IDE / ESP8266 / Wemos
 
