@@ -49,8 +49,9 @@ class mylora(LoRa):
         print(payload)
         if (payload):
           print("counter:", payload[0])
-          t = struct.unpack('>h', bytearray([payload[1], payload[2]]))[0]/10.0
-          print(t, "°C")
+          (t, h) = struct.unpack('>hh', bytearray(payload[1:5]))
+          print(t/10.0, "°C")
+          print(h/10.0, "%rh")
           #print((payload[1]*256+payload[2])/10.0, "°C")
           #print((payload[3]*256+payload[4])/10.0, "%rh")
           #mens=bytes(payload).decode("utf-8",'ignore')
