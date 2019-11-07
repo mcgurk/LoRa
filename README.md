@@ -53,7 +53,7 @@ https://www.mouser.com/datasheet/2/761/down-767039.pdf
 | DIO3 (valko/sini) | 13 (*GPIO27) |
 | LED | 33 (*GPIO13) |
 
-**Notice! Python uses \*GPIO-numbers, but they are not same GPIO's as in pinout-charts. \*GPIO's are BCM-numbers**
+**Notice! Python uses \*GPIO-numbers, but they are not same GPIO's as in pinout-charts. \*GPIO's are BCM-numbers.**
 
 ## Arduino IDE / ESP8266 / Wemos
 
