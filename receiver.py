@@ -22,16 +22,13 @@
 # <http://www.gnu.org/licenses/>.
 
 import time
-import datetime
+from datetime import datetime
 import struct
 from SX127x.LoRa import *
-#from SX127x.LoRaArgumentParser import LoRaArgumentParser
 from SX127x.board_config import BOARD
 
 BOARD.setup()
 BOARD.reset()
-#parser = LoRaArgumentParser("Lora tester")
-
 
 class mylora(LoRa):
     def __init__(self, verbose=False):
@@ -41,7 +38,7 @@ class mylora(LoRa):
 
     def on_rx_done(self):
         BOARD.led_on()
-        print(datetime.datetime.now())
+        print(datetime.now())
         #print(self.spi.xfer([0x1C, 0])[1]) # REG.LORA.MODEM_CONFIG_2
         self.clear_irq_flags(RxDone=1, ValidHeader=1)
         payload = self.read_payload(nocheck=False )# Receive INF
@@ -52,8 +49,6 @@ class mylora(LoRa):
           (t, h) = struct.unpack('<hh', bytearray(payload[1:5]))
           print(t/10.0, "°C")
           print(h/10.0, "%rh")
-          #print((payload[1]*256+payload[2])/10.0, "°C")
-          #print((payload[3]*256+payload[4])/10.0, "%rh")
           #mens=bytes(payload).decode("utf-8",'ignore')
           #print(mens)
         #print(self.get_modem_config_1())
@@ -99,7 +94,6 @@ class mylora(LoRa):
             self.set_mode(MODE.RXCONT) # Receiver mode
             while True:
                 pass;
-
 
 #lora = mylora(verbose=False)
 lora = mylora(verbose=True)
