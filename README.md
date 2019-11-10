@@ -59,7 +59,7 @@ https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
 
 ## Arduino IDE / ESP8266 / Wemos
 
-https://wiki.wemos.cc/products:retired:d1_mini_v2.2.0https://wiki.wemos.cc/products:retired:d1_mini_v2.2.0
+https://wiki.wemos.cc/products:retired:d1_mini_v2.2.0
 
 ### ESP8266 support for Aduino IDE
 
@@ -87,6 +87,22 @@ RESET | D2 (GPIO4)
 DIO0 (IRQ) | D1 (GPIO5)
 GND | G
 3.3V | 3V3
+
+### Wemos pinout
+
+NodeMCU | GPIO | notes
+--- | --- | ---
+D0 | GPIO16 | Ei tue keskeytyksiä. Ei ylösvetovastusominaisuutta. Ei PWM:ää. Käytetään syväunesta heräämiseen kytkemällä tämä RST:hen. Joissain moduuleissa user-nappi.
+D1 | GPIO5 |
+D2 | GPIO4 |
+D3 | GPIO0 | Flash-moodi. Flash-nappi NodeMCU-moduulissa. Pitää olla ylhäällä bootatessa normaalisti.
+D4 | GPIO2 | Pitää olla ylhäällä bootatessa. Sininen LED NodeMCU:ssa.
+D5 | GPIO14 | SCK
+D6 | GPIO12 | MISO
+D7 | GPIO13 | MOSI, sarjaportin vuonohjausta käytettäessä CTS.
+D8 | GPIO15 | SS, boottilähteen valinta. Pitää olla alhaalla bootatessa normaalisti. Sarjaportin vuonohjausta käytettäessä RTS.
+D9 | GPIO3 | Sarjaportin RX.
+D10 | GPIO1 | Sarjaportin TX.
 
 
 # Misc
