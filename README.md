@@ -7,6 +7,8 @@ https://github.com/rpsreal/pySX127x
 
 https://www.mouser.com/datasheet/2/761/down-767039.pdf
 
+https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
+
 ```
  $ gpio readall
  +-----+-----+---------+------+---+---Pi 2---+---+------+---------+-----+-----+
