@@ -113,6 +113,11 @@ RegSyncWord (0x39) 7-0 SyncWord rw 0x12 LoRa Sync Word
 # RF 433MHz
 Motonet Kauko-ohjattava ulkopistorasia IP44 3600W (38-4663) / EMAX 6867 ja 68671
 
+- 230V AC, 50Hz
+- 16A, 3600W
+- Frequency: 433,92MHz
+- Protection: IP44
+
 button | code (0 = short, 1 = long)
 --- | ---
 A on |  011000111010011000001111 1101100000
