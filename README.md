@@ -211,3 +211,17 @@ All off | 011000111010011000001000 1101110000
 - 0 (short): mark 300µs + space 841µs
 - 1 (long): mark 815µs + space 326µs
 - Remote sends code 6 times. About 10ms between codes.
+
+## Python
+
+sudo apt install python3-serial
+
+```
+import serial, time
+ser = serial.Serial('/dev/ttyUSB0', 115200)
+print(ser)
+ser.write(b'011000111010011000001111 1101100000')
+time.sleep(5)
+ser.write(b'011000111010011000001110 1101100100')
+ser.close()
+```
