@@ -126,8 +126,9 @@ D off | 011000111010011000000110 1101000100
 All on | 011000111010011000000100 1101001000
 All off | 011000111010011000001000 1101110000
 
-- code is 34 bits
+- Code is 34 bits
 - 34 bits take 38.8ms
-- one bit take 1.141ms
+- One bit take 1.141ms
 - 0 (short): mark 300us + space 1141-300us
 - 1 (long): mark 815us + space 1141-815us
+- Remote sends code 6 times. About 10ms between codes.
