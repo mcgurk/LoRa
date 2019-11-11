@@ -107,16 +107,27 @@ D10 | GPIO1 | Sarjaportin TX.
 
 # Misc
 
-address byte
-node id
-nodeaddress
-page 77
-
-sync word
-page 74
-
-spi
-page 80
-
 RegSyncWord (0x39) 7-0 SyncWord rw 0x12 LoRa Sync Word
 (Value 0x34 is reserved for LoRaWAN networks)
+
+# RF 433MHz
+Motonet Kauko-ohjattava ulkopistorasia IP44 3600W (38-4663) / EMAX 6867 ja 68671
+
+button | code (0 = short, 1 = long)
+--- | ---
+A on |  011000111010011000001111 1101100000
+A off | 011000111010011000001110 1101100100
+B on |  011000111010011000001101 1101101100
+B off | 011000111010011000001100 1101101000
+C on |  011000111010011000001011 1101111100
+C off | 011000111010011000001010 1101111000
+D on |  011000111010011000000111 1101000000
+D off | 011000111010011000000110 1101000100
+All on | 011000111010011000000100 1101001000
+All off | 011000111010011000001000 1101110000
+
+- code is 34 bits
+- 34 bits take 38.8ms
+- one bit take 1.141ms
+- 0 (short): mark 300us + space 1141-300us
+- 1 (long): mark 815us + space 1141-815us
