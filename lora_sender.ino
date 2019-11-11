@@ -45,22 +45,31 @@ void setup() {
 }
 
 void loop() {
-  int16_t temperature = dht.getTemperature()*10.0;
-  int16_t humidity = dht.getHumidity()*10.0;
+  float temperature = dht.getTemperature();
+  float humidity = dht.getHumidity();
+  int16_t t = 32767;
+  int16_t h = 32767;
 
   Serial.print("Sending packet: ");
   Serial.println(counter);
   Serial.println(temperature);
   Serial.println(humidity);
-    
+
+  if (!isnan(temperature) && !isnan(humidity)) {
+    t = temperature * 10.0;
+    h = humidity * 10.0;
+  }
+  Serial.println(t);
+  Serial.println(h);
+  
   // send packet
   digitalWrite(D4, HIGH);
   LoRa.beginPacket(); //0 = ExplicitHeaderModeOn, 1 = ImplicitHeaderModeOn
   // ExplicitHeaderModeOn: RegModemConfig 1 (0x1D) Bit 0 (ImplicitHeaderModeOn) = 0 //header includes coding rate and crc (page 29)
   //LoRa.print("McGurk - ");
   LoRa.write(counter);
-  LoRa.write((uint8_t*)&temperature, 2);
-  LoRa.write((uint8_t*)&humidity, 2);
+  LoRa.write((uint8_t*)&t, 2);
+  LoRa.write((uint8_t*)&h, 2);
   /*LoRa.write(temperature>>8);
   LoRa.write(temperature&0xff);
   LoRa.write(humidity>>8);
