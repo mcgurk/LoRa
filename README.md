@@ -57,6 +57,80 @@ https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
 
 **Notice! Python uses \*GPIO-numbers, but they are not same GPIO's as in pinout-charts. \*GPIO's are BCM-numbers.**
 
+## Orange Pi Zero
+```
+WiringPi (Orange Pi Zero):
+git clone https://github.com/xpertsavenue/WiringOP-Zero.git
+cd WiringOP-Zero
+sudo ./build
+gpio readall
+test:
+gpio write 30 1 # punanen led paalle
+gpio write 30 0 # punanen led pois paalta
+
+Python gpio:
+https://pypi.org/project/OPi.GPIO/ (from rpi.gpio)
+https://pypi.org/project/OrangePi.GPIO/ (only basic gpio functions. userspace)
+(git clone https://github.com/rm-hull/OPi.GPIO.git)
+(git clone https://github.com/Jeremie-C/OrangePi.GPIO)
+(cd OrangePi.GPIO)
+(sudo python3 setup.py install)
+(sudo pip3 install OPi.GPIO)
+sudo adduser "$USER" kmem
+sudo chmod g+rw /dev/kmem
+test:
+import OPi.GPIO as GPIO
+from time import sleep
+#GPIO.setboard(GPIO.ZERO)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(3, GPIO.OUT)
+
+while True:
+  GPIO.output(3, 1)
+  sleep(0.5)
+  GPIO.output(3, 0)
+  sleep(0.5)
+
+spi:
+sudo apt install python3-pip python3-setuptools python3-dev python3-wheel python3-numpy
+sudo pip3 install spidev
+test:
+#!/usr/bin/env python3
+import spidev
+spi = spidev.SpiDev()
+import OPi.GPIO as GPIO
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(24, GPIO.OUT, GPIO.LOW) # CE0
+GPIO.setup(22, GPIO.IN, GPIO.HIGH) # RST
+spi.open(1,0) # use spi.open(0,0) with Orange Pi PC
+spi.max_speed_hz = 5000000
+spi.xfer([0x42, 0])
+(miksi tää testi ei toimi?)
+
+pyLoRa:
+sudo pip3 install pyLoRa
+git clone https://github.com/rpsreal/pySX127x.git
+cd pySX127x
+./LORA_CLIENT.py
+nano /home/kurkku/pySX127x/SX127x/board_config.py (täällä myös pinnit!):
+RPi.GPIO -> OPi.GPIO
+SPI_BUS=0 -> 1
+GPIO.setmode(GPIO.BCM) -> GPIO.BOARD
+
+sudo sed -i 's/RPi.GPIO/OPi.GPIO/g' /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
+sudo sed -i 's/SPI_BUS=0/SPI_BUS=1/g' /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
+sudo sed -i 's/GPIO.BCM/GPIO.BOARD/g' /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
+häkki:
+sudo sed -i 's/SPI_CS=1/SPI_CS=0/g' /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
+
+    DIO0 = 18   # RaspPi GPIO 4
+    DIO1 = 13   # RaspPi GPIO 17
+    DIO2 = 15#10   # RaspPi GPIO 18
+    DIO3 = 16#11   # RaspPi GPIO 27
+    RST  = 22   # RaspPi GPIO 22
+    LED  = 3   # RaspPi GPIO 13 connects to the LED and a resistor (1kohm or 330ohm)
+```
+
 ## Arduino IDE / ESP8266 / Wemos
 
 https://wiki.wemos.cc/products:retired:d1_mini_v2.2.0
