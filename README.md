@@ -134,6 +134,6 @@ All off | 011000111010011000001000 1101110000
 - Code is 34 bits
 - 34 bits take 38.8ms
 - One bit take 1.141ms
-- 0 (short): mark 300us + space 1141-300us
-- 1 (long): mark 815us + space 1141-815us
+- 0 (short): mark 300us + space 841us
+- 1 (long): mark 815us + space 326us
 - Remote sends code 6 times. About 10ms between codes.
