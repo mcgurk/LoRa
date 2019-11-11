@@ -40,6 +40,8 @@ void setup() {
   LoRa.setSyncWord(0x77);
   
   LoRa.dumpRegisters(Serial);
+  
+  delay(1000);
 }
 
 void loop() {
