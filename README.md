@@ -217,11 +217,25 @@ All off | 011000111010011000001000 1101110000
 sudo apt install python3-serial
 
 ```
-import serial, time
+#!/usr/bin/env python3
+
+import serial, time, sys
+
+#print('Number of arguments:', len(sys.argv), 'arguments.')
+#print('Argument List:', str(sys.argv))
+
 ser = serial.Serial('/dev/ttyUSB0', 115200)
-print(ser)
-ser.write(b'011000111010011000001111 1101100000')
-time.sleep(5)
-ser.write(b'011000111010011000001110 1101100100')
+#print(ser)
+if sys.argv[1] == "on":
+  print("on")
+  ser.write(b'011000111010011000001111 1101100000')
+if sys.argv[1] == "off":
+  print("off")
+  ser.write(b'011000111010011000001110 1101100100')
+
+#ser.write(b'011000111010011000001111 1101100000')
+#time.sleep(5)
+#ser.write(b'011000111010011000001110 1101100100')
 ser.close()
+
 ```
