@@ -63,6 +63,8 @@ class mylora(LoRa):
         #print(self.spi.xfer([0x1C, 0])[1]) # REG.LORA.MODEM_CONFIG_2
         self.clear_irq_flags(RxDone=1, ValidHeader=1)
         payload = self.read_payload(nocheck=False )# Receive INF
+        print("pkt_rssi: ", self.get_pkt_rssi_value())
+        print("pkt_snr: ", self.get_pkt_snr_value())
         print ("Receive: ")
         print(payload)
         if (payload):
