@@ -29,8 +29,7 @@ void setup() {
   LoRa.setSpreadingFactor(10);
   LoRa.setCodingRate4(8);
   //LoRa.setTxPower(2); // PA_BOOST: 2-20, 0dBm...20dBm, RegPaDac (0x4D) bits 2-0, RegOcp (0x0B) bit 0-5 
-  LoRa.setTxPower(4);
-  //LoRa.setTxPower(0,0);
+  LoRa.setTxPower(10);
   // https://www.mouser.com/datasheet/2/761/down-767039.pdf
   // register table summary: page 90
   // lora mode registers: 108 ->
