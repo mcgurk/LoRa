@@ -1,5 +1,5 @@
 
-// make rf_sender; sudo chown root:root blink; sudo chmod u+s blink
+// gcc -o rf_sender rf_sender.c -O3 -Wall -I/usr/local/include -Winline -pipe -L/usr/local/lib -lwiringPi -lwiringPiDev -lpthread -lm -lcrypt -lrt; sudo chown root:root rf_sender; sudo chmod u+s rf_sender
 
 #include <stdio.h>
 #include <wiringPi.h>
