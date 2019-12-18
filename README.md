@@ -209,7 +209,7 @@ All off | 01100011101001100000 1000 1101 1100 00
 
 - Code is 34 bits
 - 34 bits take 38.8ms
-- One bit take 1.141ms
+- One bit takes 1.141ms
 - 0 (short): mark 300µs + space 841µs
 - 1 (long): mark 815µs + space 326µs
 - Remote sends code 6 times. About 10ms between codes.
