@@ -215,10 +215,23 @@ All off | 011000111010011000001000 1101110000
 - Remote sends code 6 times. About 10ms between codes.
 
 ### LIDL
+TR-502MSV
 - Code is 21 bits
 - 0 (short): space 1300µs + mark 600µs
 - 1 (long): space 600µs + mark 1300µs
 - Remote sends code 4 times. About 80ms between codes.
+- 13 bits identification: randomly selected when reset button is pressed from remot
+- 2 bit address: 11 = 1, 01 = 2, 10 = 3, 00 = 4 (dim sends last pressed button and if all is pressed addr is 00)
+- 4 bit opcode: 1011 = on, 1111 = off, 1101 = dim+, 1001 = dim-, 0011 = all on, 0111 = all off
+- 2 bit checksum: last 3 bitpairs xorred with each other
+Examples:
+```
+       ID            Btn Op  Chksum
+1 on:  0011011101101 11 1011 10
+1 off: 0011011101101 11 1111 11
+2 on:  0011011101101 01 1011 00
+2 off: 0011011101101 01 1111 01
+```
 
 ## Python
 
