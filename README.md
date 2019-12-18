@@ -225,6 +225,7 @@ TR-502MSV
 - 4 bit opcode: 1011 = on, 1111 = off, 1101 = dim+, 1001 = dim-, 0011 = all on, 0111 = all off
 - 2 bit checksum: last 3 bitpairs xorred with each other
 Examples:
+
 Button | RemoteID | BtnID | OpCode | Chksum
 --- | --- | --- | --- | ---
 1 on |  0011011101101 | 11 | 1011 | 10
