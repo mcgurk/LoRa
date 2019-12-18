@@ -185,6 +185,8 @@ RegSyncWord (0x39) 7-0 SyncWord rw 0x12 LoRa Sync Word
 (Value 0x34 is reserved for LoRaWAN networks)
 
 # RF 433MHz
+
+### Motonet
 Motonet Kauko-ohjattava ulkopistorasia IP44 3600W (38-4663) / EMAX 6867 ja 68671
 
 - 230V AC, 50Hz
