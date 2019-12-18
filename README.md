@@ -212,6 +212,12 @@ All off | 011000111010011000001000 1101110000
 - 1 (long): mark 815µs + space 326µs
 - Remote sends code 6 times. About 10ms between codes.
 
+### LIDL
+- Code is 21 bits
+- 0 (short): space 1300µs + mark 600µs
+- 1 (long): space 600µs + mark 1300µs
+- Remote sends code 4 times. About 80ms between codes.
+
 ## Python
 
 sudo apt install python3-serial
