@@ -222,7 +222,7 @@ TR-502MSV
 - Remote sends code 4 times. About 80ms between codes.
 - 21 bits (13+2+4+2)
 - 13 bits identification: randomly selected when reset button is pressed from remot
-- 2 bit address: 11 = 1, 01 = 2, 10 = 3, 00 = 4 (dim sends last pressed button and if all is pressed addr is 00)
+- 2 bit address: 11 = 1, 01 = 2, 10 = 3, 00 = 4 (dim sends last pressed BtnID and if "all" is pressed BtnID is 00)
 - 4 bit opcode: 1011 = on, 1111 = off, 1101 = dim+, 1001 = dim-, 0011 = all on, 0111 = all off
 - 2 bit checksum: last 3 bitpairs xorred with each other
 Examples:
