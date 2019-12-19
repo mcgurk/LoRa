@@ -68,6 +68,8 @@ test:
 gpio write 30 1 # punanen led paalle
 gpio write 30 0 # punanen led pois paalta
 
+(miksi zerollakin ei käyttäisi https://github.com/orangepi-xunlong/wiringOP?)
+
 Python gpio:
 https://pypi.org/project/OPi.GPIO/ (from rpi.gpio)
 https://pypi.org/project/OrangePi.GPIO/ (only basic gpio functions. userspace)
