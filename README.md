@@ -161,12 +161,12 @@ sudo sed -i 's/SPI_CS=1/SPI_CS=0/g' /usr/local/lib/python3.7/dist-packages/SX127
 ```
 /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py:
 ```
-    DIO0 = 18   # RaspPi GPIO 4
-    DIO1 = 13   # RaspPi GPIO 17
-    DIO2 = 15#10   # RaspPi GPIO 18
-    DIO3 = 16#11   # RaspPi GPIO 27
-    RST  = 22   # RaspPi GPIO 22
-    LED  = 3   # RaspPi GPIO 13 connects to the LED and a resistor (1kohm or 330ohm)
+    DIO0 = 18
+    DIO1 = 13
+    DIO2 = 15
+    DIO3 = 16
+    RST  = 22
+    LED  = 3
 ```
 
 ## Arduino IDE / ESP8266 / Wemos
