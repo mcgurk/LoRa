@@ -58,7 +58,33 @@ https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
 **Notice! Python uses \*GPIO-numbers, but they are not same GPIO's as in pinout-charts. \*GPIO's are BCM-numbers.**
 
 ## Orange Pi Zero
-### WiringPi to Orange Pi Zero
+http://linux-sunxi.org/Xunlong_Orange_Pi_Zero
+https://linux-sunxi.org/images/e/e0/Orange-Pi-Zero-Schanetics-v1_11.pdf
+```
+$ gpio readall
++-----+-----+----------+------+--Orange Pi Zero--+------+----------+-----+-----+
+| H2+ | wPi |   Name   | Mode | V | Physical | V | Mode | Name     | wPi | H2+ |
++-----+-----+----------+------+---+----++----+---+------+----------+-----+-----+
+|     |     |     3.3v |      |   |  1 || 2  |   |      | 5v       |     |     |
+|  12 |   8 |    SDA.0 |  OUT | 1 |  3 || 4  |   |      | 5V       |     |     |
+|  11 |   9 |    SCL.0 | ALT3 | 0 |  5 || 6  |   |      | 0v       |     |     |
+|   6 |   7 |   GPIO.7 | ALT3 | 0 |  7 || 8  | 0 | ALT3 | TxD3     | 15  | 198 |
+|     |     |       0v |      |   |  9 || 10 | 0 | ALT3 | RxD3     | 16  | 199 |
+|   1 |   0 |     RxD2 | ALT3 | 0 | 11 || 12 | 0 | ALT3 | GPIO.1   | 1   | 7   |
+|   0 |   2 |     TxD2 | ALT3 | 0 | 13 || 14 |   |      | 0v       |     |     |
+|   3 |   3 |     CTS2 | ALT3 | 0 | 15 || 16 | 0 | ALT3 | GPIO.4   | 4   | 19  |
+|     |     |     3.3v |      |   | 17 || 18 | 0 | ALT3 | GPIO.5   | 5   | 18  |
+|  15 |  12 |     MOSI | ALT5 | 0 | 19 || 20 |   |      | 0v       |     |     |
+|  16 |  13 |     MISO | ALT5 | 0 | 21 || 22 | 0 | ALT3 | RTS2     | 6   | 2   |
+|  14 |  14 |     SCLK | ALT5 | 0 | 23 || 24 | 0 | ALT5 | CE0      | 10  | 13  |
+|     |     |       0v |      |   | 25 || 26 | 0 | ALT3 | GPIO.11  | 11  | 10  |
++-----+-----+----------+------+---+---LEDs---+---+------+----------+-----+-----+
+|  17 |  30 | STAT-LED |  OUT | 0 | 27 || 28 |   |      | PWR-LED  |     |     |
++-----+-----+----------+------+---+-----+----+---+------+----------+-----+-----+
+| H2+ | wPi |   Name   | Mode | V | Physical | V | Mode | Name     | wPi | H2+ |
++-----+-----+----------+------+--Orange Pi Zero--+---+------+---------+-----+--+
+```
+### WiringPi to Orange Pi Zero (do we even need this?)
 #### Install
 ```
 git clone https://github.com/xpertsavenue/WiringOP-Zero.git
@@ -85,16 +111,16 @@ sudo chmod g+rw /dev/kmem
 ```
 import OPi.GPIO as GPIO
 from time import sleep
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(3, GPIO.OUT)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(17, GPIO.OUT) # red led
 
 while True:
-  GPIO.output(3, 1)
+  GPIO.output(17, 1)
   sleep(0.5)
-  GPIO.output(3, 0)
+  GPIO.output(17, 0)
   sleep(0.5)
 ```
-### Python 3 / spi
+### Python 3 / spidev
 #### Install
 ```
 sudo apt install python3-pip python3-setuptools python3-dev python3-wheel python3-numpy
@@ -113,7 +139,6 @@ spi.open(1,0) # use spi.open(0,0) with Orange Pi PC
 spi.max_speed_hz = 5000000
 spi.xfer([0x42, 0])
 (miksi tää testi ei toimi?)
-
 ```
 ### Python 3 / pyLoRa
 #### Install
