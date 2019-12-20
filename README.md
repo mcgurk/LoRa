@@ -57,6 +57,16 @@ https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
 
 **Notice! Python uses \*GPIO-numbers, but they are not same GPIO's as in pinout-charts. \*GPIO's are BCM-numbers.**
 
+### Install
+```
+sudo raspi-config nonint do_spi 0 # enable spi
+sudo apt install python3-rpi.gpio python3-pip python3-spidev wiringpi
+sudo pip3 install pyLoRa
+
+git clone https://github.com/rpsreal/pySX127x
+cd pySX127x
+```
+
 ## Orange Pi Zero
 http://linux-sunxi.org/Xunlong_Orange_Pi_Zero
 https://linux-sunxi.org/images/e/e0/Orange-Pi-Zero-Schanetics-v1_11.pdf
