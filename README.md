@@ -114,12 +114,12 @@ $ gpio readall
 git clone https://github.com/xpertsavenue/WiringOP-Zero.git
 cd WiringOP-Zero
 sudo ./build
-gpio readall
 ```
 - https://github.com/orangepi-xunlong/wiringOP doesn't compile with Orange Pi Zero (20.12.2019)
 
 #### Test:
 ```
+gpio readall
 gpio write 30 1 # red led on
 gpio write 30 0 # red led off
 ```
