@@ -62,9 +62,6 @@ https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
 sudo raspi-config nonint do_spi 0 # enable spi
 sudo apt install python3-rpi.gpio python3-pip python3-spidev wiringpi
 sudo pip3 install pyLoRa
-
-git clone https://github.com/rpsreal/pySX127x
-cd pySX127x
 ```
 
 ## Orange Pi Zero
