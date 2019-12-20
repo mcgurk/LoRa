@@ -91,6 +91,23 @@ $ gpio readall
 | H2+ | wPi |   Name   | Mode | V | Physical | V | Mode | Name     | wPi | H2+ |
 +-----+-----+----------+------+--Orange Pi Zero--+---+------+---------+-----+--+
 ```
+
+| RFM95 | Orange Pi Zero, physical pin number in gpio header |
+| --- | --- |
+| MISO (SPI) (ruskea) | 21 (GPIO16/PA16/SPI1_MISO) |
+| MOSI (SPI) (oranssi) | 19 (GPIO15/PA15/SPI1_MOSI) |
+| SCK/SCLK (SPI) (keltainen) | 23 (GPIO14/PA14/SPI1_CLK) |
+| RESET (sininen) | 22 (GPIO2/PA02) |
+| NSS/SS/CS (SPI) (vihreä) | 24 (GPIO13/PA13/SPI1_CS) |
+| DIO0 (IRQ) (harmaa) | 18 (GPIO18/PA18) |
+| GND (musta) | 6 |
+| 3.3V (punainen) | 1 |
+| Optional: |
+| DIO1 (purppura) | 13 (GPIO0/PA00) |
+| DIO2 (valkoinen) | 15 (GPIO3/PA03) |
+| DIO3 (valko/sini) | 16 (GPIO19/PA19) |
+| LED | 3 (GPIO12/PA12) |
+
 ### WiringPi to Orange Pi Zero (do we even need this?)
 #### Install
 ```
