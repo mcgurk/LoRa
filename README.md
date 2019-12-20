@@ -105,20 +105,20 @@ gpio write 30 0 # red led off
 sudo pip3 install OPi.GPIO
 sudo adduser "$USER" kmem
 sudo chmod g+rw /dev/kmem
-# make permanent
+# make permanent:
 sudo sed -i /kmem/s/0640/0660/ /lib/udev/rules.d/50-udev-default.rules
 ```
 #### Test
 ```
 import OPi.GPIO as GPIO
 from time import sleep
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(17, GPIO.OUT) # red led
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(3, GPIO.OUT) # red led
 
 while True:
-  GPIO.output(17, 1)
+  GPIO.output(3, 1)
   sleep(0.5)
-  GPIO.output(17, 0)
+  GPIO.output(3, 0)
   sleep(0.5)
 ```
 ### Python 3 / spidev
