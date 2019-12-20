@@ -120,7 +120,7 @@ sudo sed -i /kmem/s/0640/0660/ /lib/udev/rules.d/50-udev-default.rules
 import OPi.GPIO as GPIO
 from time import sleep
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(3, GPIO.OUT) # red led
+GPIO.setup(3, GPIO.OUT) # pin3 (GPIO12/PA12/wPi8)
 
 while True:
   GPIO.output(3, 1)
@@ -152,20 +152,15 @@ spi.xfer([0x42, 0])
 #### Install
 ```
 sudo pip3 install pyLoRa
-git clone https://github.com/rpsreal/pySX127x.git
-cd pySX127x
-./LORA_CLIENT.py
-nano /home/kurkku/pySX127x/SX127x/board_config.py (täällä myös pinnit!):
-RPi.GPIO -> OPi.GPIO
-SPI_BUS=0 -> 1
-GPIO.setmode(GPIO.BCM) -> GPIO.BOARD
 
 sudo sed -i 's/RPi.GPIO/OPi.GPIO/g' /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
 sudo sed -i 's/SPI_BUS=0/SPI_BUS=1/g' /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
 sudo sed -i 's/GPIO.BCM/GPIO.BOARD/g' /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
-häkki:
+# Very ugly hack (after this both spi-devices points to same SPI_BUS=1 and same SPI_CS=0):
 sudo sed -i 's/SPI_CS=1/SPI_CS=0/g' /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
-
+```
+/usr/local/lib/python3.7/dist-packages/SX127x/board_config.py:
+```
     DIO0 = 18   # RaspPi GPIO 4
     DIO1 = 13   # RaspPi GPIO 17
     DIO2 = 15#10   # RaspPi GPIO 18
