@@ -58,7 +58,8 @@ https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
 **Notice! Python uses \*GPIO-numbers, but they are not same GPIO's as in pinout-charts. \*GPIO's are BCM-numbers.**
 
 ## Orange Pi Zero
-### Install WiringPi to Orange Pi Zero
+### WiringPi to Orange Pi Zero
+#### Install
 ```
 git clone https://github.com/xpertsavenue/WiringOP-Zero.git
 cd WiringOP-Zero
@@ -67,28 +68,23 @@ gpio readall
 ```
 - https://github.com/orangepi-xunlong/wiringOP doesn't compile with Orange Pi Zero (20.12.2019)
 
-### Test WiringPi with Orange Pi Zero:
+#### Test:
 ```
 gpio write 30 1 # red led on
 gpio write 30 0 # red led off
 ```
-
-(miksi zerollakin ei käyttäisi https://github.com/orangepi-xunlong/wiringOP?)
-
-Python gpio:
-https://pypi.org/project/OPi.GPIO/ (from rpi.gpio)
-https://pypi.org/project/OrangePi.GPIO/ (only basic gpio functions. userspace)
-(git clone https://github.com/rm-hull/OPi.GPIO.git)
-(git clone https://github.com/Jeremie-C/OrangePi.GPIO)
-(cd OrangePi.GPIO)
-(sudo python3 setup.py install)
-(sudo pip3 install OPi.GPIO)
+### Python 3 / OPi.GPIO
+#### Install
+```
+sudo pip3 install OPi.GPIO
 sudo adduser "$USER" kmem
 sudo chmod g+rw /dev/kmem
-test:
+# todo: how to make permanent?
+```
+#### Test
+```
 import OPi.GPIO as GPIO
 from time import sleep
-#GPIO.setboard(GPIO.ZERO)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(3, GPIO.OUT)
 
@@ -97,11 +93,15 @@ while True:
   sleep(0.5)
   GPIO.output(3, 0)
   sleep(0.5)
-
-spi:
+```
+### Python 3 / spi
+#### Install
+```
 sudo apt install python3-pip python3-setuptools python3-dev python3-wheel python3-numpy
 sudo pip3 install spidev
-test:
+```
+#### Test
+```
 #!/usr/bin/env python3
 import spidev
 spi = spidev.SpiDev()
@@ -114,7 +114,10 @@ spi.max_speed_hz = 5000000
 spi.xfer([0x42, 0])
 (miksi tää testi ei toimi?)
 
-pyLoRa:
+```
+### Python 3 / pyLoRa
+#### Install
+```
 sudo pip3 install pyLoRa
 git clone https://github.com/rpsreal/pySX127x.git
 cd pySX127x
