@@ -58,15 +58,20 @@ https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
 **Notice! Python uses \*GPIO-numbers, but they are not same GPIO's as in pinout-charts. \*GPIO's are BCM-numbers.**
 
 ## Orange Pi Zero
+### Install WiringPi to Orange Pi Zero
 ```
-WiringPi (Orange Pi Zero):
 git clone https://github.com/xpertsavenue/WiringOP-Zero.git
 cd WiringOP-Zero
 sudo ./build
 gpio readall
-test:
-gpio write 30 1 # punanen led paalle
-gpio write 30 0 # punanen led pois paalta
+```
+- https://github.com/orangepi-xunlong/wiringOP doesn't compile with Orange Pi Zero (20.12.2019)
+
+### Test WiringPi with Orange Pi Zero:
+```
+gpio write 30 1 # red led on
+gpio write 30 0 # red led off
+```
 
 (miksi zerollakin ei käyttäisi https://github.com/orangepi-xunlong/wiringOP?)
 
