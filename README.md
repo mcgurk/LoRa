@@ -105,7 +105,8 @@ gpio write 30 0 # red led off
 sudo pip3 install OPi.GPIO
 sudo adduser "$USER" kmem
 sudo chmod g+rw /dev/kmem
-# todo: how to make permanent?
+# make permanent
+sudo sed -i /kmem/s/0640/0660/ /lib/udev/rules.d/50-udev-default.rules
 ```
 #### Test
 ```
