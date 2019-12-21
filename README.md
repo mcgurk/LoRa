@@ -65,8 +65,11 @@ sudo pip3 install pyLoRa
 ```
 
 ## Orange Pi Zero
+
 http://linux-sunxi.org/Xunlong_Orange_Pi_Zero
+
 https://linux-sunxi.org/images/e/e0/Orange-Pi-Zero-Schanetics-v1_11.pdf
+
 ```
 $ gpio readall
 +-----+-----+----------+------+--Orange Pi Zero--+------+----------+-----+-----+
