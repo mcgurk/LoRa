@@ -146,6 +146,24 @@ while True:
   sleep(0.5)
 ```
 ### Python 3 / spidev
+#### /dev/spi
+/boot/armbianEnv.txt:
+```
+overlays=spi-spidev usbhost2 usbhost3
+param_spidev_spi_bus=1
+```
+/etc/udev/rules.d/50-spi.rules:
+```
+SUBSYSTEM=="spidev", GROUP="spiuser", MODE="0660"
+```
+```
+sudo groupadd spiuser
+sudo adduser "$USER" spiuser
+sudo udevadm control --reload-rules
+sudo modprobe -r spidev; sudo modprobe spidev
+# logout out and login to update user group
+```
+
 #### Install
 ```
 sudo apt install python3-pip python3-setuptools python3-dev python3-wheel python3-numpy
