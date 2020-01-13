@@ -120,7 +120,7 @@ lora.set_bw(BW.BW125)
 lora.set_spreading_factor(10)
 lora.set_sync_word(0x77)
 
-print(datetime.datetime.now())
+print(datetime.now())
 
 assert(lora.get_agc_auto_on() == 1)
 
