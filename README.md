@@ -248,6 +248,7 @@ sudo pip3 install spidev
 import spidev
 spi = spidev.SpiDev()
 import OPi.GPIO as GPIO
+GPIO.cleanup()
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(24, GPIO.OUT, GPIO.LOW) # CE0
 GPIO.setup(22, GPIO.IN, GPIO.HIGH) # RST
