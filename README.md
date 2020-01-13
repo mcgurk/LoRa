@@ -269,6 +269,7 @@ sudo sed -i 's/GPIO.BCM/GPIO.BOARD/g' /usr/local/lib/python3.7/dist-packages/SX1
 sudo sed -i 's/SPI_CS=1/SPI_CS=0/g' /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
 ```
 /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py:
+(or /usr/local/lib/python3.5/dist-packages/SX127x/board_config.py)
 ```
     DIO0 = 18
     DIO1 = 13
