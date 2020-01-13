@@ -58,6 +58,31 @@ https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
 
 **Notice! Python uses \*GPIO-numbers, but they are not same GPIO's as in pinout-charts. \*GPIO's are BCM-numbers.**
 
+### test / scan
+```
+SPI on:
+sudo raspi-config
+5 Interfacing Options -> SPI -> On
+/dev/spidev0.0 /dev/spidev0.1
+
+cd ~
+wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.62.tar.gz
+tar xvfz bcm2835-1.62.tar.gz
+cd bcm2835-1.62
+./configure
+make
+sudo make check
+sudo make install
+
+sudo apt update
+sudo apt install git
+git clone https://github.com/idreamsi/RadioHead
+cd ~/RadioHead/examples/raspi/spi_scan
+make
+sudo ./spi_scan
+Checking register(0x42) with CS=GPIO08 => SX1276 RF95/96 (V=0x12)
+```
+
 ### Install
 ```
 sudo raspi-config nonint do_spi 0 # enable spi
