@@ -41,15 +41,15 @@ https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
 
 | RFM95 | Raspi 2, physical pin number in gpio header |
 | --- | --- |
-| MISO (SPI) (ruskea) | 21 (*GPIO9) |
-| MOSI (SPI) (oranssi) | 19 (*GPIO10) |
+| MISO/SDI (SPI) (ruskea) | 21 (*GPIO9) |
+| MOSI/SDO (SPI) (oranssi) | 19 (*GPIO10) |
 | SCK/SCLK (SPI) (keltainen) | 23 (*GPIO11) |
-| RESET (sininen) | 15 (*GPIO22) |
-| NSS/SS/CS (SPI) (vihreä) | 24 (*GPIO8) |
-| DIO0 (IRQ) (harmaa) | 7 (*GPIO4) |
+| RESET/RST (sininen) | 15 (*GPIO22) |
+| NSS/SS/CS/SEL (SPI) (vihreä) | 24 (*GPIO8) |
+| DIO0/IO0 (IRQ) (harmaa) | 7 (*GPIO4) |
 | GND (musta) | 6 |
 | 3.3V (punainen) | 1 |
-| ANA | Antenna (86mm) |
+| ANA/ANT | Antenna (86mm) |
 | Optional: |
 | DIO1 (purppura) | 11 (*GPIO17) |
 | DIO2 (valkoinen) | 12 (*GPIO18) |
