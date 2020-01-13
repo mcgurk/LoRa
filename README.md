@@ -262,10 +262,12 @@ spi.xfer([0x42, 0])
 ```
 sudo pip3 install pyLoRa
 
+# notice: python3.7 might be python3.5
 sudo sed -i 's/RPi.GPIO/OPi.GPIO/g' /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
-sudo sed -i 's/SPI_BUS=0/SPI_BUS=1/g' /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
 sudo sed -i 's/GPIO.BCM/GPIO.BOARD/g' /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
-# Very ugly hack (after this both spi-devices points to same SPI_BUS=1 and same SPI_CS=0):
+# Orange Pi Zero: Very ugly hack (after this both spi-devices points to same SPI_BUS=1 and same SPI_CS=0):
+sudo sed -i 's/SPI_BUS=0/SPI_BUS=1/g' /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
+# Orange Pi PC: Very ugly hack (after this both spi-devices points to same SPI_BUS=0 and same SPI_CS=0):
 sudo sed -i 's/SPI_CS=1/SPI_CS=0/g' /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
 ```
 /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py:
