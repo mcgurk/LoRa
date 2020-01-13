@@ -130,6 +130,9 @@ sudo udevadm control --reload-rules
 sudo pip3 install OPi.GPIO
 ```
 
+#### Continue
+Go to Python 3 / spidev
+
 ## Orange Pi Zero
 
 http://linux-sunxi.org/Xunlong_Orange_Pi_Zero
@@ -220,7 +223,7 @@ while True:
 /boot/armbianEnv.txt:
 ```
 overlays=spi-spidev usbhost2 usbhost3
-param_spidev_spi_bus=1
+param_spidev_spi_bus=1 # use 0 with Orange Pi PC
 ```
 /etc/udev/rules.d/50-spi.rules:
 ```
