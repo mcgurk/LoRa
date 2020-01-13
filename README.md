@@ -49,6 +49,7 @@ https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
 | DIO0 (IRQ) (harmaa) | 7 (*GPIO4) |
 | GND (musta) | 6 |
 | 3.3V (punainen) | 1 |
+| ANA | Antenna (86mm) |
 | Optional: |
 | DIO1 (purppura) | 11 (*GPIO17) |
 | DIO2 (valkoinen) | 12 (*GPIO18) |
@@ -105,6 +106,7 @@ $ gpio readall
 | DIO0 (IRQ) (harmaa) | 18 (GPIO18/PA18) |
 | GND (musta) | 6 |
 | 3.3V (punainen) | 1 |
+| ANA | Antenna (86mm) |
 | Optional: |
 | DIO1 (purppura) | 13 (GPIO0/PA00) |
 | DIO2 (valkoinen) | 15 (GPIO3/PA03) |
