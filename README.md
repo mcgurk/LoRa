@@ -59,6 +59,7 @@ https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
 **Notice! Python uses \*GPIO-numbers, but they are not same GPIO's as in pinout-charts. \*GPIO's are BCM-numbers.**
 
 ### test / scan
+Reset and DIO0 can be unconnected when using spi_scan?
 ```
 SPI on:
 sudo raspi-config
