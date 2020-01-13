@@ -329,8 +329,8 @@ Select right board from board settings (in my case "LOLIN(WEMOS) D1 R2 & mini").
 ### Wiring
 RFM95 | Wemos D1 R2 & mini
 --- | ---
-MISO (SPI) | D6 (GPIO12)
-MOSI (SPI) | D7 (GPIO13)
+MISO/SDO (SPI) | D6 (GPIO12)
+MOSI/SDI (SPI) | D7 (GPIO13)
 SCK/SCLK (SPI) | D5 (GPIO14)
 NSS/SS/CS (SPI) | D8 (GPIO15)
 RESET | D2 (GPIO4)
