@@ -103,8 +103,8 @@ $ gpio readall
 | RESET (blue) | 22 (GPIO2/PA2) |
 | NSS/SS/CS (SPI) (green) | 24 (GPIO67/PC3/SPI0_CS) |
 | DIO0 (IRQ) (grey) | 18 (GPIO71/PC7) |
-| GND (black) | 6 |
-| 3.3V (red) | 1 |
+| GND (black) | 20 |
+| 3.3V (red) | 17 |
 | ANA | Antenna (86mm) |
 | Optional: |
 | DIO1 (purple) | 13 (GPIO0/PA0) |
