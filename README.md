@@ -123,7 +123,7 @@ SUBSYSTEM=="gpio", KERNEL=="gpio*", ACTION=="add", PROGRAM="/bin/sh -c 'chown ro
 sudo groupadd gpio
 sudo adduser "$USER" gpio
 sudo udevadm control --reload-rules
-# logout out and login to update user group
+# reboot
 ```
 #### Install
 ```
