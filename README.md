@@ -40,7 +40,7 @@ https://cdn.sparkfun.com/assets/learn_tutorials/4/2/4/header_pinout.jpg
  | BCM | wPi |   Name  | Mode | V | Physical | V | Mode | Name    | wPi | BCM |
  +-----+-----+---------+------+---+---Pi 2---+---+------+---------+-----+-----+
 ```
-**Notice! Wiringpi "Name"-column "GPIO"-numbers are not same as GPIO-numbers in Python or pinout-charts. Use Wiringpi "BCM" numbers as GPIO numbers.**
+**Notice! Wiringpi "Name"-column "GPIO"-numbers are not same as GPIO-numbers in Python or pinout-charts. Use Wiringpi "BCM"-column as GPIO numbers.**
 
 | RFM95 | Raspi 2, physical pin number in gpio header |
 | --- | --- |
