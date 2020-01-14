@@ -9,6 +9,8 @@ https://www.mouser.com/datasheet/2/761/down-767039.pdf
 
 https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
 
+https://cdn.sparkfun.com/assets/learn_tutorials/4/2/4/header_pinout.jpg
+
 ```
  $ gpio readall
  +-----+-----+---------+------+---+---Pi 2---+---+------+---------+-----+-----+
@@ -44,9 +46,9 @@ https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
 | MISO/SDO (SPI) (ruskea) | 21 (*GPIO9) |
 | MOSI/SDI (SPI) (oranssi) | 19 (*GPIO10) |
 | SCK/SCLK (SPI) (keltainen) | 23 (*GPIO11) |
-| RESET/RST (sininen) | 18 (*GPIO5) |
+| RESET/RST (sininen) | 18 (*GPIO24) |
 | NSS/SS/CS/SEL (SPI) (vihreä) | 24 (*GPIO8) |
-| DIO0/IO0 (IRQ) (harmaa) | 22 (*GPIO6) |
+| DIO0/IO0 (IRQ) (harmaa) | 22 (*GPIO25) |
 | GND (musta) | 6 |
 | 3.3V (punainen) | 1 |
 | ANA/ANT | Antenna (86mm) |
@@ -56,7 +58,7 @@ https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
 | DIO3 (valko/sini) | 13 (*GPIO27) |
 | LED | 3 (*GPIO2) |
 
-**Notice! Python uses \*GPIO-numbers, but they are not same GPIO's as in pinout-charts. \*GPIO's are BCM-numbers.**
+**Notice! Python uses \*GPIO-numbers, but they are not same GPIO's as in pinout-charts or in wiringpi "name"-fields. \*GPIO's are BCM-numbers.**
 
 ### test / scan
 Reset and DIO0 can be unconnected when using spi_scan?
