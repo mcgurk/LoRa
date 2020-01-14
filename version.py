@@ -3,6 +3,8 @@ import spidev
 spi = spidev.SpiDev()
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
+GPIO.setup(8, GPIO.OUT) # CE0
+GPIO.output(8, GPIO.LOW)
 GPIO.setup(25, GPIO.OUT) # RST
 GPIO.output(25, GPIO.HIGH)
 spi.open(0,0)
