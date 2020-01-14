@@ -44,9 +44,9 @@ https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
 | MISO/SDO (SPI) (ruskea) | 21 (*GPIO9) |
 | MOSI/SDI (SPI) (oranssi) | 19 (*GPIO10) |
 | SCK/SCLK (SPI) (keltainen) | 23 (*GPIO11) |
-| RESET/RST (sininen) | 15 (*GPIO22) |
+| RESET/RST (sininen) | 18 (*GPIO5) |
 | NSS/SS/CS/SEL (SPI) (vihreä) | 24 (*GPIO8) |
-| DIO0/IO0 (IRQ) (harmaa) | 7 (*GPIO4) |
+| DIO0/IO0 (IRQ) (harmaa) | 22 (*GPIO6) |
 | GND (musta) | 6 |
 | 3.3V (punainen) | 1 |
 | ANA/ANT | Antenna (86mm) |
@@ -126,9 +126,9 @@ $ gpio readall
 | MISO (SPI) (brown) | 21 (GPIO65/PC1/SPI0_MISO) |
 | MOSI (SPI) (orange) | 19 (GPIO64/PC0/SPI0_MOSI) |
 | SCK/SCLK (SPI) (yellow) | 23 (GPIO66/PC2/SPI0_CLK) |
-| RESET (blue) | 22 (GPIO2/PA2) |
+| RESET (blue) | 18 (GPIO71/PC7) |
 | NSS/SS/CS (SPI) (green) | 24 (GPIO67/PC3/SPI0_CS) |
-| DIO0 (IRQ) (grey) | 18 (GPIO71/PC7) |
+| DIO0 (IRQ) (grey) | 22 (GPIO2/PA2) |
 | GND (black) | 20 |
 | 3.3V (red) | 17 |
 | ANA | Antenna (86mm) |
@@ -195,9 +195,9 @@ $ gpio readall
 | MISO (SPI) (brown) | 21 (GPIO16/PA16/SPI1_MISO) |
 | MOSI (SPI) (orange) | 19 (GPIO15/PA15/SPI1_MOSI) |
 | SCK/SCLK (SPI) (yellow) | 23 (GPIO14/PA14/SPI1_CLK) |
-| RESET (blue) | 22 (GPIO2/PA02) |
+| RESET (blue) | 18 (GPIO18/PA18) |
 | NSS/SS/CS (SPI) (green) | 24 (GPIO13/PA13/SPI1_CS) |
-| DIO0 (IRQ) (grey) | 18 (GPIO18/PA18) |
+| DIO0 (IRQ) (grey) | 22 (GPIO2/PA02) |
 | GND (black) | 6 |
 | 3.3V (red) | 1 |
 | ANA | Antenna (86mm) |
