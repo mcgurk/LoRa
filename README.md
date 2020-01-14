@@ -65,6 +65,7 @@ SPI on:
 sudo raspi-config
 5 Interfacing Options -> SPI -> On
 /dev/spidev0.0 /dev/spidev0.1
+(or: sudo raspi-config nonint do_spi 0 # enable spi)
 
 cd ~
 wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.62.tar.gz
@@ -87,7 +88,7 @@ Checking register(0x42) with CS=GPIO08 => SX1276 RF95/96 (V=0x12)
 
 ### Install
 ```
-sudo raspi-config nonint do_spi 0 # enable spi
+
 sudo apt install python3-rpi.gpio python3-pip python3-spidev wiringpi
 sudo pip3 install pyLoRa
 ```
