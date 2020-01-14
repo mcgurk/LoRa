@@ -90,7 +90,17 @@ Checking register(0x42) with CS=GPIO08 => SX1276 RF95/96 (V=0x12)
 ```
 sudo apt install python3-rpi.gpio python3-pip python3-spidev wiringpi
 sudo pip3 install pyLoRa
-sudo nano /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
+```
+/usr/local/lib/python3.7/dist-packages/SX127x/board_config.py:
+```
+    DIO0 = 25   # RaspPi GPIO 4
+    DIO1 = 17   # RaspPi GPIO 17
+    DIO2 = 18   # RaspPi GPIO 18
+    DIO3 = 27   # RaspPi GPIO 27
+    RST  = 24   # RaspPi GPIO 22
+    LED  = 2   # RaspPi GPIO 13 connects to the LED and a resistor (1kohm or 330ohm)
+```
+```
 cd ~
 wget https://raw.githubusercontent.com/mcgurk/LoRa-and-RF/master/lora_receiver.py
 chmod 777 lora_receiver.py
