@@ -58,7 +58,7 @@ https://cdn.sparkfun.com/assets/learn_tutorials/4/2/4/header_pinout.jpg
 | DIO3 (valko/sini) | 13 (GPIO27) |
 | LED | 3 (GPIO2) |
 
-**Notice! Wiringpi name field GPIO-numbers are not same as GPIO-numbers in Python or pinout-charts. Use Wiringpi "BCM" numbers as GPIO numbers.**
+**Notice! Wiringpi "Name"-column "GPIO"-numbers are not same as GPIO-numbers in Python or pinout-charts. Use Wiringpi "BCM" numbers as GPIO numbers.**
 
 ### test / scan
 Reset and DIO0 can be unconnected when using spi_scan?
