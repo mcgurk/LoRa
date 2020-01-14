@@ -55,7 +55,7 @@
 | DIO3 (valko/sini) | 13 (GPIO27) |
 | LED | 3 (GPIO2) |
 
-### test / scan
+### Test / scan
 Reset and DIO0 can be unconnected when using spi_scan?
 ```
 SPI on:
@@ -82,6 +82,7 @@ sudo ./spi_scan
 sudo ~/RadioHead/examples/raspi/spi_scan/spi_scan
 Checking register(0x42) with CS=GPIO08 => SX1276 RF95/96 (V=0x12)
 ```
+**Notice! spi_scan doesn't test RST ja DIO0 pins! You can only be sure that all SPI-pins worked.**
 
 ### Install pip3, spidev and pyLoRa and start receiver
 ```
