@@ -81,6 +81,7 @@ git clone https://github.com/idreamsi/RadioHead
 cd ~/RadioHead/examples/raspi/spi_scan
 make
 sudo ./spi_scan
+sudo ~/RadioHead/examples/raspi/spi_scan/spi_scan
 Checking register(0x42) with CS=GPIO08 => SX1276 RF95/96 (V=0x12)
 ```
 
