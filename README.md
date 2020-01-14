@@ -43,22 +43,22 @@ https://cdn.sparkfun.com/assets/learn_tutorials/4/2/4/header_pinout.jpg
 
 | RFM95 | Raspi 2, physical pin number in gpio header |
 | --- | --- |
-| MISO/SDO (SPI) (ruskea) | 21 (*GPIO9) |
-| MOSI/SDI (SPI) (oranssi) | 19 (*GPIO10) |
-| SCK/SCLK (SPI) (keltainen) | 23 (*GPIO11) |
-| RESET/RST (sininen) | 18 (*GPIO24) |
-| NSS/SS/CS/SEL (SPI) (vihreä) | 24 (*GPIO8) |
-| DIO0/IO0 (IRQ) (harmaa) | 22 (*GPIO25) |
+| MISO/SDO (SPI) (ruskea) | 21 (GPIO9) |
+| MOSI/SDI (SPI) (oranssi) | 19 (GPIO10) |
+| SCK/SCLK (SPI) (keltainen) | 23 (GPIO11) |
+| RESET/RST (sininen) | 18 (GPIO24) |
+| NSS/SS/CS/SEL (SPI) (vihreä) | 24 (GPIO8) |
+| DIO0/IO0 (IRQ) (harmaa) | 22 (GPIO25) |
 | GND (musta) | 6 |
 | 3.3V (punainen) | 1 |
 | ANA/ANT | Antenna (86mm) |
 | Optional: |
-| DIO1 (purppura) | 11 (*GPIO17) |
-| DIO2 (valkoinen) | 12 (*GPIO18) |
-| DIO3 (valko/sini) | 13 (*GPIO27) |
-| LED | 3 (*GPIO2) |
+| DIO1 (purppura) | 11 (GPIO17) |
+| DIO2 (valkoinen) | 12 (GPIO18) |
+| DIO3 (valko/sini) | 13 (GPIO27) |
+| LED | 3 (GPIO2) |
 
-**Notice! Python uses \*GPIO-numbers, but they are not same GPIO's as in pinout-charts or in wiringpi "name"-fields. \*GPIO's are BCM-numbers.**
+**Notice! Wiringpi name field GPIO-numbers are not same as GPIO-numbers in Python or pinout-charts. Use Wiringpi "BCM" numbers as GPIO numbers.**
 
 ### test / scan
 Reset and DIO0 can be unconnected when using spi_scan?
