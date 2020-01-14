@@ -54,7 +54,7 @@ https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
 | DIO1 (purppura) | 11 (*GPIO17) |
 | DIO2 (valkoinen) | 12 (*GPIO18) |
 | DIO3 (valko/sini) | 13 (*GPIO27) |
-| LED | 33 (*GPIO13) |
+| LED | 3 (*GPIO2) |
 
 **Notice! Python uses \*GPIO-numbers, but they are not same GPIO's as in pinout-charts. \*GPIO's are BCM-numbers.**
 
@@ -90,6 +90,7 @@ Checking register(0x42) with CS=GPIO08 => SX1276 RF95/96 (V=0x12)
 ```
 sudo apt install python3-rpi.gpio python3-pip python3-spidev wiringpi
 sudo pip3 install pyLoRa
+sudo nano /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
 cd ~
 wget https://raw.githubusercontent.com/mcgurk/LoRa-and-RF/master/lora_receiver.py
 chmod 777 lora_receiver.py
