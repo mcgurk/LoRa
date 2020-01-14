@@ -1,15 +1,11 @@
 # LoRa
 
 ## Python / Raspberry Pi 2
-https://pypi.org/project/pyLoRa/
-
-https://github.com/rpsreal/pySX127x
-
-https://www.mouser.com/datasheet/2/761/down-767039.pdf
-
-https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
-
-https://cdn.sparkfun.com/assets/learn_tutorials/4/2/4/header_pinout.jpg
+- https://pypi.org/project/pyLoRa/
+- https://github.com/rpsreal/pySX127x
+- https://www.mouser.com/datasheet/2/761/down-767039.pdf
+- https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
+- https://cdn.sparkfun.com/assets/learn_tutorials/4/2/4/header_pinout.jpg
 
 ```
  $ gpio readall
