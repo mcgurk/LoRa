@@ -43,11 +43,11 @@ https://cdn.sparkfun.com/assets/learn_tutorials/4/2/4/header_pinout.jpg
 
 | RFM95 | Raspi 2, physical pin number in gpio header |
 | --- | --- |
-| MISO/SDO (SPI) (ruskea) | 21 (GPIO9) |
 | MOSI/SDI (SPI) (oranssi) | 19 (GPIO10) |
+| MISO/SDO (SPI) (ruskea) | 21 (GPIO9) |
 | SCK/SCLK (SPI) (keltainen) | 23 (GPIO11) |
-| RESET/RST (sininen) | 18 (GPIO24) |
 | NSS/SS/CS/SEL (SPI) (vihreä) | 24 (GPIO8) |
+| RESET/RST (sininen) | 18 (GPIO24) |
 | DIO0/IO0 (IRQ) (harmaa) | 22 (GPIO25) |
 | GND (musta) | 6 |
 | 3.3V (punainen) | 1 |
