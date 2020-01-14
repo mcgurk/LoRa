@@ -86,7 +86,7 @@ Checking register(0x42) with CS=GPIO08 => SX1276 RF95/96 (V=0x12)
 
 ### Install pip3, spidev and pyLoRa and start receiver
 ```
-sudo apt install python3-rpi.gpio python3-pip python3-spidev wiringpi
+sudo apt install python3-rpi.gpio python3-pip python3-spidev wiringpi screen
 sudo pip3 install pyLoRa
 ```
 /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py:
@@ -102,7 +102,7 @@ sudo pip3 install pyLoRa
 cd ~
 wget https://raw.githubusercontent.com/mcgurk/LoRa-and-RF/master/lora_receiver.py
 chmod 777 lora_receiver.py
-./lora_receiver.py
+screen ./lora_receiver.py
 ```
 
 ## Orange Pi PC
