@@ -82,6 +82,21 @@ sudo ./spi_scan
 sudo ~/RadioHead/examples/raspi/spi_scan/spi_scan
 Checking register(0x42) with CS=GPIO08 => SX1276 RF95/96 (V=0x12)
 ```
+### Test with Python3 spidev
+```
+gpio mode 10 out; gpio mode 12 alt0; gpio mode 13 alt0; gpio mode 14 alt0; gpio mode 6 in; gpio mode 5 out; gpio write 5 1
+
+import spidev
+spi = spidev.SpiDev()
+spi.open(0,0)
+spi.max_speed_hz = 5000000
+ver=spi.xfer([0x42, 0])[1]
+print(hex(ver))
+spi.close()
+
+
+```
+
 **Notice! spi_scan doesn't test RST ja DIO0 pins! You can only be sure that all SPI-pins worked.**
 
 ### Install pip3, spidev and pyLoRa and start receiver
