@@ -103,6 +103,8 @@ sudo ./spi_scan
 sudo ~/RadioHead/examples/raspi/spi_scan/spi_scan
 Checking register(0x42) with CS=GPIO08 => SX1276 RF95/96 (V=0x12)
 ```
+**Notice! spi_scan doesn't test RST ja DIO0 pins! You can only be sure that all SPI-pins worked.**
+
 ### Test with Python3 spidev
 ```
 gpio mode 12 alt0; gpio mode 13 alt0; gpio mode 14 alt0; gpio mode 10 out; gpio write 10 1; gpio mode 11 out; gpio write 11 1; gpio mode 5 out; gpio write 5 1; gpio mode 6 in;
@@ -116,8 +118,7 @@ ver=spi.xfer([0x42, 0])[1]
 print(hex(ver))
 spi.close()
 ```
-
-**Notice! spi_scan doesn't test RST ja DIO0 pins! You can only be sure that all SPI-pins worked.**
+**Notice! Spidev doesn't set right pin-modes. Set them manually with Wiringpi before starting python!** 
 
 ### Print all registers with pyLoRa/pySX127x
 ```
