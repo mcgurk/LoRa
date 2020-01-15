@@ -125,7 +125,7 @@ spi.close()
 
 ### Print all registers with pyLoRa/pySX127x
 ```
-sudo apt install git python-spidev
+sudo apt install git python3-spidev
 cd ~
 git clone https://github.com/rpsreal/pySX127x
 ```
@@ -142,7 +142,7 @@ pySX127x/¨SX127x/board_config.py:
 gpio mode 12 alt0; gpio mode 13 alt0; gpio mode 14 alt0; 
 gpio mode 10 out; gpio write 10 1; gpio mode 11 out; gpio write 11 1; 
 gpio mode 5 out; gpio write 5 1; gpio mode 6 in;
-pySX127x/lora_util.py # python2!
+python3 pySX127x/lora_util.py # without "python3"-command lora_util.py tries to use python2
 ```
 
 ### Install pip3, spidev and pyLoRa and start receiver
