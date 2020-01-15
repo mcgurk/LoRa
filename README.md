@@ -7,6 +7,16 @@
 - https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
 - https://cdn.sparkfun.com/assets/learn_tutorials/4/2/4/header_pinout.jpg
 
+### PROBLEM
+
+Using C library for Broadcom BCM 2835 as used in Raspberry Pi (https://www.airspayce.com/mikem/bcm2835/) to access SPI, it doesn't revert pins to previous state. After "bcm2835_spi_end()" MOSI, MISO, SCLK, CE0, CE1 are in "IN"-mode. So things said here doesn't happen: https://raspberrypi.stackexchange.com/questions/58864/pigpio-python-module-doesnt-always-set-gpio-pin-modes-for-spi.
+
+After "bcm2835_spi_begin()" MOSI, MISO, SCLK, CE0 and CE1 are in "ALT0"-mode as should be.
+
+At bootup, MOSI, MISO and SCLK is in state "ALT0" and CE0 and CE1 in state "OUT"
+
+Python spidev-module counts on that pins are at bootup-state. It uses CE0 and CE1 with softare and doesn't rely hardware CE0 and CE1 usage.
+
 ```
  $ gpio readall
  +-----+-----+---------+------+---+---Pi 2---+---+------+---------+-----+-----+
@@ -93,8 +103,6 @@ spi.max_speed_hz = 5000000
 ver=spi.xfer([0x42, 0])[1]
 print(hex(ver))
 spi.close()
-
-
 ```
 
 **Notice! spi_scan doesn't test RST ja DIO0 pins! You can only be sure that all SPI-pins worked.**
