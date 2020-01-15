@@ -17,6 +17,13 @@ At bootup, MOSI, MISO and SCLK is in state "ALT0" and CE0 and CE1 in state "OUT"
 
 Python spidev-module relies that pins are at bootup-state. It uses CE0 and CE1 with softare and doesn't use hardware CE0 and CE1 usage. Even worse is that you cannot change MOSI, MISO and SCLK state to ALT0 with RPi.GPIO-python module.
 
+#### "Workaround"
+Set pin states same as after bootup with Wiringpi (MOSI, MISO and SCLK = "ALT0", CE0 and CE1 = "OUT"/1):
+`gpio mode 12 alt0; gpio mode 13 alt0; gpio mode 14 alt0; gpio mode 10 out; gpio write 10 1; gpio mode 11 out; gpio write 11 1;`
+
+Set RST to "OUT"/1 and DIO0 to "IN":
+`gpio mode 5 out; gpio write 5 1; gpio mode 6 in; `
+
 ```
  $ gpio readall # after bootup
 +-----+-----+---------+------+---+---Pi 2---+---+------+---------+-----+-----+
