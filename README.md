@@ -163,6 +163,9 @@ sudo pip3 install pyLoRa
 cd ~
 wget https://raw.githubusercontent.com/mcgurk/LoRa-and-RF/master/lora_receiver.py
 chmod 777 lora_receiver.py
+gpio mode 12 alt0; gpio mode 13 alt0; gpio mode 14 alt0; 
+gpio mode 10 out; gpio write 10 1; gpio mode 11 out; gpio write 11 1; 
+gpio mode 5 out; gpio write 5 1; gpio mode 6 in;
 screen ./lora_receiver.py
 ```
 
