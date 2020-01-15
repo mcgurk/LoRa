@@ -19,9 +19,13 @@ Python spidev-module relies that pins are at bootup-state. It uses CE0 and CE1 w
 
 #### "Workaround"
 Set pin states same as after bootup with Wiringpi (MOSI, MISO and SCLK = "ALT0", CE0 and CE1 = "OUT"/1):
-```gpio mode 12 alt0; gpio mode 13 alt0; gpio mode 14 alt0; gpio mode 10 out; gpio write 10 1; gpio mode 11 out; gpio write 11 1;```
+```
+gpio mode 12 alt0; gpio mode 13 alt0; gpio mode 14 alt0; gpio mode 10 out; gpio write 10 1; gpio mode 11 out; gpio write 11 1;
+```
 Set RST to "OUT"/1 and DIO0 to "IN":
-```gpio mode 5 out; gpio write 5 1; gpio mode 6 in; ```
+```
+gpio mode 5 out; gpio write 5 1; gpio mode 6 in;
+```
 
 ```
  $ gpio readall # after bootup
@@ -113,6 +117,25 @@ spi.close()
 ```
 
 **Notice! spi_scan doesn't test RST ja DIO0 pins! You can only be sure that all SPI-pins worked.**
+
+### Print all registers with pyLoRa/pySX127x
+```
+sudo apt install git python-spidev
+cd ~
+git clone https://github.com/rpsreal/pySX127x
+```
+pySX127x/¨SX127x/board_config.py:
+```
+    DIO0 = 25   # RaspPi GPIO 4
+    DIO1 = 17   # RaspPi GPIO 17
+    DIO2 = 18   # RaspPi GPIO 18
+    DIO3 = 27   # RaspPi GPIO 27
+    RST  = 24   # RaspPi GPIO 22
+    LED  = 2   # RaspPi GPIO 13 connects to the LED and a resistor (1kohm or 330ohm)
+```
+```
+pySX127x/lora_utils.py
+```
 
 ### Install pip3, spidev and pyLoRa and start receiver
 ```
