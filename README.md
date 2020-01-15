@@ -15,7 +15,7 @@ After "bcm2835_spi_begin()" MOSI, MISO, SCLK, CE0 and CE1 are in "ALT0"-mode as 
 
 At bootup, MOSI, MISO and SCLK is in state "ALT0" and CE0 and CE1 in state "OUT"
 
-Python spidev-module counts on that pins are at bootup-state. It uses CE0 and CE1 with softare and doesn't rely hardware CE0 and CE1 usage.
+Python spidev-module relies that pins are at bootup-state. It uses CE0 and CE1 with softare and doesn't use hardware CE0 and CE1 usage. Even worse is that you cannot change MOSI, MISO and SCLK state to ALT0 with RPi.GPIO-python module.
 
 ```
  $ gpio readall
