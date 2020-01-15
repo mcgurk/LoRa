@@ -113,7 +113,7 @@ gpio mode 12 alt0; gpio mode 13 alt0; gpio mode 14 alt0; gpio mode 10 out; gpio 
 import spidev
 spi = spidev.SpiDev()
 spi.open(0,0)
-spi.max_speed_hz = 5000000
+spi.max_speed_hz = 5000000 # SX127x can go up to 10MHz, pick half that to be safe
 ver=spi.xfer([0x42, 0])[1]
 print(hex(ver))
 spi.close()
