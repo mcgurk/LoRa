@@ -142,7 +142,7 @@ pySX127x/¨SX127x/board_config.py:
 gpio mode 12 alt0; gpio mode 13 alt0; gpio mode 14 alt0; 
 gpio mode 10 out; gpio write 10 1; gpio mode 11 out; gpio write 11 1; 
 gpio mode 5 out; gpio write 5 1; gpio mode 6 in;
-pySX127x/lora_utils.py
+pySX127x/lora_util.py # python2!
 ```
 
 ### Install pip3, spidev and pyLoRa and start receiver
