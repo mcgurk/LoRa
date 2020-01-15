@@ -291,11 +291,11 @@ import OPi.GPIO as GPIO
 GPIO.cleanup()
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(24, GPIO.OUT, GPIO.LOW) # CE0
-GPIO.setup(22, GPIO.IN, GPIO.HIGH) # RST
+GPIO.setup(22, GPIO.OUT, GPIO.HIGH) # RST
 spi.open(1,0) # use spi.open(0,0) with Orange Pi PC
 spi.max_speed_hz = 5000000
 spi.xfer([0x42, 0])
-(miksi tää testi ei toimi?)
+#this doesn't allways work. something to do with pinmodes...
 ```
 ### Python 3 / pyLoRa
 #### Install
