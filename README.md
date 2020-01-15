@@ -1,6 +1,6 @@
 # LoRa
 
-## Python / Raspberry Pi 2
+## Raspberry Pi 2
 - https://pypi.org/project/pyLoRa/
 - https://github.com/rpsreal/pySX127x
 - https://www.mouser.com/datasheet/2/761/down-767039.pdf
@@ -27,9 +27,9 @@ Set RST to "OUT"/1 and DIO0 to "IN":
 ```
 gpio mode 5 out; gpio write 5 1; gpio mode 6 in;
 ```
-
+### Pins after bootup
 ```
- $ gpio readall # after bootup
+ $ gpio readall
 +-----+-----+---------+------+---+---Pi 2---+---+------+---------+-----+-----+
  | BCM | wPi |   Name  | Mode | V | Physical | V | Mode | Name    | wPi | BCM |
  +-----+-----+---------+------+---+----++----+---+------+---------+-----+-----+
@@ -60,6 +60,7 @@ gpio mode 5 out; gpio write 5 1; gpio mode 6 in;
 ```
 **Notice! Wiringpi "Name"-column "GPIO"-numbers are not same as GPIO-numbers in Python or pinout-charts. Use Wiringpi "BCM"-column as GPIO numbers.**
 
+### Connections
 | RFM95 | Raspi 2, physical pin number in gpio header |
 | --- | --- |
 | MOSI/SDI (SPI) (oranssi) | 19 (GPIO10) |
@@ -77,7 +78,7 @@ gpio mode 5 out; gpio write 5 1; gpio mode 6 in;
 | DIO3 (valko/sini) | 13 (GPIO27) |
 | LED | 3 (GPIO2) |
 
-### Test / scan
+### Add spi-device and test / scan (without Python)
 Reset and DIO0 can be unconnected when using spi_scan?
 ```
 SPI on:
