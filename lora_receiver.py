@@ -1,26 +1,5 @@
 #!/usr/bin/env python3
 
-""" This program sends a response whenever it receives the "INF" """
-
-# Copyright 2018 Rui Silva.
-#
-# This file is part of rpsreal/pySX127x, fork of mayeranalytics/pySX127x.
-#
-# pySX127x is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public
-# License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later
-# version.
-#
-# pySX127x is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied
-# warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
-# details.
-#
-# You can be released from the requirements of the license by obtaining a commercial license. Such a license is
-# mandatory as soon as you develop commercial activities involving pySX127x without disclosing the source code of your
-# own applications, or shipping pySX127x with a closed source product.
-#
-# You should have received a copy of the GNU General Public License along with pySX127.  If not, see
-# <http://www.gnu.org/licenses/>.
-
 import time
 from datetime import datetime
 import struct
@@ -60,9 +39,18 @@ class mylora(LoRa):
         BOARD.led_on()
         print("\nRxDone")
         print(datetime.now())
+        #print(self.get_irq_flags())
         #print(self.spi.xfer([0x1C, 0])[1]) # REG.LORA.MODEM_CONFIG_2
+        if not self.get_hop_channel()['crc_on_payload']:
+          print("No CRC in payload!")
+        if not self.get_irq_flags()['valid_header']:
+          print("Invalid header in payload!")
+        if self.get_irq_flags()['rx_timeout']:
+          print("rx timeout!")
+        if self.get_irq_flags()['crc_error']:
+          print("crc_error!")
         self.clear_irq_flags(RxDone=1, ValidHeader=1)
-        payload = self.read_payload(nocheck=False )# Receive INF
+        payload = self.read_payload(nocheck=False)
         print("pkt_rssi: ", self.get_pkt_rssi_value())
         print("pkt_snr: ", self.get_pkt_snr_value())
         print ("Receive: ")
