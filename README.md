@@ -130,14 +130,14 @@ sudo apt install git python3-spidev
 cd ~
 git clone https://github.com/rpsreal/pySX127x
 ```
-pySX127x/¨SX127x/board_config.py:
+pySX127x/SX127x/board_config.py:
 ```
-    DIO0 = 25   # RaspPi GPIO 4
+    DIO0 = 25   # RaspPi GPIO 25
     DIO1 = 17   # RaspPi GPIO 17
     DIO2 = 18   # RaspPi GPIO 18
     DIO3 = 27   # RaspPi GPIO 27
-    RST  = 24   # RaspPi GPIO 22
-    LED  = 2   # RaspPi GPIO 13 connects to the LED and a resistor (1kohm or 330ohm)
+    RST  = 24   # RaspPi GPIO 24
+    LED  = 2   # RaspPi GPIO 2 connects to the LED and a resistor (1kohm or 330ohm)
 ```
 ```
 gpio mode 12 alt0; gpio mode 13 alt0; gpio mode 14 alt0; 
@@ -153,12 +153,12 @@ sudo pip3 install pyLoRa
 ```
 /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py:
 ```
-    DIO0 = 25   # RaspPi GPIO 4
+    DIO0 = 25   # RaspPi GPIO 25
     DIO1 = 17   # RaspPi GPIO 17
     DIO2 = 18   # RaspPi GPIO 18
     DIO3 = 27   # RaspPi GPIO 27
-    RST  = 24   # RaspPi GPIO 22
-    LED  = 2   # RaspPi GPIO 13 connects to the LED and a resistor (1kohm or 330ohm)
+    RST  = 24   # RaspPi GPIO 24
+    LED  = 2   # RaspPi GPIO 2 connects to the LED and a resistor (1kohm or 330ohm)
 ```
 ```
 cd ~
@@ -381,7 +381,7 @@ sudo ln -s /dev/spidev1.0 /dev/spidev0.0
 # Orange Pi PC: Very ugly hack (after this both spi-devices points to same SPI_BUS=0 and same SPI_CS=0):
 sudo ln -s /dev/spidev0.0 /dev/spidev0.1
 ```
-/usr/local/lib/python3.7/dist-packages/SX127x/board_config.py:
+/usr/local/lib/python3.7/dist-packages/SX127x/board_config.py (physical pin numbers):
 (or /usr/local/lib/python3.5/dist-packages/SX127x/board_config.py)
 ```
     DIO0 = 22
