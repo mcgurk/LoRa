@@ -368,21 +368,27 @@ spi.xfer([0x42, 0])
 sudo pip3 install pyLoRa
 
 # notice: python3.7 might be python3.5
+# ZERO:
 sudo sed -i 's/RPi.GPIO/OPi.GPIO/g' /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
 sudo sed -i 's/GPIO.BCM/GPIO.BOARD/g' /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
+# PC: (edit board_config.py line 59):
+import orangepi.zero
+GPIO.setmode(orangepi.pc.BOARD)
+# pyLoRa needs spidev0.0 and spidev0.1. Let's do some very ugly hack and just make link to only spidev:
 # Orange Pi Zero: Very ugly hack (after this both spi-devices points to same SPI_BUS=1 and same SPI_CS=0):
-sudo sed -i 's/SPI_BUS=0/SPI_BUS=1/g' /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
+sudo ln -s /dev/spidev1.0 /dev/spidev0.0
+sudo ln -s /dev/spidev1.0 /dev/spidev0.0
 # Orange Pi PC: Very ugly hack (after this both spi-devices points to same SPI_BUS=0 and same SPI_CS=0):
-sudo sed -i 's/SPI_CS=1/SPI_CS=0/g' /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
+sudo ln -s /dev/spidev0.0 /dev/spidev0.1
 ```
 /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py:
 (or /usr/local/lib/python3.5/dist-packages/SX127x/board_config.py)
 ```
-    DIO0 = 18
+    DIO0 = 22
     DIO1 = 13
     DIO2 = 15
-    DIO3 = 16
-    RST  = 22
+    DIO3 = 10
+    RST  = 18
     LED  = 3
 ```
 
