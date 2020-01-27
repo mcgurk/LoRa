@@ -13,8 +13,7 @@ class LoRaSender(LoRa):
     def __init__(self, verbose=False):
         super(LoRaSender, self).__init__(verbose)
         self.set_mode(MODE.SLEEP)
-        self.set_dio_mapping([1,0,0,0,0,0])
-        #self.set_dio_mapping([0] * 6)
+        self.set_dio_mapping([1,0,0,0,0,0]) # DIO0 = 1 = tx_done (0 = rx_done)
 
     def on_rx_done(self):
         print("\nRxDone")
