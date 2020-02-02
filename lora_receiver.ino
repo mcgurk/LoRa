@@ -1,15 +1,19 @@
 #include <SPI.h>
 #include <LoRa.h>
 #include <Ticker.h>
+#include <ArduinoJson.h>
 
 Ticker mwg;
+//DynamicJsonDocument doc(1024);
+StaticJsonDocument<1024> doc;
 
 #define TURN_LED_ON digitalWrite(LED_BUILTIN, LOW)
 #define TURN_LED_OFF digitalWrite(LED_BUILTIN, HIGH)
 
 void message_watchdog() {
   TURN_LED_OFF;
-  Serial.println("{ \"message_watchdog_triggered\": 1, \"error\": 1 }");
+  doc["info"] = "Message watchdog triggered";
+  serializeJson(doc, Serial); Serial.println(); doc.clear();
 }
 
 void setup() {
@@ -35,6 +39,8 @@ void setup() {
   TURN_LED_OFF;
   mwg.attach(62, message_watchdog); //in seconds
 
+  doc["info"] = "LoRa started";
+  serializeJson(doc, Serial); Serial.println(); doc.clear();
   delay(1000);
 }
 
@@ -49,27 +55,40 @@ void loop() {
     TURN_LED_ON;
     mwg.attach(62, message_watchdog); //in seconds
     uint8_t error = 0;
+    uint8_t buf[100];
+    uint16_t bytes=0;
     // read packet
     while (LoRa.available()) {
-      packetcnt = LoRa.read();
-      uint8_t c1 = LoRa.read(); uint8_t c2 = LoRa.read();
-      if(c1 == 0xff && c2 == 0xff) error = 1;
-      temp = (c1 + (c2 << 8)) / 10.0;
-      c1 = LoRa.read(); c2 = LoRa.read();
-      if(c1 == 0xff && c2 == 0xff) error = 1;
-      humi = (c1 + (c2 << 8)) / 10.0;
+      buf[bytes++] = LoRa.read();
+      if(bytes > 99) break;
     }
-    Serial.print("{ \"packetcnt\": ");
-    Serial.print(packetcnt);
-    Serial.print(", \"temp\": ");
-    Serial.print(temp, 1);
-    Serial.print(", \"humi\": ");
-    Serial.print(humi, 1);
-    Serial.print(", \"RSSI\": ");
-    Serial.print(LoRa.packetRssi());
-    Serial.printf(", \"chipid\": \"%08X\"", ESP.getChipId());
-    Serial.printf(", \"error\": %i", error);
-    Serial.println(" }");
+    doc["size"] = bytes;
+    doc["RSSI"] = LoRa.packetRssi();
+    char chipidstr[10];
+    sprintf(chipidstr, "%08X", ESP.getChipId());
+    doc["chipid"] = chipidstr;
+    char hexbuf[512];
+    char *ptr = hexbuf;
+    for (uint16_t i = 0; i < bytes; i++) {
+      if (i > 0) ptr += sprintf(ptr, " ");
+      ptr += sprintf(ptr, "0x%02X", buf[i]);
+    }
+    doc["message"] = hexbuf;
+
+    if (bytes == 5) {
+      packetcnt = buf[0];
+      if (buf[1] == 0xff && buf[2] == 0xff) error = 1;
+      temp = (buf[1] + (buf[2] << 8)) / 10.0;
+      if (buf[3] == 0xff && buf[4] == 0xff) error = 1;
+      humi = (buf[3] + (buf[4] << 8)) / 10.0;
+      doc["packetcnt"] = packetcnt;
+      doc["temp"] = temp;
+      doc["humi"] = humi;
+      if (!error) doc["error"] = false; else doc["error"] = "Sensor value error";
+    } else {
+      doc["error"] = "Packet size error";
+    }
+    serializeJson(doc, Serial); Serial.println(); doc.clear();
  
   }
 }
