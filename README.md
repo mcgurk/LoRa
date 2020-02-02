@@ -427,17 +427,17 @@ GND | G
 
 NodeMCU | GPIO | notes
 --- | --- | ---
-D0 | GPIO16 | Ei tue keskeytyksiä. Ei ylösvetovastusominaisuutta. Ei PWM:ää. Käytetään syväunesta heräämiseen kytkemällä tämä RST:hen. Joissain moduuleissa user-nappi.
+D0 | GPIO16 | No interrupts, no pullup feature, no PWM. Used to wake up from deepsleep. User-button is sometimes connected to this.
 D1 | GPIO5 |
 D2 | GPIO4 |
-D3 | GPIO0 | Flash-moodi. Flash-nappi NodeMCU-moduulissa. Pitää olla ylhäällä bootatessa normaalisti.
-D4 | GPIO2 | Pitää olla ylhäällä bootatessa. Sininen LED NodeMCU:ssa.
+D3 | GPIO0 | Flash-mode. Flash-button in some modules. Must be high at boot up.
+D4 | GPIO2 | Must be high at boot up. Blue led in Wemos and NodeMCU.
 D5 | GPIO14 | SCK
 D6 | GPIO12 | MISO
-D7 | GPIO13 | MOSI, sarjaportin vuonohjausta käytettäessä CTS.
-D8 | GPIO15 | SS, boottilähteen valinta. Pitää olla alhaalla bootatessa normaalisti. Sarjaportin vuonohjausta käytettäessä RTS.
-D9 | GPIO3 | Sarjaportin RX.
-D10 | GPIO1 | Sarjaportin TX.
+D7 | GPIO13 | MOSI, if serial port flow control is used, this is CTS.
+D8 | GPIO15 | SS, boot source selections. Must be low at boot up. if serial port flow control is used, this is RTS.
+D9 | GPIO3 | Serial RX.
+D10 | GPIO1 | Serial TX.
 
 
 # Misc
