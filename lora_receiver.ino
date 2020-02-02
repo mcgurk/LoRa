@@ -1,3 +1,13 @@
+/*
+LoRa.h:
+  uint8_t CrcOnPayload();
+LoRa.cpp:
+uint8_t LoRaClass::CrcOnPayload()
+{
+  return (readRegister(0x1C) >> 6) & 1; //RegHopChannel, bit 6 = CrcOnPayload
+}
+*/
+
 #include <SPI.h>
 #include <LoRa.h>
 #include <Ticker.h>
@@ -51,6 +61,7 @@ void loop() {
   // try to parse packet
   int packetSize = LoRa.parsePacket();
   if (packetSize) {
+    //Serial.println(packetSize);
     // received a packet
     TURN_LED_ON;
     mwg.attach(62, message_watchdog); //in seconds
@@ -64,6 +75,8 @@ void loop() {
     }
     doc["size"] = bytes;
     doc["RSSI"] = LoRa.packetRssi();
+    doc["SNR"] = LoRa.packetSnr();
+    doc["CRC"] = LoRa.CrcOnPayload();
     char chipidstr[10];
     sprintf(chipidstr, "%08X", ESP.getChipId());
     doc["chipid"] = chipidstr;
@@ -84,7 +97,8 @@ void loop() {
       doc["packetcnt"] = packetcnt;
       doc["temp"] = temp;
       doc["humi"] = humi;
-      if (!error) doc["error"] = false; else doc["error"] = "Sensor value error";
+      if (!LoRa.CrcOnPayload()) doc["error"] = "CRC MISSING!!!";
+      if (error) doc["error"] = "Sensor value error";
     } else {
       doc["error"] = "Packet size error";
     }
