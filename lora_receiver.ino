@@ -8,7 +8,8 @@ Ticker mwg;
 #define TURN_LED_OFF digitalWrite(LED_BUILTIN, HIGH)
 
 void message_watchdog() {
-  TURN_LED_OFF; 
+  TURN_LED_OFF;
+  Serial.println("{ \"message_watchdog_triggered\": 1, \"error\": 1 }");
 }
 
 void setup() {
@@ -32,12 +33,8 @@ void setup() {
 
   pinMode(LED_BUILTIN, OUTPUT);
   TURN_LED_OFF;
+  mwg.attach(62, message_watchdog); //in seconds
 
-  int16_t t = 1234;
-  uint8_t* b;
-  b = (uint8_t*)&t;
-  Serial.println(b[1]);
-  Serial.println(b[0]);
   delay(1000);
 }
 
@@ -49,32 +46,19 @@ void loop() {
   int packetSize = LoRa.parsePacket();
   if (packetSize) {
     // received a packet
-    //Serial.print("Received packet '");
     TURN_LED_ON;
-    mwg.attach(5, message_watchdog);
-    //String s = "{ \"value\" : \"";
-    // read packet
+    mwg.attach(62, message_watchdog); //in seconds
     uint8_t error = 0;
+    // read packet
     while (LoRa.available()) {
-      //Serial.print((char)LoRa.read());
       packetcnt = LoRa.read();
-      uint8_t c1 = LoRa.read();
-      uint8_t c2 = LoRa.read();
+      uint8_t c1 = LoRa.read(); uint8_t c2 = LoRa.read();
       if(c1 == 0xff && c2 == 0xff) error = 1;
       temp = (c1 + (c2 << 8)) / 10.0;
-      c1 = LoRa.read();
-      c2 = LoRa.read();
+      c1 = LoRa.read(); c2 = LoRa.read();
       if(c1 == 0xff && c2 == 0xff) error = 1;
       humi = (c1 + (c2 << 8)) / 10.0;
-      //char buf[100];
-      //sprintf(buf, "{ \"value\" : \"%x\" }", c);
-      //Serial.print(buf);
-      //s += "0x";
-      //s += String(c, HEX);
-      //if(LoRa.available()) s += " ";
     }
-    //s += "\" }";
-    //Serial.print(s);
     Serial.print("{ \"packetcnt\": ");
     Serial.print(packetcnt);
     Serial.print(", \"temp\": ");
@@ -86,10 +70,6 @@ void loop() {
     Serial.printf(", \"chipid\": \"%08X\"", ESP.getChipId());
     Serial.printf(", \"error\": %i", error);
     Serial.println(" }");
-    //Serial.println(packetcnt + " " + temp + " " + humi);
-    
-    // print RSSI of packet
-    //Serial.print("' with RSSI ");
-    //Serial.println(LoRa.packetRssi());
+ 
   }
 }
