@@ -63,19 +63,19 @@ gpio mode 5 out; gpio write 5 1; gpio mode 6 in;
 ### Connections
 | RFM95 | Raspi 2, physical pin number in gpio header |
 | --- | --- |
-| MOSI/SDI (SPI) (oranssi) | 19 (GPIO10) |
-| MISO/SDO (SPI) (ruskea) | 21 (GPIO9) |
-| SCK/SCLK (SPI) (keltainen) | 23 (GPIO11) |
-| NSS/SS/CS/SEL (SPI) (vihreä) | 24 (GPIO8) |
-| RESET/RST (sininen) | 18 (GPIO24) |
-| DIO0/IO0 (IRQ) (harmaa) | 22 (GPIO25) |
-| GND (musta) | 6 |
-| 3.3V (punainen) | 1 |
+| MOSI/SDI (SPI) (orange) | 19 (GPIO10) |
+| MISO/SDO (SPI) (brown) | 21 (GPIO9) |
+| SCK/SCLK (SPI) (yellow) | 23 (GPIO11) |
+| NSS/SS/CS/SEL (SPI) (green) | 24 (GPIO8) |
+| RESET/RST (blue) | 18 (GPIO24) |
+| DIO0/IO0 (IRQ) (grey) | 22 (GPIO25) |
+| GND (black) | 6 |
+| 3.3V (red) | 1 |
 | ANA/ANT | Antenna (86mm) |
 | Optional: |
-| DIO1 (purppura) | 11 (GPIO17) |
-| DIO2 (valkoinen) | 12 (GPIO18) |
-| DIO3 (valko/sini) | 13 (GPIO27) |
+| DIO1 (purple) | 11 (GPIO17) |
+| DIO2 (white) | 12 (GPIO18) |
+| DIO3 (white/blue) | 13 (GPIO27) |
 | LED | 3 (GPIO2) |
 
 ### Add spi-device and test / scan (without Python)
