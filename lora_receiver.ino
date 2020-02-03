@@ -14,7 +14,7 @@ uint8_t LoRaClass::CrcOnPayload()
 #include <ArduinoJson.h>
 
 Ticker mwg;
-//DynamicJsonDocument doc(1024);
+
 StaticJsonDocument<1024> doc;
 
 #define TURN_LED_ON digitalWrite(LED_BUILTIN, LOW)
@@ -91,9 +91,9 @@ void loop() {
     if (bytes == 5) {
       packetcnt = buf[0];
       if (buf[1] == 0xff && buf[2] == 0xff) error = 1;
-      temp = (buf[1] + (buf[2] << 8)) / 10.0;
+      temp = *((int16_t*)&buf[1]) / 10.0;
       if (buf[3] == 0xff && buf[4] == 0xff) error = 1;
-      humi = (buf[3] + (buf[4] << 8)) / 10.0;
+      humi = *((int16_t*)&buf[3]) / 10.0;
       doc["packetcnt"] = packetcnt;
       doc["temp"] = temp;
       doc["humi"] = humi;
