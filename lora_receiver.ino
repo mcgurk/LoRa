@@ -14,7 +14,7 @@ uint8_t LoRaClass::CrcOnPayload()
 #include <ArduinoJson.h>
 
 Ticker mwg;
-
+//DynamicJsonDocument doc(1024);
 StaticJsonDocument<1024> doc;
 
 #define TURN_LED_ON digitalWrite(LED_BUILTIN, LOW)
@@ -43,7 +43,7 @@ void setup() {
   LoRa.setCodingRate4(8);
   LoRa.enableCrc(); // CRC: RegModemConfig 2 (0x1E) Bit 2 (RxPayloadCrcOn) = 1 (page 30)
   LoRa.setSyncWord(0x77);
-  LoRa.dumpRegisters(Serial);
+  //LoRa.dumpRegisters(Serial);
 
   pinMode(LED_BUILTIN, OUTPUT);
   TURN_LED_OFF;
@@ -55,25 +55,21 @@ void setup() {
 }
 
 float temp, humi;
-uint8_t packetcnt;
 
 void loop() {
   // try to parse packet
   int packetSize = LoRa.parsePacket();
   if (packetSize) {
-    //Serial.println(packetSize);
+    doc["size"] = packetSize;
+    int bytes = packetSize;
+    if (bytes > 100) bytes = 100;
     // received a packet
     TURN_LED_ON;
     mwg.attach(62, message_watchdog); //in seconds
     uint8_t error = 0;
     uint8_t buf[100];
-    uint16_t bytes=0;
     // read packet
-    while (LoRa.available()) {
-      buf[bytes++] = LoRa.read();
-      if(bytes > 99) break;
-    }
-    doc["size"] = bytes;
+    for (uint16_t i = 0; i < bytes; i++) buf[i] = LoRa.read();
     doc["RSSI"] = LoRa.packetRssi();
     doc["SNR"] = LoRa.packetSnr();
     doc["CRC"] = LoRa.CrcOnPayload();
@@ -89,14 +85,12 @@ void loop() {
     doc["message"] = hexbuf;
 
     if (bytes == 5) {
-      packetcnt = buf[0];
-      if (buf[1] == 0xff && buf[2] == 0xff) error = 1;
-      temp = *((int16_t*)&buf[1]) / 10.0;
-      if (buf[3] == 0xff && buf[4] == 0xff) error = 1;
-      humi = *((int16_t*)&buf[3]) / 10.0;
-      doc["packetcnt"] = packetcnt;
-      doc["temp"] = temp;
-      doc["humi"] = humi;
+      doc["packetcnt"] = buf[0];
+      temp = *((int16_t*)&buf[1]);
+      humi = *((int16_t*)&buf[3]);
+      if (temp == 32767 || humi == 32767) error = 1;
+      doc["temp"] = temp / 10.0;
+      doc["humi"] = humi / 10.0;
       if (!LoRa.CrcOnPayload()) doc["error"] = "CRC MISSING!!!";
       if (error) doc["error"] = "Sensor value error";
     } else {
