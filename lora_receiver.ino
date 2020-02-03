@@ -1,8 +1,8 @@
 /*
 LoRa.h:
-  uint8_t CrcOnPayload();
+  uint8_t crcOnPayload();
 LoRa.cpp:
-uint8_t LoRaClass::CrcOnPayload()
+uint8_t LoRaClass::crcOnPayload()
 {
   return (readRegister(0x1C) >> 6) & 1; //RegHopChannel, bit 6 = CrcOnPayload
 }
@@ -43,7 +43,6 @@ void setup() {
   LoRa.setCodingRate4(8);
   LoRa.enableCrc(); // CRC: RegModemConfig 2 (0x1E) Bit 2 (RxPayloadCrcOn) = 1 (page 30)
   LoRa.setSyncWord(0x77);
-  //LoRa.dumpRegisters(Serial);
 
   pinMode(LED_BUILTIN, OUTPUT);
   TURN_LED_OFF;
@@ -91,7 +90,7 @@ void loop() {
       if (temp == 32767 || humi == 32767) error = 1;
       doc["temp"] = temp / 10.0;
       doc["humi"] = humi / 10.0;
-      if (!LoRa.CrcOnPayload()) doc["error"] = "CRC MISSING!!!";
+      if (!LoRa.crcOnPayload()) doc["error"] = "CRC MISSING!!!";
       if (error) doc["error"] = "Sensor value error";
     } else {
       doc["error"] = "Packet size error";
