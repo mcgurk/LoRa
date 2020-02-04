@@ -14,7 +14,7 @@ uint8_t LoRaClass::crcOnPayload()
 #include <ArduinoJson.h>
 
 Ticker mwg;
-//DynamicJsonDocument doc(1024);
+
 StaticJsonDocument<1024> doc;
 
 #define TURN_LED_ON digitalWrite(LED_BUILTIN, LOW)
@@ -41,7 +41,6 @@ void setup() {
   LoRa.setSignalBandwidth(125E3);
   LoRa.setSpreadingFactor(10);
   LoRa.setCodingRate4(8);
-  LoRa.enableCrc(); // CRC: RegModemConfig 2 (0x1E) Bit 2 (RxPayloadCrcOn) = 1 (page 30)
   LoRa.setSyncWord(0x77);
 
   pinMode(LED_BUILTIN, OUTPUT);
@@ -71,7 +70,7 @@ void loop() {
     for (uint16_t i = 0; i < bytes; i++) buf[i] = LoRa.read();
     doc["RSSI"] = LoRa.packetRssi();
     doc["SNR"] = LoRa.packetSnr();
-    doc["CRC"] = LoRa.CrcOnPayload();
+    doc["CRC"] = LoRa.crcOnPayload();
     char chipidstr[10];
     sprintf(chipidstr, "%08X", ESP.getChipId());
     doc["chipid"] = chipidstr;
