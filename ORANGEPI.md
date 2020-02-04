@@ -194,8 +194,14 @@ spi.xfer([0x42, 0])
 #### Install
 ```
 sudo pip3 install pyLoRa
-
-# notice: python3.7 might be python3.5
+```
+Get pip3 packages install directory:
+```
+$python3 -c "import site; print(site.getsitepackages()[0])"
+/usr/local/lib/python3.7/dist-packages
+```
+Modify settings by editing /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py:
+```
 # ZERO:
 sudo sed -i 's/RPi.GPIO/OPi.GPIO/g' /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
 sudo sed -i 's/GPIO.BCM/GPIO.BOARD/g' /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py
@@ -210,7 +216,6 @@ sudo ln -s /dev/spidev1.0 /dev/spidev0.0
 sudo ln -s /dev/spidev0.0 /dev/spidev0.1
 ```
 /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py (physical pin numbers):
-(or /usr/local/lib/python3.5/dist-packages/SX127x/board_config.py)
 ```
     DIO0 = 22
     DIO1 = 13
