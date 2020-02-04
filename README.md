@@ -1,15 +1,16 @@
 # LoRa
 - https://www.mouser.com/datasheet/2/761/down-767039.pdf
 
+## LoRa Python links
+- https://pypi.org/project/pyLoRa/
+- https://github.com/rpsreal/pySX127x
+- https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
+
 ## Raspberry Pi
 [Raspberry Pi](RASPBERRYPI.md)
 ## Orange Pi
 [Orange Pi](ORANGEPI.md)
 
-## Python
-- https://pypi.org/project/pyLoRa/
-- https://github.com/rpsreal/pySX127x
-- https://github.com/rpsreal/pySX127x/blob/master/LORA_CLIENT.py
 
 
 ## Raspberry Pi 2
