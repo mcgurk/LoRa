@@ -162,6 +162,7 @@ $python3 -c "import site; print(site.getsitepackages()[0])"
 ```
 ```
 cd ~
+sudo apt install screen
 wget https://raw.githubusercontent.com/mcgurk/LoRa-and-RF/master/lora_receiver.py
 chmod 777 lora_receiver.py
 gpio mode 12 alt0; gpio mode 13 alt0; gpio mode 14 alt0; 
