@@ -224,4 +224,11 @@ sudo ln -s /dev/spidev0.0 /dev/spidev0.1
     RST  = 18
     LED  = 3
 ```
-
+#### Start receiver
+```
+sudo apt install screen
+cd ~
+wget https://raw.githubusercontent.com/mcgurk/LoRa-and-RF/master/lora_receiver.py
+chmod 777 lora_receiver.py
+```
+screen ./lora_receiver.py
