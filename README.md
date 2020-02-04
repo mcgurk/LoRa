@@ -1,8 +1,10 @@
 # LoRa
 - https://www.mouser.com/datasheet/2/761/down-767039.pdf
 
-## [Raspberry Pi](RASPBERRYPI.md)
-## [Orange Pi](ORANGEPI.md)
+## Raspberry Pi
+[Raspberry Pi](RASPBERRYPI.md)
+## Orange Pi
+[Orange Pi](ORANGEPI.md)
 
 ## Python
 - https://pypi.org/project/pyLoRa/
