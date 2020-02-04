@@ -146,6 +146,11 @@ python3 pySX127x/lora_util.py # without "python3"-command lora_util.py tries to 
 sudo apt install python3-rpi.gpio python3-pip python3-spidev wiringpi screen
 sudo pip3 install pyLoRa
 ```
+Get pip3 packages install directory:
+```
+$python3 -c "import site; print(site.getsitepackages()[0])"
+/usr/local/lib/python3.7/dist-packages
+```
 /usr/local/lib/python3.7/dist-packages/SX127x/board_config.py:
 ```
     DIO0 = 25   # RaspPi GPIO 25
