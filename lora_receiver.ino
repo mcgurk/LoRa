@@ -31,7 +31,7 @@ void setup() {
   while (!Serial);
 
   Serial.println("LoRa Receiver");
-  LoRa.setPins(D8, D2, D1); // ss, reset, dio0
+  LoRa.setPins(D8, D3, D2); // ss, reset, dio0
 
   if (!LoRa.begin(868E6)) {
     Serial.println("Starting LoRa failed!");
