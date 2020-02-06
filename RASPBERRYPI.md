@@ -56,7 +56,7 @@ gpio mode 5 out; gpio write 5 1; gpio mode 6 in;
 **Notice! Wiringpi "Name"-column "GPIO"-numbers are not same as GPIO-numbers in Python or pinout-charts. Use Wiringpi "BCM"-column as GPIO numbers.**
 
 ## Connections
-| RFM95 | Raspi 2, physical pin number in gpio header |
+| RFM95W | Raspi 2, physical pin number in gpio header |
 | --- | --- |
 | MOSI/SDI (SPI) (orange) | 19 (GPIO10) |
 | MISO/SDO (SPI) (brown) | 21 (GPIO9) |
@@ -171,3 +171,29 @@ gpio mode 5 out; gpio write 5 1; gpio mode 6 in;
 screen ./lora_receiver.py
 ```
 
+## RadioHead library
+```
+cd ~
+sudo apt install git
+git clone https://github.com/hallard/RadioHead.git
+```
+Test/detect:
+```
+sudo apt install git
+git clone https://github.com/hallard/RadioHead
+cd RadioHead/examples/raspi/spi_scan
+make
+sudo ./spi_scan
+# -> Checking register(0x42) with CS=GPIO25 => SX1276 RF95/96 (V=0x12)
+```
+Client/server:
+RadioHead/examples/raspi/rf95/
+RadioHead/examples/raspi/RasPiBoards.h:
+```
+#if defined (BOARD_LORASPI)
+#define RF_LED_PIN RPI_V2_GPIO_P1_03
+#define RF_CS_PIN  RPI_V2_GPIO_P1_24
+#define RF_IRQ_PIN RPI_V2_GPIO_P1_22
+#define RF_RST_PIN RPI_V2_GPIO_P1_18
+
+```
