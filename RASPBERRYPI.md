@@ -215,3 +215,4 @@ Crashing on some versions of Raspbian
 Some people have reported that various versions of Rasbian will crash or hang if certain GPIO pins are toggled: https://github.com/raspberrypi/linux/issues/2550 when using bcm2835. A workaround is to add this line to your /boot/config.txt:
 dtoverlay=gpio-no-irq
 ```
+After that Python library doesn't work :(
