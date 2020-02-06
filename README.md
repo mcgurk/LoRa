@@ -52,11 +52,11 @@ D0 | GPIO16 | No interrupts, no pullup feature, no PWM. Used to wake up from dee
 D1 | GPIO5 |
 D2 | GPIO4 |
 D3 | GPIO0 | Flash-mode. Flash-button in some modules. Must be high at boot up.
-D4 | GPIO2 | Must be high at boot up. Blue led in Wemos and NodeMCU.
+D4 | GPIO2 | Must be high at boot up (boot source selection). Blue led in Wemos and NodeMCU.
 D5 | GPIO14 | SCK (SPI)
 D6 | GPIO12 | MISO (SPI)
 D7 | GPIO13 | MOSI (SPI), if serial port flow control is used, this is CTS.
-D8 | GPIO15 | SS (SPI), boot source selections. Must be low at boot up. if serial port flow control is used, this is RTS.
+D8 | GPIO15 | SS (SPI).Must be low at boot up (boot source selection). If serial port flow control is used, this is RTS.
 D9 | GPIO3 | Serial RX.
 D10 | GPIO1 | Serial TX.
 
