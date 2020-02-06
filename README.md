@@ -39,8 +39,8 @@ MISO/SDO (SPI) (brown) | D6 (GPIO12)
 MOSI/SDI (SPI) (orange) | D7 (GPIO13)
 SCK/SCLK (SPI) (yellow) | D5 (GPIO14)
 NSS/SS/CS (SPI) (green)| D8 (GPIO15)
-RESET (blue) | D2 (GPIO4)
-DIO0 (IRQ) (grey) | D1 (GPIO5)
+RESET (blue) | D3 (GPIO0)
+DIO0 (IRQ) (grey) | D2 (GPIO4)
 GND (black) | G
 3.3V (red) | 3V3
 
