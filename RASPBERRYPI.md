@@ -206,7 +206,9 @@ RadioHead/examples/raspi/RasPiBoards.h:
 #define RF_RST_PIN RPI_V2_GPIO_P1_18
 ```
 `sudo ./rf95_client` locks up Raspberry Pi 2 totally
-"Fix":
+
+#### "Fix"
+
 https://www.airspayce.com/mikem/bcm2835/
 ```
 Crashing on some versions of Raspbian
