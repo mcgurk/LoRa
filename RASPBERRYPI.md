@@ -195,5 +195,5 @@ RadioHead/examples/raspi/RasPiBoards.h:
 #define RF_CS_PIN  RPI_V2_GPIO_P1_24
 #define RF_IRQ_PIN RPI_V2_GPIO_P1_22
 #define RF_RST_PIN RPI_V2_GPIO_P1_18
-
 ```
+`sudo ./rf95_client` locks up Raspberry Pi 2 totally
