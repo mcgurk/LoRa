@@ -4,7 +4,6 @@
 
 DHTesp dht;
 
-//uint16_t counter = 0;
 uint8_t counter = 0;
 
 void setup() {
@@ -17,7 +16,7 @@ void setup() {
   while (!Serial);
 
   Serial.println("LoRa Sender");
-  LoRa.setPins(D8, D2, D1); // ss (10), reset (9), dio0 (2) (must be interrupt capable via attachInterrupt(...))
+  LoRa.setPins(D8, D3, D2); // ss (10), reset (9), dio0 (2) (must be interrupt capable via attachInterrupt(...))
 
   if (!LoRa.begin(868E6)) {
     Serial.println("Starting LoRa failed!");
