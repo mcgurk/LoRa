@@ -185,13 +185,8 @@ make
 sudo make check
 sudo make install
 ```
-### Get RadioHead library
-```
-cd ~
-sudo apt install git
-git clone https://github.com/hallard/RadioHead.git
-```
-Test/detect:
+### RadioHead
+Get, test/detect:
 ```
 sudo apt install git
 git clone https://github.com/hallard/RadioHead
