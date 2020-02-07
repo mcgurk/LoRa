@@ -58,6 +58,7 @@ void loop() {
   // try to parse packet
   int packetSize = LoRa.parsePacket();
   if (packetSize) {
+    doc["info"] = "Message received";
     doc["size"] = packetSize;
     int bytes = packetSize;
     if (bytes > 100) bytes = 100;
