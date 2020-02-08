@@ -6,7 +6,7 @@ void setup() {
   Serial.begin(115200); while (!Serial);
   Serial.print(F("Alustetaan SX1276..."));
   int state = lora.begin(868, 125, 10, 8, 0x77, 2); // Freq[MHz], BW[kHz], SF, CR, syncword, power[dBm]
-  lora.setCRC(false);
+  //lora.setCRC(false);
   if (state == ERR_NONE) {
     Serial.println(F("Alustus onnistui!"));
   } else {
