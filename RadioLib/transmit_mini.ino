@@ -21,16 +21,12 @@ void loop() {
 
   if (state == ERR_NONE) {
     Serial.println(F("Paketin lähetys onnistui!"));
-
-    // print measured data rate
     Serial.print(F("Datanopeus:\t"));
     Serial.print(lora.getDataRate());
     Serial.println(F(" bps"));
-
   } else {
     Serial.print(F("Virhe paketin lähetyksessä, koodi "));
     Serial.println(state);
   }
-
   delay(5000);
 }
