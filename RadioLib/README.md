@@ -7,4 +7,4 @@
 Now `if(lora.CRCONPAYLOAD()) ...` can be used to check if CRC was used with packet.
 
 ### IRAM error
-If you get "ISR not in IRAM!", add `ICACHE_RAM_ATTR` before ISR-routine name. E.g. `void ICACHE_RAM_ATTR setFlag(void) {`.
+If you get "ISR not in IRAM!", add `ICACHE_RAM_ATTR` before ISR-routine name, e.g. `void ICACHE_RAM_ATTR setFlag(void) {`.
