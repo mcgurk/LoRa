@@ -5,7 +5,7 @@ SX1276 lora = new Module(D8, D2, D3, D1); // NSS, DIO0, RST, DIO1
 void setup() {
   Serial.begin(115200); while (!Serial);
   Serial.print(F("Alustetaan SX1276..."));
-  int state = lora.begin(868, 125, 10, 8, 0x77, 2); // Freq[MHz], BW[kHz], SF, CR, syncword, power[dBm]
+  int state = lora.begin(868, 125, 9, 7, 0x64, 2); // Freq[MHz], BW[kHz], SF, CR, syncword, power[dBm]
   //lora.setCRC(false);
   if (state == ERR_NONE) {
     Serial.println(F("Alustus onnistui!"));
