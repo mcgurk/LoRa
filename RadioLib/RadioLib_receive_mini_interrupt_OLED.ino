@@ -84,7 +84,6 @@ void loop() {
       u8g2.print(lora.getSNR());
       u8g2.setCursor(20,60);
       u8g2.print(counter++);
-      u8g2.sendBuffer();          // transfer internal memory to the display      
 
       // print SNR (Signal-to-Noise Ratio)
       Serial.print(F("SNR:\t\t"));
@@ -98,11 +97,17 @@ void loop() {
 
     } else if (state == ERR_CRC_MISMATCH) {
       Serial.println(F("CRC-tarkistussumma virhe!"));
+      u8g2.setCursor(50,60);
+      u8g2.print("CRC-virhe!");
     } else { // jokin muu virhe kuin CRC-virhe
       Serial.print(F("Paketin vastaanotto epäonnistui, koodi "));
       Serial.println(state);
+      u8g2.setCursor(50,60);
+      u8g2.print("Joku virhe!");
     }
 
+    u8g2.sendBuffer();          // transfer internal memory to the display 
+      
     // asetetaan SX1276 takaisin kuuntelutilaan
     lora.startReceive();
 
