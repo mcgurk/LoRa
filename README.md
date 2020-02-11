@@ -61,7 +61,7 @@ D9 | GPIO3 | Serial RX.
 D10 | GPIO1 | Serial TX.
 
 
-# Misc
+## Misc
 
 RegSyncWord (0x39) 7-0 SyncWord rw 0x12 LoRa Sync Word
 (Value 0x34 is reserved for LoRaWAN networks)
