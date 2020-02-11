@@ -42,7 +42,7 @@ NSS/SS/CS (SPI) (green) | &leftarrow; | D8 (GPIO15) | GPIO5
 RESET (blue) | &leftarrow; | D3 (GPIO0) | GPIO22
 DIO0 (IRQ) (grey) | &rightarrow; | D2 (GPIO4) | GPIO21
 GND (black) | | G | GND
-3.3V (red) | | 3V3 | 3V3
+3.3V (red){: style="color: red"} | | 3V3 | 3V3
 
 ### Wemos/NodeMCU pinout
 
