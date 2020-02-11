@@ -33,14 +33,14 @@ Open Boards Manager from Tools > Board menu and install esp8266 platform.
 Select right board from board settings (in my case "LOLIN(WEMOS) D1 R2 & mini"). Wrong board might give weird results.
 
 ### Wiring
-RFM95 | Wemos D1 R2 & mini
---- | ---
-MISO/SDO (SPI) (brown) | D6 (GPIO12)
-MOSI/SDI (SPI) (orange) | D7 (GPIO13)
-SCK/SCLK (SPI) (yellow) | D5 (GPIO14)
-NSS/SS/CS (SPI) (green)| D8 (GPIO15)
-RESET (blue) | D3 (GPIO0)
-DIO0 (IRQ) (grey) | D2 (GPIO4)
+RFM95 | Wemos D1 R2 & mini / NodeMCU | ESP32
+--- | --- | ---
+MISO/SDO (SPI) (brown) | D6 (GPIO12) | GPIO19
+MOSI/SDI (SPI) (orange) | D7 (GPIO13) | GPIO23
+SCK/SCLK (SPI) (yellow) | D5 (GPIO14) | GPIO18
+NSS/SS/CS (SPI) (green)| D8 (GPIO15) | GPIO5
+RESET (blue) | D3 (GPIO0) | GPIO22
+DIO0 (IRQ) (grey) | D2 (GPIO4) | GPIO21
 GND (black) | G
 3.3V (red) | 3V3
 
