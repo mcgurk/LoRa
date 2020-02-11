@@ -35,8 +35,8 @@ Select right board from board settings (in my case "LOLIN(WEMOS) D1 R2 & mini").
 ### Wiring
 RFM95 | Direction | ESP8266/Wemos/NodeMCU | ESP32
 --- | --- | --- | ---
-MISO/SDO (SPI) (brown![#c68c53](https://placehold.it/15/f03c15/000000?text=+)) | &leftarrow; | D6 (GPIO12) | GPIO19
-MOSI/SDI (SPI) (orange![#ff8000](https://placehold.it/15/f03c15/000000?text=+)) | &rightarrow; | D7 (GPIO13) | GPIO23
+MISO/SDO (SPI) (brown![#c68c53](https://placehold.it/10/c68c53/000000?text=+)) | &leftarrow; | D6 (GPIO12) | GPIO19
+MOSI/SDI (SPI) (orange![#ff8000](https://placehold.it/10/ff8000/000000?text=+)) | &rightarrow; | D7 (GPIO13) | GPIO23
 SCK/SCLK (SPI) (yellow) | &leftarrow; | D5 (GPIO14) | GPIO18
 NSS/SS/CS (SPI) (green) | &leftarrow; | D8 (GPIO15) | GPIO5
 RESET (blue) | &leftarrow; | D3 (GPIO0) | GPIO22
