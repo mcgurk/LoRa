@@ -35,7 +35,7 @@ Select right board from board settings (in my case "LOLIN(WEMOS) D1 R2 & mini").
 ### Wiring
 RFM95 | Direction | Wemos D1 R2 & mini / NodeMCU | ESP32
 --- | --- | --- | ---
-MISO/SDO (SPI) (brown) | &leftarrow; | D6 (GPIO12) | GPIO19
+MISO/SDO (SPI) (brown) | **&leftarrow;** | D6 (GPIO12) | GPIO19
 MOSI/SDI (SPI) (orange) | &rightarrow; | D7 (GPIO13) | GPIO23
 SCK/SCLK (SPI) (yellow) | &leftarrow; | D5 (GPIO14) | GPIO18
 NSS/SS/CS (SPI) (green) | &leftarrow; | D8 (GPIO15) | GPIO5
