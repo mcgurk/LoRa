@@ -33,9 +33,9 @@ Open Boards Manager from Tools > Board menu and install esp8266 platform.
 Select right board from board settings (in my case "LOLIN(WEMOS) D1 R2 & mini"). Wrong board might give weird results.
 
 ### Wiring
-RFM95 | Direction | Wemos D1 R2 & mini / NodeMCU | ESP32
+RFM95 | Direction | ESP8266/Wemos/NodeMCU | ESP32
 --- | --- | --- | ---
-MISO/SDO (SPI) (brown) | **&leftarrow;** | D6 (GPIO12) | GPIO19
+MISO/SDO (SPI) (<span style="color:brown">brown</span>) | &leftarrow; | D6 (GPIO12) | GPIO19
 MOSI/SDI (SPI) (orange) | &rightarrow; | D7 (GPIO13) | GPIO23
 SCK/SCLK (SPI) (yellow) | &leftarrow; | D5 (GPIO14) | GPIO18
 NSS/SS/CS (SPI) (green) | &leftarrow; | D8 (GPIO15) | GPIO5
@@ -44,9 +44,9 @@ DIO0 (IRQ) (grey) | &rightarrow; | D2 (GPIO4) | GPIO21
 GND (black) | | G | GND
 3.3V (red) | | 3V3 | 3V3
 
-### Wemos pinout
+### Wemos/NodeMCU pinout
 
-NodeMCU | GPIO | notes
+Wemos/NodeMCU | GPIO | notes
 --- | --- | ---
 D0 | GPIO16 | No interrupts, no pullup feature, no PWM. Used to wake up from deepsleep. User-button is sometimes connected to this.
 D1 | GPIO5 | SCL
