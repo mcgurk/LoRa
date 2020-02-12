@@ -52,7 +52,7 @@ D0 | GPIO16 | in/out | No interrupts, no pullup feature, no PWM. Used to wake up
 D1 | GPIO5 | in/out/SCL | I<sup>2</sup>C
 D2 | GPIO4 | in/out/SDA | I<sup>2</sup>C
 D3 | GPIO0 | out | Flash-mode. Flash-button in some modules. Must be high at boot up (boot mode selection).
-D4 | GPIO2 | out | Must be high at boot up (boot mode selection). Blue led in Wemos and NodeMCU.
+D4 | GPIO2 | out/led | Must be high at boot up (boot mode selection). Blue led in Wemos and NodeMCU.
 D5 | GPIO14 | in/out/SCK | SPI
 D6 | GPIO12 | in/out/MISO | SPI
 D7 | GPIO13 | in/out/MOSI | SPI, if serial port flow control is used, this is CTS.
