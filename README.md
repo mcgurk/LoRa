@@ -46,19 +46,19 @@ GND (black ![#black](https://placehold.it/10/000000/000000?text=+)) | | G | GND
 
 ### Wemos/NodeMCU pinout
 
-Wemos/NodeMCU | GPIO | notes
---- | --- | ---
-D0 | GPIO16 | No interrupts, no pullup feature, no PWM. Used to wake up from deepsleep. User-button is sometimes connected to this.
-D1 | GPIO5 | SCL (I<sup>2</sup>C)
-D2 | GPIO4 | SDA (I<sup>2</sup>C)
-D3 | GPIO0 | Flash-mode. Flash-button in some modules. Must be high at boot up (boot mode selection).
-D4 | GPIO2 | Must be high at boot up (boot mode selection). Blue led in Wemos and NodeMCU.
-D5 | GPIO14 | SCK (SPI)
-D6 | GPIO12 | MISO (SPI)
-D7 | GPIO13 | MOSI (SPI), if serial port flow control is used, this is CTS.
-D8 | GPIO15 | Must be low at boot up (boot mode selection). If serial port flow control is used, this is RTS.
-D9 | GPIO3 | Serial RX.
-D10 | GPIO1 | Serial TX.
+Wemos/NodeMCU | GPIO | use | notes
+--- | --- | --- | ---
+D0 | GPIO16 | in/out | No interrupts, no pullup feature, no PWM. Used to wake up from deepsleep. User-button is sometimes connected to this.
+D1 | GPIO5 | in/out/SCL | I<sup>2</sup>C
+D2 | GPIO4 | in/out/SDA | I<sup>2</sup>C
+D3 | GPIO0 | out | Flash-mode. Flash-button in some modules. Must be high at boot up (boot mode selection).
+D4 | GPIO2 | out | Must be high at boot up (boot mode selection). Blue led in Wemos and NodeMCU.
+D5 | GPIO14 | in/out/SCK | SPI
+D6 | GPIO12 | in/out/MISO | SPI
+D7 | GPIO13 | in/out/MOSI/CTS | SPI, if serial port flow control is used, this is CTS.
+D8 | GPIO15 | out/RTS | Must be low at boot up (boot mode selection). If serial port flow control is used, this is RTS.
+D9 | GPIO3 | x | Serial RX.
+D10 | GPIO1 | x | Serial TX.
 
 
 ## Misc
