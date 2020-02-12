@@ -55,8 +55,8 @@ D3 | GPIO0 | out | Flash-mode. Flash-button in some modules. Must be high at boo
 D4 | GPIO2 | out | Must be high at boot up (boot mode selection). Blue led in Wemos and NodeMCU.
 D5 | GPIO14 | in/out/SCK | SPI
 D6 | GPIO12 | in/out/MISO | SPI
-D7 | GPIO13 | in/out/MOSI/CTS | SPI, if serial port flow control is used, this is CTS.
-D8 | GPIO15 | out/RTS | Must be low at boot up (boot mode selection). If serial port flow control is used, this is RTS.
+D7 | GPIO13 | in/out/MOSI | SPI, if serial port flow control is used, this is CTS.
+D8 | GPIO15 | out | Must be low at boot up (boot mode selection). If serial port flow control is used, this is RTS.
 D9 | GPIO3 | x | Serial RX.
 D10 | GPIO1 | x | Serial TX.
 
