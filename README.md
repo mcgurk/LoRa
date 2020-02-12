@@ -45,7 +45,7 @@ GND (black ![#black](https://placehold.it/10/000000/000000?text=+)) | | G | GND
 3.3V (red ![#red](https://placehold.it/10/ff0000/000000?text=+)) | | 3V3 | 3V3
 
 #### Reset
-Normally High-Z, >100us = reset. Notice that Wemos/NodeMCU has pullup resistor for D3 and D4 and pulldown resistor for D8, so those cannot be in High-Z-state.  Nevertheless it looks like D3 and D4 works for reset.
+High-Z = normal, low (>100us) = reset. Notice that Wemos/NodeMCU has pullup resistor for D3 and D4 and pulldown resistor for D8, so those cannot be in High-Z-state.  Nevertheless it looks like D3 and D4 works for reset.
 
 ### Wemos/NodeMCU pinout
 
