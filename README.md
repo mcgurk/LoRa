@@ -35,9 +35,9 @@ Select right board from board settings (in my case "LOLIN(WEMOS) D1 R2 & mini").
 ### Wiring
 RFM95 | Direction | ESP8266/Wemos/NodeMCU | ESP32
 --- | --- | --- | ---
-MISO/SDO (SPI) (brown ![#brown](https://placehold.it/10/c68c53/000000?text=+)) | &leftarrow; | D6 (GPIO12) | GPIO19 (VSPI)
-MOSI/SDI (SPI) (orange ![#orange](https://placehold.it/10/ff8000/000000?text=+)) | &rightarrow; | D7 (GPIO13) | GPIO23 (VSPI)
-SCK/SCLK (SPI) (yellow ![#yellow](https://placehold.it/10/ffff00/000000?text=+)) | &leftarrow; | D5 (GPIO14) | GPIO18 (VSPI)
+MISO/SDO (SPI) (brown ![#brown](https://placehold.it/10/c68c53/000000?text=+)) | &leftarrow; | D6 (GPIO12) | GPIO19 (VSPI MISO)
+MOSI/SDI (SPI) (orange ![#orange](https://placehold.it/10/ff8000/000000?text=+)) | &rightarrow; | D7 (GPIO13) | GPIO23 (VSPI MOSI)
+SCK/SCLK (SPI) (yellow ![#yellow](https://placehold.it/10/ffff00/000000?text=+)) | &leftarrow; | D5 (GPIO14) | GPIO18 (VSPI SCLK)
 NSS/SS/CS (SPI) (green ![#green](https://placehold.it/10/00ff00/000000?text=+)) | &leftarrow; | D8 (GPIO15) | GPIO5
 RESET (blue ![#blue](https://placehold.it/10/0000ff/000000?text=+)) | &leftarrow; | D3 (GPIO0) | GPIO22
 DIO0 (IRQ) (grey ![#grey](https://placehold.it/10/999999/000000?text=+)) | &rightarrow; | D2 (GPIO4) | GPIO21
