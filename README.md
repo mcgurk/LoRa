@@ -46,6 +46,8 @@ GND (black ![#black](https://placehold.it/10/000000/000000?text=+)) | | G | GND
 
 #### Reset
 High-Z = normal, low (>100us) = reset. Notice that Wemos/NodeMCU has pullup resistor for D3 and D4 and pulldown resistor for D8, so those cannot be in High-Z-state.  Nevertheless it looks like D3 and D4 works for reset.
+#### DIO0/IRQ
+Normally low, high when active. DIO0 could be connected to D8, but then there is small risk that SX1276 interrupt is triggered when ESP8266 resets itself. Then D8 would be up and ESP8266 would not boot.
 
 ### Wemos/NodeMCU pinout
 
