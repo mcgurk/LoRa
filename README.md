@@ -49,8 +49,8 @@ GND (black ![#black](https://placehold.it/10/000000/000000?text=+)) | | G | GND
 Wemos/NodeMCU | GPIO | notes
 --- | --- | ---
 D0 | GPIO16 | No interrupts, no pullup feature, no PWM. Used to wake up from deepsleep. User-button is sometimes connected to this.
-D1 | GPIO5 | SCL
-D2 | GPIO4 | SDA
+D1 | GPIO5 | SCL (I<sup>2</sup>C)
+D2 | GPIO4 | SDA (I<sup>2</sup>C)
 D3 | GPIO0 | Flash-mode. Flash-button in some modules. Must be high at boot up (boot mode selection).
 D4 | GPIO2 | Must be high at boot up (boot mode selection). Blue led in Wemos and NodeMCU.
 D5 | GPIO14 | SCK (SPI)
