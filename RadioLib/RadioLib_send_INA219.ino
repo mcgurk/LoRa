@@ -3,7 +3,8 @@
 #include <Wire.h>
 #include <Adafruit_INA219.h>
 
-#define DEBUG
+//#define DEBUG
+#define SLEEP 30
 
 //SX1276 lora = new Module(D8, D2, D3, D1); // NSS, DIO0, RST, DIO1
 SX1276 lora = new Module(D4, D8, D3); // NSS, DIO0, RST, DIO1
@@ -81,5 +82,6 @@ void loop() {
   counter++;
 
   //delay(30000);
-  delay(5000);
+  //delay(5000);
+  ESP.deepSleep(SLEEP*1000*1000);
 }
