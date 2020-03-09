@@ -58,12 +58,12 @@ DIO0 (IRQ) (grey ![#grey](https://placehold.it/10/999999/000000?text=+)) | &righ
 GND (black ![#black](https://placehold.it/10/000000/000000?text=+)) | | G
 3.3V (red ![#red](https://placehold.it/10/ff0000/000000?text=+)) | | 3V3
 
+**Warning:** if DIO0 interrupt signal is triggered, ESP8266 doesn't boot up. This is safe wiring only if interrupt is not used.
+
 #### Deepsleep
 ESP8266/Wemos/NodeMCU | Direction | ESP8266/Wemos/NodeMCU | notes
 --- | --- | --- | ---
 D0 (GPIO16) (violet ![#violet](https://placehold.it/10/cc0066/000000?text=+)) | &rightarrow; | RST (ESP8266) | unconnect when flashing!
-
-Warning: if DIO0 interrupt signal is triggered, ESP8266 doesn't boot up. This is safe wiring only if interrupt is not used.
 
 #### Reset
 High-Z = normal, low (>100us) = reset. Notice that Wemos/NodeMCU has pullup resistor for D3 and D4 and pulldown resistor for D8, so those cannot be in High-Z-state.  Nevertheless it looks like D3 and D4 works for reset.
