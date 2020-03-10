@@ -75,8 +75,8 @@ Normally low, high when active. DIO0 could be connected to D8, but then there is
 Wemos/NodeMCU | GPIO | use | notes
 --- | --- | --- | ---
 D0 | GPIO16 | in/out | No interrupts, no pullup feature, no PWM. Used to wake up from deepsleep. User-button is sometimes connected to this.
-D1 | GPIO5 | in/out/SCL | I<sup>2</sup>C
-D2 | GPIO4 | in/out/SDA | I<sup>2</sup>C
+D1 | GPIO5 | in/out/SCL | I<sup>2</sup>C (ESP32: GPIO22)
+D2 | GPIO4 | in/out/SDA | I<sup>2</sup>C (ESP32: GPIO21)
 D3 | GPIO0 | out | Flash-mode. Flash-button in some modules. Must be high at boot up (boot mode selection).
 D4 | GPIO2 | out/led | Must be high at boot up (boot mode selection). Blue led in Wemos and NodeMCU.
 D5 | GPIO14 | in/out/SCK | SPI
