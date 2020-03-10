@@ -16,8 +16,14 @@ void ICACHE_RAM_ATTR setFlag(void); // Arduinollä jätä tämä rivi pois
 
 void setup() {
   Serial.begin(115200);
+  u8g2.begin();
+  u8g2.clearBuffer();          // clear the internal memory
+  u8g2.setFont(u8g2_font_ncenB08_tr); // choose a suitable font
+  u8g2.drawStr(0,10,"Start");  // write something to the internal memory
+  u8g2.sendBuffer();          // transfer internal memory to the display
+  
   Serial.print(F("Alustetaan SX1276... "));
-  int state = lora.begin(868, 125, 9, 7, 0x64); // Freq[MHz], BW[kHz], SF, CR, syncword
+  int state = lora.begin(868, 125, 10, 8, 0x77); // Freq[MHz], BW[kHz], SF, CR, syncword
   if (state == ERR_NONE) {
     Serial.println(F("Alustus onnistui!"));
   } else {
@@ -35,7 +41,7 @@ void setup() {
     Serial.println(state);
     while (true);
   }
-  u8g2.begin();
+
 }
 
 volatile bool receivedFlag = false;
@@ -60,17 +66,23 @@ void loop() {
     // you can read received data as an Arduino String
     String str;
     int state = lora.readData(str);
+    char buf[6];
+    str.toCharArray(buf, 6);
 
     // you can also read received data as byte array
-    /*
-      byte byteArr[8];
-      int state = lora.receive(byteArr, 8);
-    */
-
+    //byte buf[5];
+    //int state = lora.receive(buf, 5);
+    
     if (state == ERR_NONE) {
       Serial.println(F("Vastaanotettiin paketti!"));
       Serial.print(F("Data:\t\t"));
       Serial.println(str);
+      int16_t temp1 = *((int16_t*)&buf[1]);
+      int16_t temp2 = *((int16_t*)&buf[3]);
+      float voltage = temp1/1000.0;
+      float current = temp2/100.0;
+      Serial.println(voltage);
+      Serial.println(current);
 
       // print RSSI (Received Signal Strength Indicator)
       Serial.print(F("RSSI:\t\t"));
@@ -81,12 +93,16 @@ void loop() {
       u8g2.setFont(u8g2_font_ncenB08_tr); // choose a suitable font
       //u8g2.drawStr(0,10,"Hello World!");  // write something to the internal memory
       u8g2.setCursor(20,20);
-      u8g2.print(lora.getRSSI());
-      //u8g2.sendBuffer();          // transfer internal memory to the display
+      u8g2.print(voltage);
       u8g2.setCursor(20,40);
-      u8g2.print(lora.getSNR());
+      u8g2.print(current);
       u8g2.setCursor(20,60);
       u8g2.print(counter++);
+
+      u8g2.setCursor(60,20);
+      u8g2.print(lora.getRSSI());
+      u8g2.setCursor(60,40);
+      u8g2.print(lora.getSNR());
 
       // print SNR (Signal-to-Noise Ratio)
       Serial.print(F("SNR:\t\t"));
