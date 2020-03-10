@@ -45,6 +45,7 @@ RESET (blue ![#blue](https://placehold.it/10/0000ff/000000?text=+)) | &leftarrow
 DIO0 (IRQ) (grey ![#grey](https://placehold.it/10/999999/000000?text=+)) | &rightarrow; | D2 (GPIO4) | GPIO21
 GND (black ![#black](https://placehold.it/10/000000/000000?text=+)) | | G | GND
 3.3V (red ![#red](https://placehold.it/10/ff0000/000000?text=+)) | | 3V3 | 3V3
+ANA/ANT | | | Antenna (86mm)
 
 #### Alternative wiring for ESP8266: LED used as CS and I<sup>2</sup>C useable
 RFM95 | Direction | ESP8266/Wemos/NodeMCU
@@ -57,6 +58,7 @@ RESET (blue ![#blue](https://placehold.it/10/0000ff/000000?text=+)) | &leftarrow
 DIO0 (IRQ) (grey ![#grey](https://placehold.it/10/999999/000000?text=+)) | &rightarrow; | D8 (GPIO15)
 GND (black ![#black](https://placehold.it/10/000000/000000?text=+)) | | G
 3.3V (red ![#red](https://placehold.it/10/ff0000/000000?text=+)) | | 3V3
+ANA/ANT | | | Antenna (86mm)
 
 **Warning:** if DIO0 interrupt signal is triggered, ESP8266 doesn't boot up. This is safe wiring only if interrupt is not used.
 
