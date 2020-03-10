@@ -1,3 +1,6 @@
+// RadioLib by Jan Gromes
+// U8g2 by oliver
+
 #include <RadioLib.h>
 
 #include <U8g2lib.h>
