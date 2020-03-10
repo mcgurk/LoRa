@@ -46,7 +46,7 @@ void setup() {
 
 volatile bool receivedFlag = false;
 volatile bool enableInterrupt = true;
-uint8_t counter = 0;
+uint32_t counter = 0;
 
 void setFlag(void) {
   if(!enableInterrupt) {
@@ -92,17 +92,17 @@ void loop() {
       u8g2.clearBuffer();          // clear the internal memory
       u8g2.setFont(u8g2_font_ncenB08_tr); // choose a suitable font
       //u8g2.drawStr(0,10,"Hello World!");  // write something to the internal memory
-      u8g2.setCursor(20,20);
-      u8g2.print(voltage);
-      u8g2.setCursor(20,40);
-      u8g2.print(current);
-      u8g2.setCursor(20,60);
+      u8g2.setCursor(10,10);
+      u8g2.print(voltage); u8g2.print("V");
+      u8g2.setCursor(10,20);
+      u8g2.print(current); u8g2.print("mA");
+      u8g2.setCursor(10,60);
       u8g2.print(counter++);
 
-      u8g2.setCursor(60,20);
-      u8g2.print(lora.getRSSI());
-      u8g2.setCursor(60,40);
-      u8g2.print(lora.getSNR());
+      u8g2.setCursor(60,50);
+      u8g2.print(lora.getRSSI()); u8g2.print("dBm");
+      u8g2.setCursor(60,60);
+      u8g2.print(lora.getSNR()); u8g2.print("dB");
 
       // print SNR (Signal-to-Noise Ratio)
       Serial.print(F("SNR:\t\t"));
@@ -116,12 +116,12 @@ void loop() {
 
     } else if (state == ERR_CRC_MISMATCH) {
       Serial.println(F("CRC-tarkistussumma virhe!"));
-      u8g2.setCursor(50,60);
+      u8g2.setCursor(10,30);
       u8g2.print("CRC-virhe!");
     } else { // jokin muu virhe kuin CRC-virhe
       Serial.print(F("Paketin vastaanotto epäonnistui, koodi "));
       Serial.println(state);
-      u8g2.setCursor(50,60);
+      u8g2.setCursor(10,30);
       u8g2.print("Joku virhe!");
     }
 
