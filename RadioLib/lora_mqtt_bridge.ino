@@ -246,7 +246,7 @@ void loop() {
   }
   client.loop();
 
-  unsigned long now = millis();
+  /*unsigned long now = millis();
   if (now - lastMsg > 2000) {
     lastMsg = now;
     ++value;
@@ -268,8 +268,8 @@ void loop() {
     docesp["freeHeap"] = ESP.getFreeHeap();
     serializeJson(doc, msg);
     Serial.println(msg);
-    client.publish("lora", msg);
-  }
+    client.publish(Config.mqtt.topic, msg);
+  }*/
   
   checkButton(); //WIFIManager
 }
@@ -424,5 +424,31 @@ void poll_lora() {
 
     // aktivoidaan keskeytysten käsittely uudelleen
     enableInterrupt = true;
+
+    //create json message and send it with mqtt
+    ++value;
+    Serial.print("Publish message: ");
+    time_t now = time(nullptr);
+    char *date = ctime(&now);
+    date[strcspn(date, "\r\n")] = 0; //remove \r and/or \n
+    DynamicJsonDocument doc(1024); //heap https://arduinojson.org/v6/how-to/reuse-a-json-document/
+    doc["client"] = Config.mqtt.clientid;
+    doc["counter"] = value;
+    doc["time"] = now;
+    doc["date"] = date;
+    doc["data"] = str;
+    doc["RSSI"] = lora.getRSSI();
+    doc["SNR"] = lora.getSNR();
+    doc["freqError"] = lora.getFrequencyError();
+    doc["error"] = state;
+    //doc["temperature"] = am2320.readTemperature();
+    //doc["humidity"] = am2320.readHumidity();
+    JsonObject docesp = doc.createNestedObject("ESP");
+    docesp["chipId"] = ESP.getChipId();
+    docesp["freeHeap"] = ESP.getFreeHeap();
+    serializeJson(doc, msg);
+    Serial.println(msg);
+    client.publish(Config.mqtt.topic, msg);
+    
   }  
 }
