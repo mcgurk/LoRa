@@ -9,7 +9,7 @@ Adafruit_AM2320 am2320 = Adafruit_AM2320();*/
 
 #define TRIGGER_PIN D1
 
-#include <RadioLib.h>
+#include <RadioLib.h> // from library manager (https://github.com/jgromes/RadioLib)
 SX1276 lora = new Module(D8, D2, D3); // NSS, DIO0, RST, DIO1
 void ICACHE_RAM_ATTR setFlag(void); // Mandatory for ESP (without this ESP crashes "ISR not in IRAM!")
 
