@@ -52,7 +52,8 @@ int value = 0;
 
 void setup_lora() {
   Serial.print(F("Initializing SX1276..."));
-  int state = lora.begin(868, 125, 9, 7, 0x64); // Freq[MHz], BW[kHz], SF, CR, syncword
+  //int state = lora.begin(868, 125, 9, 7, 0x64); // Freq[MHz], BW[kHz], SF, CR, syncword
+  int state = lora.begin(868, 125, 10, 8, 0x77, 14); 
   if (state == ERR_NONE) {
     Serial.println(F("Initialized successfully!"));
   } else {
@@ -166,7 +167,7 @@ void setup() {
   //Serial.setDebugOutput(true);
   //while (!Serial) continue;
   while(!Serial);
-  delay(1000); //!!!! Arduino Ide:n monitoria varten
+  //delay(1000); // for Arduino IDE:n monitor
   Serial.println(); Serial.print("--- (compilation date: "); Serial.print(__DATE__); Serial.print(" "); Serial.print(__TIME__); Serial.println(") ---");
   SPIFFS.begin();
   SPIFFS_dir();
