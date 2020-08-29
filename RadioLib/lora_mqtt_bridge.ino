@@ -2,6 +2,7 @@
 #include <PubSubClient.h> //from library manager (https://pubsubclient.knolleary.net/)
 #include <ArduinoJson.h>  //from library manager (https://arduinojson.org/)
 #include <WiFiManager.h> // from library manager (https://github.com/tzapu/WiFiManager) (https://github.com/tzapu/WiFiManager/issues/656)
+#include <rBase64.h> // from library manager (https://github.com/boseji/rBASE64)
 
 /*#include "Adafruit_Sensor.h"
 #include "Adafruit_AM2320.h"
@@ -12,6 +13,7 @@ Adafruit_AM2320 am2320 = Adafruit_AM2320();*/
 #include <RadioLib.h> // from library manager (https://github.com/jgromes/RadioLib)
 SX1276 lora = new Module(D8, D2, D3); // NSS, DIO0, RST, DIO1
 void ICACHE_RAM_ATTR setFlag(void); // Mandatory for ESP (without this ESP crashes "ISR not in IRAM!")
+//byte byteArr[100];
 
 //#define SAVE_DEFAULT_CONFIG_TO_FILE_AND_HALT
 #define CONFIG_FILENAME "config.json"
@@ -144,7 +146,7 @@ void reconnect() {
     if (result) {
       Serial.println("connected");
       // Once connected, publish an announcement...
-      client.publish(Config.mqtt.topic, "hello world"); //greetings message
+      client.publish(Config.mqtt.topic, "ESP8266-LoRa-MQTT-bridge started!"); //greetings message
       // ... and resubscribe
       String inTopic = Config.mqtt.topic;
       inTopic += "/set";
@@ -164,8 +166,6 @@ void setup() {
   pinMode(BUILTIN_LED, OUTPUT);     // Initialize the BUILTIN_LED pin as an output
   pinMode(TRIGGER_PIN, INPUT_PULLUP);
   Serial.begin(115200);
-  //Serial.setDebugOutput(true);
-  //while (!Serial) continue;
   while(!Serial);
   //delay(1000); // for Arduino IDE:n monitor
   Serial.println(); Serial.print("--- (compilation date: "); Serial.print(__DATE__); Serial.print(" "); Serial.print(__TIME__); Serial.println(") ---");
@@ -214,7 +214,8 @@ void setup() {
   Serial.print("Config.mqtt.clientid: \""); Serial.print(Config.mqtt.clientid); Serial.println("\"");
     
   setup_wifi();
-  
+
+  client.setBufferSize(1024); //default = 128
   client.setServer(Config.mqtt.server, 1883);
   client.setCallback(callback);
 
@@ -377,24 +378,27 @@ void saveParamCallback(){
 
 void poll_lora() {
   if(receivedFlag) {
+    Serial.println(F("LoRa-packet detected!"));
     // don't react other interrupts while processing this interrupt
     enableInterrupt = false;
     receivedFlag = false;
 
+    int length = lora.getPacketLength();
+    Serial.print(F("Packet length:\t\t")); Serial.println(length);
     // you can read received data as an Arduino String
-    String str;
-    int state = lora.readData(str);
-
+    //String str;
+    //int state = lora.readData(str);
     // you can also read received data as byte array
-    /*
-      byte byteArr[8];
-      int state = lora.receive(byteArr, 8);
-    */
+    byte buf[100];
+    int state = lora.readData(buf, length);
+    Serial.print(F("Receive state:\t\t")); Serial.println(state);
 
     if (state == ERR_NONE) {
-      Serial.println(F("LoRa-packet received!"));
-      Serial.print(F("Data:\t\t"));
-      Serial.println(str);
+      Serial.println(F("LoRa-packet successfully received!"));
+      //Serial.print(F("Packet length:\t\t")); Serial.println(lora.getPacketLength());
+
+      //Serial.print(F("Data:\t\t"));
+      //Serial.println(byteArr);
 
       // print RSSI (Received Signal Strength Indicator)
       Serial.print(F("RSSI:\t\t"));
@@ -420,13 +424,12 @@ void poll_lora() {
 
     // Set SX1276 back to listening mode
     lora.startReceive();
-
     // reactivate interrupt
     enableInterrupt = true;
 
     //create json message and send it with mqtt
     ++value;
-    Serial.print("Publish message: ");
+    //Serial.print("Publish message: ");
     time_t now = time(nullptr);
     char *date = ctime(&now);
     date[strcspn(date, "\r\n")] = 0; //remove \r and/or \n
@@ -435,19 +438,46 @@ void poll_lora() {
     doc["counter"] = value;
     doc["time"] = now;
     doc["date"] = date;
-    doc["data"] = str;
-    doc["RSSI"] = lora.getRSSI();
-    doc["SNR"] = lora.getSNR();
-    doc["freqError"] = lora.getFrequencyError();
-    doc["error"] = state;
     //doc["temperature"] = am2320.readTemperature();
     //doc["humidity"] = am2320.readHumidity();
     JsonObject docesp = doc.createNestedObject("ESP");
     docesp["chipId"] = ESP.getChipId();
     docesp["freeHeap"] = ESP.getFreeHeap();
+    JsonObject doclora = doc.createNestedObject("lora");
+    //doc["data"] = byteArr;
+    //rbase64.encode("blaahblaah");
+    rbase64.encode(buf, length);
+    doclora["data"] = rbase64.result();
+    doclora["RSSI"] = lora.getRSSI();
+    doclora["SNR"] = lora.getSNR();
+    doclora["length"] = length;
+    doclora["freqError"] = lora.getFrequencyError();
+    doclora["error"] = state;
+      int16_t v = *((int16_t*)&buf[1]);
+      int16_t c = *((int16_t*)&buf[3]);
+      int16_t t = *((int16_t*)&buf[5]);
+      int16_t h = *((int16_t*)&buf[7]);
+      float voltage = v/100.0;
+      float current = c/100.0;
+      float temperature = t/100.0;
+      float humidity = h/100.0;
+      /*Serial.println(voltage);
+      Serial.println(current);
+      Serial.println(temperature);
+      Serial.println(humidity);*/
+      doclora["voltage"] = voltage;
+      doclora["current"] = current;
+      doclora["temperature"] = temperature;
+      doclora["humidity"] = humidity;
     serializeJson(doc, msg);
+    Serial.print("Server: \""); Serial.print(Config.mqtt.server); Serial.print("\", ");
+    Serial.print("Topic: \""); Serial.print(Config.mqtt.topic); Serial.println("\", Message:");
     Serial.println(msg);
-    client.publish(Config.mqtt.topic, msg);
+    if(!client.publish(Config.mqtt.topic, msg)) {
+      Serial.println("Error publishing MQTT-message (message too big?)!");
+    }
+    //client.publish(Config.mqtt.topic, "fgfdhffd");
+    // maximum message size: https://www.hivemq.com/blog/mqtt-client-library-encyclopedia-arduino-pubsubclient
     
   }  
 }
