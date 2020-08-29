@@ -10,9 +10,8 @@ Adafruit_AM2320 am2320 = Adafruit_AM2320();*/
 #define TRIGGER_PIN D1
 
 #include <RadioLib.h>
-//SX1276 lora = new Module(D8, D2, D3, D1); // NSS, DIO0, RST, DIO1
 SX1276 lora = new Module(D8, D2, D3); // NSS, DIO0, RST, DIO1
-void ICACHE_RAM_ATTR setFlag(void); // Arduinollä jätä tämä rivi pois
+void ICACHE_RAM_ATTR setFlag(void); // Mandatory for ESP (without this ESP crashes "ISR not in IRAM!")
 
 //#define SAVE_DEFAULT_CONFIG_TO_FILE_AND_HALT
 #define CONFIG_FILENAME "config.json"
@@ -23,7 +22,7 @@ struct Mqtt_config {
   char server[100+1];
   char username[30+1];
   char password[30+1];
-  char topic[100+1];
+  char topic[100+1]; //subscribe topic = [topic]/set
   char clientid[30+1];
 };
 
@@ -33,7 +32,7 @@ struct Wifi_config { //NOT NORMALLY USED. WIFIMANAGER MANAGES THESE
 };
 
 struct config {
-  Wifi_config wifi; //NOT NORMALLY USED. WIFIMANAGER MANAGES THESE
+  Wifi_config wifi; //NOT NORMALLY USED. WIFIMANAGER MANAGES THIS
   Mqtt_config mqtt;
 } Config;
 
@@ -52,22 +51,22 @@ unsigned long lastMsg = 0;
 int value = 0;
 
 void setup_lora() {
-  Serial.print(F("Alustetaan SX1276..."));
+  Serial.print(F("Initializing SX1276..."));
   int state = lora.begin(868, 125, 9, 7, 0x64); // Freq[MHz], BW[kHz], SF, CR, syncword
   if (state == ERR_NONE) {
-    Serial.println(F("Alustus onnistui!"));
+    Serial.println(F("Initialized successfully!"));
   } else {
-    Serial.print(F("Alustus epäonnistui, koodi "));
+    Serial.print(F("Initializing failed, code "));
     Serial.println(state);
     while (true);
   }
   lora.setDio0Action(setFlag);
-  Serial.print(F("Aloita LoRa-pakettien kuuntelu."));
+  Serial.print(F("Begin to listen LoRa-packets. "));
   state = lora.startReceive();
   if (state == ERR_NONE) {
-    Serial.println(F("Kuuntelutilan asetus onnistui!"));
+    Serial.println(F("Listening mode success!"));
   } else {
-    Serial.print(F("Kuuntelutilan asetus epäonnistui, koodi "));
+    Serial.print(F("Listening mode failed, code "));
     Serial.println(state);
     while (true);
   }  
@@ -377,9 +376,8 @@ void saveParamCallback(){
 
 void poll_lora() {
   if(receivedFlag) {
-    // jätetään reagoimatta mahdollisiin jatkokeskeytyksiin
+    // don't react other interrupts while processing this interrupt
     enableInterrupt = false;
-    // nollataan lippu
     receivedFlag = false;
 
     // you can read received data as an Arduino String
@@ -393,7 +391,7 @@ void poll_lora() {
     */
 
     if (state == ERR_NONE) {
-      Serial.println(F("Vastaanotettiin paketti!"));
+      Serial.println(F("LoRa-packet received!"));
       Serial.print(F("Data:\t\t"));
       Serial.println(str);
 
@@ -419,10 +417,10 @@ void poll_lora() {
       Serial.println(state);
     }
 
-    // asetetaan SX1276 takaisin kuuntelutilaan
+    // Set SX1276 back to listening mode
     lora.startReceive();
 
-    // aktivoidaan keskeytysten käsittely uudelleen
+    // reactivate interrupt
     enableInterrupt = true;
 
     //create json message and send it with mqtt
