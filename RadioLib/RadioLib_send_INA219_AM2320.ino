@@ -12,7 +12,7 @@ Adafruit_INA219 ina219;
 #include "Adafruit_AM2320.h"
 Adafruit_AM2320 am2320 = Adafruit_AM2320();
 
-#define DEBUG
+//#define DEBUG
 #define SLEEP 30 //seconds
 
 //SX1276 lora = new Module(D8, D2, D3, D1); // NSS, DIO0, RST, DIO1
