@@ -61,12 +61,12 @@ void loop() {
   #endif
 
   if (!isnan(voltage) && !isnan(current)) {
-    v = voltage * 10.0;
-    c = current * 10.0;
+    v = voltage * 100.0;
+    c = current * 100.0;
   }
   if (!isnan(temperature) && !isnan(humidity)) {
-    t = temperature * 10.0;
-    h = humidity * 10.0;
+    t = temperature * 100.0;
+    h = humidity * 100.0;
   }
   #ifdef DEBUG
   Serial.println("Scaled values:");
