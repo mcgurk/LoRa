@@ -17,6 +17,7 @@ If you get "ISR not in IRAM!", add `ICACHE_RAM_ATTR` before ISR-routine name, e.
   - http://www.advanced-monolithic.com/pdf/ds1117.pdf
   - quiescent current when led-removed: 1-2mA
 - GY-INA219 module (INA219, voltage and current measure, I2C)
+  - 0.1ohm current resistor
 - AM2320(B) sensor (temperature and humidity measure, I2C) 
   - Red=VDD, Yellow=SDA, Black=GND, White=SCL
 - LoRa SX1276 module
