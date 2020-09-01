@@ -7,6 +7,7 @@
   - quiescent current when led-removed: 1-2mA
 - GY-INA219 module (INA219, voltage and current measure, I2C)
   - 0.1ohm current resistor
+  - https://www.ti.com/lit/ds/symlink/ina219.pdf
 - AM2320(B) sensor (temperature and humidity measure, I2C) 
   - Red=VDD, Yellow=SDA, Black=GND, White=SCL
 - LoRa SX1276 module
