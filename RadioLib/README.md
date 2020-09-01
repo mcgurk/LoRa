@@ -10,8 +10,8 @@ After that modification, `if(lora.CRCONPAYLOAD()) ...` can be used to check if C
 If you get "ISR not in IRAM!", add `ICACHE_RAM_ATTR` before ISR-routine name, e.g. `void ICACHE_RAM_ATTR setFlag(void) {`.
 
 ### Parts
-- WeMos D1 mini R2
-- AMS1117-3.3 "Power module"
-- INA219
-- AM2320(B)
+- WeMos D1 mini R2 (ESP8266 module)
+- AMS1117-3.3 "Power module" (3.3V, max input voltage 15V, dropout max 1.3V) http://www.advanced-monolithic.com/pdf/ds1117.pdf
+- INA219 (voltage and current measure, I2C)
+- AM2320(B) (temperature and humidity measure, I2C)
 - LoRa SX1276 module
