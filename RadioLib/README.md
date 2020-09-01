@@ -12,6 +12,14 @@
   - Red=VDD, Yellow=SDA, Black=GND, White=SCL
 - LoRa SX1276 module
 
+### Wiring
+- OBD[+12V] -> INA219[VIN+]
+- INA219[VIN+] -> AMS1117-3.3[VIN+]
+- AMS1117[OUT-3.3V] -> INA219[VCC]
+- OBD[GND] -> AMS1117[IN-GND]
+- AMS1117[OUT-GND] -> INA219[GND]
+- INA219[VCC/GND/SDA/SCL] -> AM2320[VCC/GND/SDA/SCL] + ESP[VCC/GND/SDA/SCL]
+ 
 ### CRC check in receiver
 ```
 #define RADIOLIB_GODMODE
