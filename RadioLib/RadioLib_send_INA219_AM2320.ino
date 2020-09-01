@@ -39,12 +39,21 @@ void setup() {
   #endif
 
   ina219.begin();
+  // By default the initialization will use the largest range (32V, 2A).
+  // To use a slightly lower 32V, 1A range (higher precision on amps):
+  //ina219.setCalibration_32V_1A();
+  // Or to use a lower 16V, 400mA range (higher precision on volts and amps):
+  ina219.setCalibration_16V_400mA();
   am2320.begin();
 }
 
 void loop() {
-  float voltage = ina219.getBusVoltage_V();
+  //float voltage = ina219.getBusVoltage_V();
+  float shuntvoltage = ina219.getShuntVoltage_mV();
+  float busvoltage = ina219.getBusVoltage_V();
+  float voltage = busvoltage + (shuntvoltage / 1000);  //loadvoltage
   float current = ina219.getCurrent_mA();
+  //float power_mW = ina219.getPower_mW();
   float temperature = am2320.readTemperature();
   float humidity = am2320.readHumidity();
   int16_t v = 32767;
