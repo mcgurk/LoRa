@@ -1,15 +1,11 @@
-// RadioLib by Jan Gromes
-// Adafruit INA219
+#include <RadioLib.h> // RadioLib by Jan Gromes, https://github.com/jgromes/RadioLib
 
-//#include <SPI.h>
-#include <RadioLib.h>
-//#include <Wire.h>
 #include "Adafruit_Sensor.h"
 
-#include <Adafruit_INA219.h>
+#include <Adafruit_INA219.h> // Adafruit INA219, https://github.com/adafruit/Adafruit_INA219
 Adafruit_INA219 ina219;
 
-#include "Adafruit_AM2320.h"
+#include "Adafruit_AM2320.h" // https://github.com/adafruit/Adafruit_AM2320
 Adafruit_AM2320 am2320 = Adafruit_AM2320();
 
 //#define DEBUG
