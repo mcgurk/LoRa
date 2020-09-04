@@ -23,9 +23,9 @@ Start Arduino and open the Preferences window. Enter https://arduino.esp8266.com
 Open Boards Manager from Tools > Board menu and install esp8266 platform.
 
 ### Libraries
-- LoRa by Sandeep Mistry (0.7.0)
-  - https://github.com/sandeepmistry/arduino-LoRa
-  - https://github.com/sandeepmistry/arduino-LoRa/blob/master/API.md
+- RadioLib by Jan Gromes (4.0.3)
+  - https://github.com/jgromes/RadioLib
+  - https://jgromes.github.io/RadioLib/
 - Optional: DHT sensor library for ESPx by beegee_tokyo 1.17.0
 
 
