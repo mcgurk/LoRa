@@ -15,8 +15,8 @@ Adafruit_AM2320 am2320 = Adafruit_AM2320();*/
 #include "DHTesp.h" //(THIS EXAMPLE IS FOR ESP8266 ONLY!)
 DHTesp dht;
 
-#define DEBUG
-#define SLEEP 59 //deepsleep duration in seconds
+//#define DEBUG
+#define SLEEP 595 //deepsleep duration in seconds (max 71min)
 #define LORA_ID 2 //first byte in packet for identification purposes
 
 //SX1276 lora = new Module(D8, D2, D3, D1); // NSS, DIO0, RST, DIO1
@@ -65,7 +65,7 @@ void loop() {
   int16_t h = 32767;
 
   #ifdef DEBUG
-  Serial.print("LoRa ID: "); Serial.println(LORA_ID);
+  Serial.print("Counter: "); Serial.println(counter);
   Serial.print("Voltage[V]: "); Serial.println(voltage);
   Serial.print("Current[mA]: "); Serial.println(current);
   Serial.print("Temperature [oC]: "); Serial.println(temperature);
@@ -128,5 +128,5 @@ void loop() {
   }
   #endif
 
-  ESP.deepSleep(SLEEP*1000*1000);
+  ESP.deepSleep((SLEEP+random(10))*1000*1000);
 }
