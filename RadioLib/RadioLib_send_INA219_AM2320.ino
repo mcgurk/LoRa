@@ -14,8 +14,7 @@ Adafruit_AM2320 am2320 = Adafruit_AM2320();
 //SX1276 lora = new Module(D8, D2, D3, D1); // NSS, DIO0, RST, DIO1
 SX1276 lora = new Module(D4, D8, D3); // NSS, DIO0, RST, DIO1
 
-  
-uint8_t counter = 0;
+#define LORA_ID 1 //first byte in packet for identification purposes
 
 void setup() {
   #ifdef DEBUG
@@ -82,7 +81,7 @@ void loop() {
   #endif
   
   uint8_t packet[9];
-  packet[0] = counter;
+  packet[0] = LORA_ID;
   *((int16_t*)&packet[1]) = v;
   *((int16_t*)&packet[3]) = c;
   *((int16_t*)&packet[5]) = t;
@@ -105,8 +104,6 @@ void loop() {
     Serial.println(state);
   }
   #endif
-  
-  counter++;
 
   //delay(30000);
   //delay(5000);
