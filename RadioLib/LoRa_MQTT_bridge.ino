@@ -8,6 +8,7 @@
 #include "Adafruit_AM2320.h"
 Adafruit_AM2320 am2320 = Adafruit_AM2320();*/
 
+#define LORA_SYNCWORD 0x77
 #define TRIGGER_PIN D1
 
 #include <RadioLib.h> // from library manager (https://github.com/jgromes/RadioLib)
@@ -54,8 +55,8 @@ int value = 0;
 
 void setup_lora() {
   Serial.print(F("Initializing SX1276..."));
-  //int state = lora.begin(868, 125, 9, 7, 0x64); // Freq[MHz], BW[kHz], SF, CR, syncword
-  int state = lora.begin(868, 125, 10, 8, 0x77, 14); 
+  //int state = lora.begin(868, 125, 9, 7, 0x64); // Freq[MHz], BW[kHz], SF, CR, syncword, preambleLength
+  int state = lora.begin(868, 125, 10, 8, LORA_SYNCWORD); 
   if (state == ERR_NONE) {
     Serial.println(F("Initialized successfully!"));
   } else {
@@ -438,45 +439,53 @@ void poll_lora() {
     doc["counter"] = value;
     doc["time"] = now;
     doc["date"] = date;
-    //doc["temperature"] = am2320.readTemperature();
-    //doc["humidity"] = am2320.readHumidity();
     JsonObject docesp = doc.createNestedObject("ESP");
     docesp["chipId"] = ESP.getChipId();
     docesp["freeHeap"] = ESP.getFreeHeap();
     JsonObject doclora = doc.createNestedObject("lora");
-    //doc["data"] = byteArr;
-    //rbase64.encode("blaahblaah");
     rbase64.encode(buf, length);
     doclora["data"] = rbase64.result();
+    byte loraID = buf[0];
+    doclora["id"] = loraID;
+    doclora["syncword"] = LORA_SYNCWORD;
     doclora["RSSI"] = lora.getRSSI();
     doclora["SNR"] = lora.getSNR();
     doclora["length"] = length;
     doclora["freqError"] = lora.getFrequencyError();
     doclora["error"] = state;
-      int16_t v = *((int16_t*)&buf[1]);
-      int16_t c = *((int16_t*)&buf[3]);
-      int16_t t = *((int16_t*)&buf[5]);
-      int16_t h = *((int16_t*)&buf[7]);
-      float voltage = v/100.0;
-      float current = c/100.0;
-      float temperature = t/100.0;
-      float humidity = h/100.0;
-      /*Serial.println(voltage);
-      Serial.println(current);
-      Serial.println(temperature);
-      Serial.println(humidity);*/
-      doclora["voltage"] = voltage;
-      doclora["current"] = current;
-      doclora["temperature"] = temperature;
-      doclora["humidity"] = humidity;
+
+    switch(loraID) {
+      case 1:
+        { 
+        int16_t v = *((int16_t*)&buf[1]);
+        int16_t c = *((int16_t*)&buf[3]);
+        int16_t t = *((int16_t*)&buf[5]);
+        int16_t h = *((int16_t*)&buf[7]);
+        float voltage = v/100.0;
+        float current = c/100.0;
+        float temperature = t/100.0;
+        float humidity = h/100.0;
+        doclora["voltage"] = voltage;
+        doclora["current"] = current;
+        doclora["temperature"] = temperature;
+        doclora["humidity"] = humidity; 
+        }
+        break;
+      case 2:
+        break;
+      default:
+        break;
+    }
+    
     serializeJson(doc, msg);
     Serial.print("Server: \""); Serial.print(Config.mqtt.server); Serial.print("\", ");
-    Serial.print("Topic: \""); Serial.print(Config.mqtt.topic); Serial.println("\", Message:");
+    char topic[100+3+4+1];
+    sprintf(topic, "%s/0x%02X/%i", Config.mqtt.topic, LORA_SYNCWORD, loraID);
+    Serial.print("Topic: \""); Serial.print(topic); Serial.println("\", Message:");
     Serial.println(msg);
-    if(!client.publish(Config.mqtt.topic, msg)) {
+    if(!client.publish(topic, msg)) {
       Serial.println("Error publishing MQTT-message (message too big?)!");
     }
-    //client.publish(Config.mqtt.topic, "fgfdhffd");
     // maximum message size: https://www.hivemq.com/blog/mqtt-client-library-encyclopedia-arduino-pubsubclient
     
   }  
