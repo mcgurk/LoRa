@@ -88,6 +88,11 @@ D8 | GPIO15 | out | Must be low at boot up (boot mode selection). If serial port
 D9 | GPIO3 | x | Serial RX.
 D10 | GPIO1 | x | Serial TX.
 
+#### Using D9/GPIO/RX for your own uses (TX is D10/GPIO1)
+https://github.com/esp8266/Arduino/issues/2430
+```
+Serial.begin(115200, SERIAL_8N1, SERIAL_TX_ONLY, D10);
+```
 
 ## Misc
 
