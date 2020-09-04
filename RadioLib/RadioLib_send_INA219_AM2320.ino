@@ -1,3 +1,7 @@
+// ---------------------
+// Flash with "Tools -> Erase Flash -> All Flash Contents" to ensure that WiFi is off!
+// ---------------------
+
 #include <RadioLib.h> // RadioLib by Jan Gromes, https://github.com/jgromes/RadioLib
 
 #include "Adafruit_Sensor.h"
