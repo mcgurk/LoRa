@@ -65,7 +65,7 @@ void loop() {
   int16_t h = 32767;
 
   #ifdef DEBUG
-  Serial.print("Counter: "); Serial.println(counter);
+  Serial.print("LoRa ID: "); Serial.println(LORA_ID);
   Serial.print("Voltage[V]: "); Serial.println(voltage);
   Serial.print("Current[mA]: "); Serial.println(current);
   Serial.print("Temperature [oC]: "); Serial.println(temperature);
