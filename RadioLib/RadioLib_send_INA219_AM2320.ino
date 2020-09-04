@@ -9,12 +9,11 @@ Adafruit_INA219 ina219;
 Adafruit_AM2320 am2320 = Adafruit_AM2320();
 
 //#define DEBUG
-#define SLEEP 30 //seconds
+#define SLEEP 30 //deepsleep duration in seconds
+#define LORA_ID 1 //first byte in packet for identification purposes
 
 //SX1276 lora = new Module(D8, D2, D3, D1); // NSS, DIO0, RST, DIO1
 SX1276 lora = new Module(D4, D8, D3); // NSS, DIO0, RST, DIO1
-
-#define LORA_ID 1 //first byte in packet for identification purposes
 
 void setup() {
   #ifdef DEBUG
