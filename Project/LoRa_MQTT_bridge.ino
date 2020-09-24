@@ -1,4 +1,6 @@
 #include <ESP8266WiFi.h>
+#include <coredecls.h>  // settimeofday_cb()
+#include <TZ.h>
 #include <PubSubClient.h> //from library manager (https://pubsubclient.knolleary.net/)
 #include <ArduinoJson.h>  //from library manager (https://arduinojson.org/)
 #include <WiFiManager.h> // from library manager (https://github.com/tzapu/WiFiManager) (https://github.com/tzapu/WiFiManager/issues/656)
@@ -10,6 +12,7 @@ Adafruit_AM2320 am2320 = Adafruit_AM2320();*/
 
 #define LORA_SYNCWORD 0x77
 #define TRIGGER_PIN D1
+#define MYTZ TZ_Europe_Helsinki
 
 #include <RadioLib.h> // from library manager (https://github.com/jgromes/RadioLib)
 SX1276 lora = new Module(D8, D2, D3); // NSS, DIO0, RST, DIO1
@@ -140,14 +143,20 @@ void reconnect() {
     //auto result = client.connect(Config.mqtt.clientid);
     int result;
     if (Config.mqtt.username[0]) {
-      result = client.connect(Config.mqtt.clientid, Config.mqtt.username, Config.mqtt.password);
+      char topic[100+3+4+1];
+      sprintf(topic, "%s/0x%02X/state", Config.mqtt.topic, LORA_SYNCWORD);
+      result = client.connect(Config.mqtt.clientid, Config.mqtt.username, Config.mqtt.password, topic, 0, true, "offline"); //LWT
     } else {
       result = client.connect(Config.mqtt.clientid);
     }
     if (result) {
       Serial.println("connected");
       // Once connected, publish an announcement...
-      client.publish(Config.mqtt.topic, "ESP8266-LoRa-MQTT-bridge started!"); //greetings message
+      char topic[100+3+4+1];
+      sprintf(topic, "%s/0x%02X/log", Config.mqtt.topic, LORA_SYNCWORD);
+      client.publish(topic, "ESP8266-LoRa-MQTT-bridge started!", true); //greetings message
+      sprintf(topic, "%s/0x%02X/state", Config.mqtt.topic, LORA_SYNCWORD);
+      client.publish(topic, "online", true);
       // ... and resubscribe
       String inTopic = Config.mqtt.topic;
       inTopic += "/set";
@@ -163,7 +172,7 @@ void reconnect() {
   }
 }
 
-void setup() {
+void setup() {  
   pinMode(BUILTIN_LED, OUTPUT);     // Initialize the BUILTIN_LED pin as an output
   pinMode(TRIGGER_PIN, INPUT_PULLUP);
   Serial.begin(115200);
@@ -222,7 +231,8 @@ void setup() {
 
   //implement NTP update of timekeeping (with automatic hourly updates)
   //configTime(timezone * 3600, dst * 0, "pool.ntp.org", "time.nist.gov");
-  configTime(0, 0, "pool.ntp.org", "time.nist.gov");
+  //configTime(0, 0, "pool.ntp.org", "time.nist.gov");
+  configTime(MYTZ, "pool.ntp.org", "time.nist.gov");
   // info to convert UNIX time to local time (including automatic DST update)
   // setenv("TZ", "EST+5EDT,M3.2.0/2:00:00,M11.1.0/2:00:00", 1);
 
@@ -465,10 +475,14 @@ void poll_lora() {
         float current = c/100.0;
         float temperature = t/100.0;
         float humidity = h/100.0;
-        doclora["voltage"] = voltage;
-        doclora["current"] = current;
-        doclora["temperature"] = temperature;
-        doclora["humidity"] = humidity; 
+        /*if (v == 32767) voltage = "err";
+        if (c == 32767) current = "err";
+        if (t == 32767) temperature = "err";
+        if (h == 32767) humidity = "err";*/
+        if (v != 32767) doclora["voltage"] = voltage; else doclora["voltage"] = "err";
+        if (c != 32767) doclora["current"] = current; else doclora["current"] = "err";
+        if (t != 32767) doclora["temperature"] = temperature; else doclora["temperature"] = "err";
+        if (h != 32767) doclora["humidity"] = humidity; else doclora["humidity"] = "err";
         }
         break;
       case 2:
@@ -480,10 +494,14 @@ void poll_lora() {
     serializeJson(doc, msg);
     Serial.print("Server: \""); Serial.print(Config.mqtt.server); Serial.print("\", ");
     char topic[100+3+4+1];
-    sprintf(topic, "%s/0x%02X/%i", Config.mqtt.topic, LORA_SYNCWORD, loraID);
+    if (state == ERR_NONE) {
+      sprintf(topic, "%s/0x%02X/%i", Config.mqtt.topic, LORA_SYNCWORD, loraID);
+    } else {
+      sprintf(topic, "%s/0x%02X/error", Config.mqtt.topic, LORA_SYNCWORD);
+    }
     Serial.print("Topic: \""); Serial.print(topic); Serial.println("\", Message:");
     Serial.println(msg);
-    if(!client.publish(topic, msg)) {
+    if(!client.publish(topic, msg, true)) {
       Serial.println("Error publishing MQTT-message (message too big?)!");
     }
     // maximum message size: https://www.hivemq.com/blog/mqtt-client-library-encyclopedia-arduino-pubsubclient
