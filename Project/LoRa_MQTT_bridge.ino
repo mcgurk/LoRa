@@ -54,7 +54,7 @@ WiFiManagerParameter custom_mqtt_clientid;
 PubSubClient client(espClient);
 char msg[1024];
 unsigned long lastMsg = 0;
-int value = 0;
+unsigned int value = 0;
 
 void setup_lora() {
   Serial.print(F("Initializing SX1276..."));
