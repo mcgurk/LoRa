@@ -158,9 +158,11 @@ void reconnect() {
       sprintf(topic, "%s/0x%02X/state", Config.mqtt.topic, LORA_SYNCWORD);
       client.publish(topic, "online", true);
       // ... and resubscribe
-      String inTopic = Config.mqtt.topic;
-      inTopic += "/set";
-      client.subscribe(inTopic.c_str());
+      //String inTopic = Config.mqtt.topic;
+      //inTopic += "/set";
+      sprintf(topic, "%s/0x%02X/set", Config.mqtt.topic, LORA_SYNCWORD);
+      //client.subscribe(inTopic.c_str());
+      client.subscribe(topic);
     } else {
       checkButton(); //WIFIManager
       Serial.print("failed, rc=");
