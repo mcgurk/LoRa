@@ -1,7 +1,3 @@
-### TODO
-- LWT
-- Retained
-- Messages with error
 
 ### Parts
 - WeMos D1 mini R2 (ESP8266 module)
