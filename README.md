@@ -108,6 +108,7 @@ Motonet Kauko-ohjattava ulkopistorasia IP44 3600W (38-4663) / EMAX 6867 ja 68671
 - 16A, 3600W
 - Frequency: 433,92MHz
 - Protection: IP44
+- For some reason, Arduino IDE rc-switch library example (simple and advance) didn't get anything.
 
 button | code (0 = short, 1 = long)
 --- | ---
