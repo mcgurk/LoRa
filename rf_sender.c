@@ -24,11 +24,11 @@
 #define CODE_LENGTH_MOTONET 34 //LIDL
 
 //space first:
-#define ZERO_LIDL delayMicroseconds(LONG_LIDL-CORRECTION1); digitalWrite(PIN, HIGH); delayMicroseconds(SHORT_LIDL-CORRECTION2); digitalWr$
-#define ONE_LIDL delayMicroseconds(SHORT_LIDL-CORRECTION1); digitalWrite(PIN, HIGH); delayMicroseconds(LONG_LIDL-CORRECTION2); digitalWri$
+#define ZERO_LIDL delayMicroseconds(LONG_LIDL-CORRECTION1); digitalWrite(PIN, HIGH); delayMicroseconds(SHORT_LIDL-CORRECTION2); digitalWrite(PIN, LOW);
+#define ONE_LIDL delayMicroseconds(SHORT_LIDL-CORRECTION1); digitalWrite(PIN, HIGH); delayMicroseconds(LONG_LIDL-CORRECTION2); digitalWrite(PIN, LOW);
 //mark first:
-#define ZERO_MOTONET digitalWrite(PIN, HIGH); delayMicroseconds(SHORT_MOTONET-CORRECTION1); digitalWrite(PIN, LOW); delayMicroseconds(LON$
-#define ONE_MOTONET digitalWrite(PIN, HIGH); delayMicroseconds(LONG_MOTONET-CORRECTION1); digitalWrite(PIN, LOW); delayMicroseconds(SHORT$
+#define ZERO_MOTONET digitalWrite(PIN, HIGH); delayMicroseconds(SHORT_MOTONET-CORRECTION1); digitalWrite(PIN, LOW); delayMicroseconds(LONG_MOTONET-CORRECTION1);
+#define ONE_MOTONET digitalWrite(PIN, HIGH); delayMicroseconds(LONG_MOTONET-CORRECTION1); digitalWrite(PIN, LOW); delayMicroseconds(SHORT_MOTONET-CORRECTION1);
 
 void send_code(char mode, char *buf) {
   switch(mode) {
