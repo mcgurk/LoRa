@@ -150,7 +150,7 @@ Button | RemoteID | BtnID | OpCode | Chksum
 2 on |  0011011101101 | 01 | 1011 | 00
 2 off | 0011011101101 | 01 | 1111 | 01
 
-## Python
+## Python serial
 
 sudo apt install python3-serial
 
@@ -176,4 +176,18 @@ if sys.argv[1] == "off":
 #ser.write(b'011000111010011000001110 1101100100')
 ser.close()
 
+```
+
+## Python rpi-rf
+```
+apt-get install python3-pip
+sudo pip3 install rpi-rf
+
+/usr/local/lib/python3.7/dist-packages/rpi_rf/rpi_rf.py:
+            Protocol(350, 0, 100, 3, 8, 8, 3))
+
+# Raspberry Pi 4: 350,0,100,3,8,8,3 (-p 100) -> 1:792 high 383 low 0:277 high 895 low
+# rpi-rf_send doesn't use protocol first parameter in source file. must be given with rpi-rf_send parameter.
+
+sleep 1; rpi-rf_send -g 17 -p 100 -t 7 -l 34 6687308644; sleep 1; rpi-rf_send -g 17 -p 100 -t 8 -l 34 6687309664
 ```
