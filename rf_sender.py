@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+# WORKS ONLY WITH RASPBERRY PI 4 WITH POWERSAFE GOVERNOR (core speed 250MHz)! SPI SPEED CHANGES IF CORE SPEED CHANGES!
 # sudo raspi-config
 # 3 Interface Options -> P4 SPI # effective instantly without booting
 # sudo apt install python3-spidev
