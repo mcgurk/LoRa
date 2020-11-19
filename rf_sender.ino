@@ -1,3 +1,6 @@
+//#define TEST
+//#define DEBUG
+
 #define REG B //for AVR
 #define PIN D2 //for ESP
 
@@ -20,12 +23,16 @@ void setup() {
   #ifdef __AVR__
   //pinMode(11, OUTPUT);
   DDR = 0xff;
+  #ifdef DEBUG
   Serial.println(STR(PORT));
   Serial.println(STR(DDR));
+  #endif
   #else
+  pinMode(PIN, OUTPUT);
+  #ifdef DEBUG  
   Serial.println(); Serial.println();
   Serial.println(STR(PIN));
-  pinMode(PIN, OUTPUT);
+  #endif
   #endif
 }
 
@@ -46,7 +53,9 @@ void send(const char* code) {
     if (b == '1') buf[p++] = 0xff;
     if (b == '\r' || b == '\n' || b == '\0') break;
   } while (p < 34);
+  #ifdef DEBUG
   for (int c = 0; c < 34; c++) Serial.print(buf[c] ? '1' : '0'); Serial.println(); // debug
+  #endif
   for (int r = 0; r < 6; r++) {
     noInterrupts();
     for (int c = 0; c < 34; c++) {
@@ -62,18 +71,22 @@ void send(const char* code) {
 }
 
 void loop() {
+  #ifndef TEST
   if(Serial.available()) {
      String str = Serial.readString();
-     //Serial.println(str);
+     #ifdef DEBUG
+     Serial.println(str);
+     #endif
      send(str.c_str());
      delay(100);
-   }
-  /*Serial.println("loop");
+  }
+  #else
+  Serial.println("loop");
   Serial.println("on");
   send(on);
   delay(5000);
   Serial.println("off");
   send(off);
-  delay(5000);*/
+  delay(5000);
+  #endif
 }
-
