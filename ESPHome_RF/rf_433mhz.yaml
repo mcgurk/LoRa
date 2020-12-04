@@ -1,0 +1,41 @@
+esphome:
+  name: rf_433mhz
+  platform: ESP8266
+  board: d1_mini
+  includes:
+    - rf_motonet.h
+
+wifi:
+  ssid: "........"
+  password: "........."
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Rf 433Mhz Fallback Hotspot"
+    password: "................."
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+switch:
+  - platform: gpio
+    name: "testiledi"
+    pin:
+      number: D4
+      inverted: yes
+
+  - platform: custom
+    lambda: |-
+      auto my_custom_switch = new MotonetRfSwitch();
+      App.register_component(my_custom_switch);
+      return {my_custom_switch};
+
+    switches:
+      name: "My Custom Switches"
