@@ -38,4 +38,4 @@ switch:
       return {my_custom_switch};
 
     switches:
-      name: "My Custom Switches"
+      name: "Motonet RF-switch"
