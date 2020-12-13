@@ -6,13 +6,13 @@ esphome:
     - rf_motonet.h
 
 wifi:
-  ssid: "........"
-  password: "........."
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "Rf 433Mhz Fallback Hotspot"
-    password: "................."
+    ssid: !secret ap_ssid
+    password: !secret ap_password
 
 captive_portal:
 
