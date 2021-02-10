@@ -4,7 +4,7 @@
 // M = startsymbol (mark+space): 10ms
 
 // M------------TTTTTTTTTTTT---- // temperature *10 in celcius
-// M------------------------CCbm // channel? (battery, mode)
+// M------------------------CCbm // channel + battery + c/f-mode
 // MPPPP------------------------ // 4bit parity/checksum?
 // M----SSSSSSSS---------------- // 8bit serial?
 
