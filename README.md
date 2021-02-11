@@ -191,3 +191,7 @@ sudo pip3 install rpi-rf
 
 sleep 1; rpi-rf_send -g 17 -p 100 -t 7 -l 34 6687308644; sleep 1; rpi-rf_send -g 17 -p 100 -t 8 -l 34 6687309664
 ```
+
+## Antenna
+- https://www.element14.com/community/community/project14/rf/blog/2020/01/11/building-a-poor-man-s-quarter-wave-433mhz-antenna-antenna-s-construction
+- 433MHz: 17,36cm
