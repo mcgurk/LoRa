@@ -41,18 +41,16 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(GPIO), ISR, RISING);
 }
 
-uint8_t checksum(uint32_t msg) {
-  //uint32_t tmp = msg;
+uint8_t isValid(uint32_t msg) {
   uint32_t sum = 0;
   for (int i = 0; i < 6; i++) {
     sum += msg & 0xf;
     msg >>= 4;
   }
   sum--;
-  return sum & 0xf;
+  return ((msg&0xf) == (sum&0xf));
 }
 
-//char message[29];
 uint32_t message = 0;
 
 void loop() {
@@ -63,7 +61,8 @@ void loop() {
     }
     //Serial.println(message, BIN);
     //Serial.println(checksum(message), BIN);
-    if (checksum(message) != ((message >> 24)&0xf)) {
+    //if (checksum(message) != ((message >> 24)&0xf)) {
+    if (!isValid(message)) {
       Serial.println("Checksum error!");
       return;
     }
