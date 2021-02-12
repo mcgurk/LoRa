@@ -18,17 +18,20 @@ void send(const char* code) {
     if (b == '1') buf[p++] = 0xff;
     if (b == '\r' || b == '\n' || b == '\0') break;
   } while (p < 34);
-  for (int r = 0; r < 6; r++) {
-    noInterrupts();
-    for (int c = 0; c < 34; c++) {
-      if (buf[c]) {
-        ONE
-      } else {
-        ZERO
+  for ( int t = 0; t < 2; t++) {
+    for (int r = 0; r < 6; r++) {
+      noInterrupts();
+      for (int c = 0; c < 34; c++) {
+        if (buf[c]) {
+          ONE
+        } else {
+          ZERO
+        }
       }
+      interrupts();
+      delay(10);
     }
-    interrupts();
-    delay(10);
+    delay(1000);      
   }
 }
 
