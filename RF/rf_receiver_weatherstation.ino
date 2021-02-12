@@ -1,6 +1,5 @@
 #define GPIO 5 // D1
 
-volatile uint8_t flag = 0;
 volatile uint32_t buf[16][29]; //16 slots, 28 bits + flag
 
 ICACHE_RAM_ATTR void ISR() {
