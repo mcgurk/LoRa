@@ -9,8 +9,6 @@ void setup() {
 
   TIMSK1 = _BV(ICIE1); // ICIE1: Timer/Counter1, Input Capture Interrupt Enable
   TCCR1A = 0; // TCCR1A WGM10, WGM11 = 0 and TCCR1B WGM12, WGM13 = 0 -> TIMER1: Normal mode
-  //TCCR1B = _BV(ICNC1) | _BV(CS10); //CS10: No prescaler, ICNC1: Input Capture Noise Canceller
-  //TCCR1B = _BV(ICNC1) | _BV(ICES1) | _BV(CS10) | _BV(CS12); //CS1x: prescaler 1024, ICES1: rising edge, ICNC1: Input Capture Noise Canceller
   TCCR1B = _BV(ICNC1) | _BV(ICES1) | _BV(CS11); //CS11: prescaler 8, ICES1: rising edge, ICNC1: Input Capture Noise Canceller
 }
 
@@ -30,7 +28,7 @@ void loop() {
     buf[slot][28] = 0;
     uint32_t message = 0;
     for (int i = 0; i < 28; i++) {
-      bitWrite(message, 27-i, ((buf[slot][i] > 8000) ? 1 : 0) );
+      bitWrite(message, 27-i, ((buf[slot][i] > 8000) ? 1 : 0) ); // 1 unit is 0,5us
     }
     if (!isValid(message)) {
       Serial.println("Checksum error!");
