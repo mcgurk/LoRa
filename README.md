@@ -50,14 +50,14 @@ ANA/ANT | | Antenna (86mm) |
 #### Alternative wiring for ESP8266: LED used as CS and I<sup>2</sup>C (D1(GPIO5)/D2(GPIO4)) useable
 RFM95 | Direction | ESP8266/Wemos/NodeMCU | ESP-201
 --- | --- | --- | ---
-MISO/SDO (SPI) (brown ![#brown](https://via.placeholder.com/10/c68c53/000000?text=+)) | &leftarrow; | D6 (GPIO12) (SPI MISO)
-MOSI/SDI (SPI) (orange ![#orange](https://via.placeholder.com/10/ff8000/000000?text=+)) | &rightarrow; | D7 (GPIO13) (SPI MOSI)
-SCK/SCLK (SPI) (yellow ![#yellow](https://via.placeholder.com/10/ffff00/000000?text=+)) | &leftarrow; | D5 (GPIO14) (SPI SCLK)
-NSS/SS/CS (SPI) (green ![#green](https://via.placeholder.com/10/00ff00/000000?text=+)) | &leftarrow; | D4 (GPIO2)
-RESET (blue ![#blue](https://via.placeholder.com/10/0000ff/000000?text=+)) | &leftarrow; | D3 (GPIO0)
-DIO0 (IRQ) (grey ![#grey](https://via.placeholder.com/10/999999/000000?text=+)) | &rightarrow; | D8 (GPIO15)
-GND (black ![#black](https://via.placeholder.com/10/000000/000000?text=+)) | | G
-3.3V (red ![#red](https://via.placeholder.com/10/ff0000/000000?text=+)) | | 3V3
+MISO/SDO (SPI) (brown ![#brown](https://via.placeholder.com/10/c68c53/000000?text=+)) | &leftarrow; | D6 (GPIO12) (SPI MISO) | IO12
+MOSI/SDI (SPI) (orange ![#orange](https://via.placeholder.com/10/ff8000/000000?text=+)) | &rightarrow; | D7 (GPIO13) (SPI MOSI) | IO13
+SCK/SCLK (SPI) (yellow ![#yellow](https://via.placeholder.com/10/ffff00/000000?text=+)) | &leftarrow; | D5 (GPIO14) (SPI SCLK) | IO14
+NSS/SS/CS (SPI) (green ![#green](https://via.placeholder.com/10/00ff00/000000?text=+)) | &leftarrow; | D3 (GPIO0) | IO0
+RESET (blue ![#blue](https://via.placeholder.com/10/0000ff/000000?text=+)) | &leftarrow; | D4 (GPIO2) | IO2
+DIO0 (IRQ) (grey ![#grey](https://via.placeholder.com/10/999999/000000?text=+)) | &rightarrow; | D8 (GPIO15) | IO15
+GND (black ![#black](https://via.placeholder.com/10/000000/000000?text=+)) | | G | GND
+3.3V (red ![#red](https://via.placeholder.com/10/ff0000/000000?text=+)) | | 3V3 | 3.3V
 ANA/ANT | | Antenna (86mm)
 
 **Warning:** if DIO0 interrupt signal is triggered, ESP8266 doesn't boot up. This is safe wiring only if interrupt is not used.
