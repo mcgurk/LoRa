@@ -75,7 +75,7 @@ Normally low, high when active. DIO0 could be connected to D8, but then there is
 ### Wemos/NodeMCU pinout
 
 Wemos/NodeMCU | GPIO | use | notes | ESP-201
---- | --- | --- | ---
+--- | --- | --- | --- | ---
 D0 | GPIO16 | in/out | No interrupts, no pullup feature, no PWM. Used to wake up from deepsleep. User-button is sometimes connected to this. | XPD
 D1 | GPIO5 | in/out/SCL | I<sup>2</sup>C (ESP32: GPIO22) | IO5
 D2 | GPIO4 | in/out/SDA | I<sup>2</sup>C (ESP32: GPIO21) | IO4
