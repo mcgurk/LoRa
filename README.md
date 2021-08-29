@@ -35,16 +35,16 @@ Select right board from board settings (in my case "LOLIN(WEMOS) D1 R2 & mini").
 ### Wiring
 
 #### LED for free use and I<sup>2</sup>C unaccessible
-RFM95 | Direction | ESP8266/Wemos/NodeMCU | ESP32
---- | --- | --- | ---
-MISO/SDO (SPI) (brown ![#brown](https://via.placeholder.com/15/c68c53/000000?text=+)) | &leftarrow; | D6 (GPIO12) (SPI MISO) | GPIO19 (VSPI MISO)
-MOSI/SDI (SPI) (orange ![#orange](https://via.placeholder.com/10/ff8000/000000?text=+)) | &rightarrow; | D7 (GPIO13) (SPI MOSI) | GPIO23 (VSPI MOSI)
-SCK/SCLK (SPI) (yellow ![#yellow](https://via.placeholder.com/10/ffff00/000000?text=+)) | &leftarrow; | D5 (GPIO14) (SPI SCLK) | GPIO18 (VSPI SCLK)
-NSS/SS/CS (SPI) (green ![#green](https://via.placeholder.com/10/00ff00/000000?text=+)) | &leftarrow; | D8 (GPIO15) | GPIO5
-RESET (blue ![#blue](https://via.placeholder.com/10/0000ff/000000?text=+)) | &leftarrow; | D3 (GPIO0) | GPIO22
-DIO0 (IRQ) (grey ![#grey](https://via.placeholder.com/10/999999/000000?text=+)) | &rightarrow; | D2 (GPIO4) | GPIO21
-GND (black ![#black](https://via.placeholder.com/10/000000/000000?text=+)) | | G | GND
-3.3V (red ![#red](https://via.placeholder.com/10/ff0000/000000?text=+)) | | 3V3 | 3V3
+RFM95 | Direction | ESP8266/Wemos/NodeMCU | ESP32 | ESP-201
+--- | --- | --- | --- | ---
+MISO/SDO (SPI) (brown ![#brown](https://via.placeholder.com/15/c68c53/000000?text=+)) | &leftarrow; | D6 (GPIO12) (SPI MISO) | GPIO19 (VSPI MISO) | IO12
+MOSI/SDI (SPI) (orange ![#orange](https://via.placeholder.com/10/ff8000/000000?text=+)) | &rightarrow; | D7 (GPIO13) (SPI MOSI) | GPIO23 (VSPI MOSI) | IO13
+SCK/SCLK (SPI) (yellow ![#yellow](https://via.placeholder.com/10/ffff00/000000?text=+)) | &leftarrow; | D5 (GPIO14) (SPI SCLK) | GPIO18 (VSPI SCLK) | IO14
+NSS/SS/CS (SPI) (green ![#green](https://via.placeholder.com/10/00ff00/000000?text=+)) | &leftarrow; | D8 (GPIO15) | GPIO5 | IO15
+RESET (blue ![#blue](https://via.placeholder.com/10/0000ff/000000?text=+)) | &leftarrow; | D3 (GPIO0) | GPIO22 | IO0
+DIO0 (IRQ) (grey ![#grey](https://via.placeholder.com/10/999999/000000?text=+)) | &rightarrow; | D2 (GPIO4) | GPIO21 | IO4
+GND (black ![#black](https://via.placeholder.com/10/000000/000000?text=+)) | | G | GND | GND
+3.3V (red ![#red](https://via.placeholder.com/10/ff0000/000000?text=+)) | | 3V3 | 3V3 | 3.3V
 ANA/ANT | | Antenna (86mm) |
 
 #### Alternative wiring for ESP8266: LED used as CS and I<sup>2</sup>C useable
