@@ -47,7 +47,7 @@ GND (black ![#black](https://via.placeholder.com/10/000000/000000?text=+)) | | G
 3.3V (red ![#red](https://via.placeholder.com/10/ff0000/000000?text=+)) | | 3V3 | 3V3 | 3.3V
 ANA/ANT | | Antenna (86mm) |
 
-#### Alternative wiring for ESP8266: LED used as CS and I<sup>2</sup>C (D1(GPIO5)/D2(GPIO4)) useable
+#### Alternative wiring for ESP8266: LED used as LoRa-RST and I<sup>2</sup>C (D1(GPIO5)/D2(GPIO4)) useable
 RFM95 | Direction | ESP8266/Wemos/NodeMCU | ESP-201
 --- | --- | --- | ---
 MISO/SDO (SPI) (brown ![#brown](https://via.placeholder.com/10/c68c53/000000?text=+)) | &leftarrow; | D6 (GPIO12) (SPI MISO) | IO12
