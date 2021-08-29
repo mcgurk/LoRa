@@ -74,19 +74,19 @@ Normally low, high when active. DIO0 could be connected to D8, but then there is
 
 ### Wemos/NodeMCU pinout
 
-Wemos/NodeMCU | GPIO | use | notes
+Wemos/NodeMCU | GPIO | use | notes | ESP-201
 --- | --- | --- | ---
-D0 | GPIO16 | in/out | No interrupts, no pullup feature, no PWM. Used to wake up from deepsleep. User-button is sometimes connected to this.
-D1 | GPIO5 | in/out/SCL | I<sup>2</sup>C (ESP32: GPIO22)
-D2 | GPIO4 | in/out/SDA | I<sup>2</sup>C (ESP32: GPIO21)
-D3 | GPIO0 | out | Flash-mode. Flash-button in some modules. Must be high at boot up (boot mode selection).
-D4 | GPIO2 | out/led | Must be high at boot up (boot mode selection). Blue led in Wemos and NodeMCU.
-D5 | GPIO14 | in/out/SCK | SPI
-D6 | GPIO12 | in/out/MISO | SPI
-D7 | GPIO13 | in/out/MOSI | SPI, if serial port flow control is used, this is CTS.
-D8 | GPIO15 | out | Must be low at boot up (boot mode selection). If serial port flow control is used, this is RTS.
-D9 | GPIO3 | x | Serial RX.
-D10 | GPIO1 | x | Serial TX.
+D0 | GPIO16 | in/out | No interrupts, no pullup feature, no PWM. Used to wake up from deepsleep. User-button is sometimes connected to this. | XPD
+D1 | GPIO5 | in/out/SCL | I<sup>2</sup>C (ESP32: GPIO22) | IO5
+D2 | GPIO4 | in/out/SDA | I<sup>2</sup>C (ESP32: GPIO21) | IO4
+D3 | GPIO0 | out | Flash-mode. Flash-button in some modules. Must be high at boot up (boot mode selection). | IO0
+D4 | GPIO2 | out/led | Must be high at boot up (boot mode selection). Blue led in Wemos and NodeMCU. | IO2
+D5 | GPIO14 | in/out/SCK | SPI | IO14
+D6 | GPIO12 | in/out/MISO | SPI | IO12
+D7 | GPIO13 | in/out/MOSI | SPI, if serial port flow control is used, this is CTS. | IO13
+D8 | GPIO15 | out | Must be low at boot up (boot mode selection). If serial port flow control is used, this is RTS. | IO15
+D9 | GPIO3 | x | Serial RX. | RX
+D10 | GPIO1 | x | Serial TX. | TX
 
 #### Using D9/GPIO/RX for your own uses (TX is D10/GPIO1)
 https://github.com/esp8266/Arduino/issues/2430
