@@ -48,8 +48,8 @@ GND (black ![#black](https://via.placeholder.com/10/000000/000000?text=+)) | | G
 ANA/ANT | | Antenna (86mm) |
 
 #### Alternative wiring for ESP8266: LED used as CS and I<sup>2</sup>C (D1(GPIO5)/D2(GPIO4)) useable
-RFM95 | Direction | ESP8266/Wemos/NodeMCU
---- | --- | ---
+RFM95 | Direction | ESP8266/Wemos/NodeMCU | ESP-201
+--- | --- | --- | ---
 MISO/SDO (SPI) (brown ![#brown](https://via.placeholder.com/10/c68c53/000000?text=+)) | &leftarrow; | D6 (GPIO12) (SPI MISO)
 MOSI/SDI (SPI) (orange ![#orange](https://via.placeholder.com/10/ff8000/000000?text=+)) | &rightarrow; | D7 (GPIO13) (SPI MOSI)
 SCK/SCLK (SPI) (yellow ![#yellow](https://via.placeholder.com/10/ffff00/000000?text=+)) | &leftarrow; | D5 (GPIO14) (SPI SCLK)
