@@ -19,8 +19,18 @@ DHTesp dht;
 #define SLEEP 595 //deepsleep duration in seconds (max 71min)
 #define LORA_ID 2 //first byte in packet for identification purposes
 
-//SX1276 lora = new Module(D8, D2, D3, D1); // NSS, DIO0, RST, DIO1
-SX1276 lora = new Module(D4, D8, D3); // NSS, DIO0, RST, DIO1
+//NodeMCU/Wemos:
+//SX1276 lora = new Module(D3, D8, D4); // NSS, DIO0, RST, DIO1
+//ESP-201:
+#define D1 5
+#define D2 4
+#define D3 0
+#define D4 2
+#define D8 15
+SX1276 lora = new Module(D3, D8, D4); // NSS, DIO0, RST, DIO1
+//https://github.com/jgromes/RadioLib/issues/305
+
+#define DHTPIN D1 // Connect DHT sensor to D1/GPIO5
 
 void setup() {
   #ifdef DEBUG
@@ -46,7 +56,7 @@ void setup() {
   // Or to use a lower 16V, 400mA range (higher precision on volts and amps):
   ina219.setCalibration_16V_400mA();
   am2320.begin();*/
-  dht.setup(D1, DHTesp::DHT22); // Connect DHT sensor to GPIO5/D1
+  dht.setup(DHTPIN, DHTesp::DHT22); // 
   
 }
 
