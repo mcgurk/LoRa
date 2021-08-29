@@ -62,6 +62,8 @@ ANA/ANT | | Antenna (86mm)
 
 **Warning:** if DIO0 interrupt signal is triggered, ESP8266 doesn't boot up. This is safe wiring only if interrupt is not used.
 
+**Warning:** If DIO1 is not utilized, RST cannot be GPIO0. This is Radiolib software limitation. https://github.com/jgromes/RadioLib/issues/305
+
 #### Deepsleep
 ESP8266/Wemos/NodeMCU | Direction | ESP8266/Wemos/NodeMCU | notes
 --- | --- | --- | ---
