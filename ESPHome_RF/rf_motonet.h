@@ -35,7 +35,7 @@ void send(const char* code) {
   }
 }
 
-class MotonetRfRemote : public Component, public Switch {
+class RfRemoteMotonet : public Component, public Switch {
  public:
   void setup() override {
     // This will be called by App.setup()
