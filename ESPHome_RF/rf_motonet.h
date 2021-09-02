@@ -35,7 +35,7 @@ void send(const char* code) {
   }
 }
 
-class MotonetRfSwitch : public Component, public Switch {
+class MotonetRfRemote : public Component, public Switch {
  public:
   void setup() override {
     // This will be called by App.setup()
@@ -44,6 +44,7 @@ class MotonetRfSwitch : public Component, public Switch {
 
   void write_state(bool state) override {
     if (state) send(on); else send(off);
+    //digitalWrite(D4, state);
     publish_state(state);
   }
 };
