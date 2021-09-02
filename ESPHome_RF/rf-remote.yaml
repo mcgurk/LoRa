@@ -1,5 +1,5 @@
 esphome:
-  name: rf_433mhz
+  name: rf-remote
   platform: ESP8266
   board: d1_mini
   includes:
@@ -8,34 +8,37 @@ esphome:
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
-
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: !secret ap_ssid
     password: !secret ap_password
 
+web_server:
+  port: 80
+  
 captive_portal:
 
-# Enable logging
 logger:
 
-# Enable Home Assistant API
 api:
 
 ota:
 
 switch:
   - platform: gpio
-    name: "testiledi"
+    name: "RF-remote-LED"
+    id: rf_remote_led
     pin:
       number: D4
       inverted: yes
 
   - platform: custom
     lambda: |-
-      auto my_custom_switch = new MotonetRfSwitch();
-      App.register_component(my_custom_switch);
-      return {my_custom_switch};
+      auto my_motonet_rf_remote = new MotonetRfRemote();
+      App.register_component(my_motonet_rf_remote);
+      return {my_motonet_rf_remote};
 
     switches:
-      name: "Motonet RF-switch"
+      name: "Motonet RF-remote"
+      id: motonet_rf_remote
+      
