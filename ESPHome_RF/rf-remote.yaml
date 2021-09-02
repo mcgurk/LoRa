@@ -27,7 +27,6 @@ ota:
 switch:
   - platform: gpio
     name: "RF-remote-LED"
-    id: rf_remote_led
     pin:
       number: D4
       inverted: yes
