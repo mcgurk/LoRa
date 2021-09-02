@@ -34,11 +34,11 @@ switch:
 
   - platform: custom
     lambda: |-
-      auto my_motonet_rf_remote = new MotonetRfRemote();
-      App.register_component(my_motonet_rf_remote);
-      return {my_motonet_rf_remote};
+      auto my_rf_remote_motonet = new RfRemoteMotonet();
+      App.register_component(my_rf_remote_motonet);
+      return {my_rf_remote_motonet};
 
     switches:
       name: "Motonet RF-remote"
-      id: motonet_rf_remote
+      id: rf_remote_motonet
       
