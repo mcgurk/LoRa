@@ -39,6 +39,5 @@ switch:
       return {my_rf_remote_motonet};
 
     switches:
-      name: "Motonet RF-remote"
-      id: rf_remote_motonet
+      name: "RF-remote (Motonet)"
       
