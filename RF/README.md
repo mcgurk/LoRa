@@ -1,5 +1,17 @@
 # RF 433MHz
 
+### Unbranded weather station
+- 29 bits (1 + 4 + 8 + 12 + 2 + 1 + 1)
+
+value | mark | parity | serial number | temperature x 10 in celcius | channel | battery | mode
+--- | --- | --- | --- | --- | --- | --- | ----
+23,4 | 1 | 0101 | 11111000 | 000011101010 | 01 | 1 | 1
+22,0 | 1 | 0110 | 11111000 | 000011011100 | 01 | 1 | 1
+
+#### Generating checksum
+- leave out mark and parity
+- sum up all nibbles and substract 1 and leave 4 last bits
+
 ### Motonet
 Motonet Kauko-ohjattava ulkopistorasia IP44 3600W (38-4663) / EMAX 6867 ja 68671
 
