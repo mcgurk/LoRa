@@ -11,6 +11,7 @@ value | mark | parity | serial number | temperature x 10 in celcius | channel | 
 #### Generating checksum
 - leave out mark and parity
 - sum up all nibbles and substract 1 and leave 4 last bits
+- e.g. 1111 + 1000 + 0000 + 1110 + 1010 + 0111 = (11)0110, 0110 - 1 = 0101
 
 ### Motonet
 Motonet Kauko-ohjattava ulkopistorasia IP44 3600W (38-4663) / EMAX 6867 ja 68671
