@@ -2,12 +2,12 @@
 
 ### Unbranded weather station
 - 29 bits, if startmark is counted (1 + 4 + 8 + 12 + 2 + 1 + 1)
-- sends 7 + 1 times (I don't know what last one is, maybe some kind of check)
 - mark duration is constant, space varies
 - mark: 440us (other measurements was 442us and 447us)
 - symbol "0" (mark+space): 2442us (other measurement was 2442us)
 - symbol "1" (mark+space): 5010us (other measurement was 5005us)
 - startmark (mark+space): 10ms
+- sends 7 + 1 times (I don't know what last one is, maybe some kind of check. it is not needed)
 - sends about every 35s
 
 value | startmark | parity | serial number | temperature x 10 in celcius | channel | battery | mode
