@@ -1,6 +1,6 @@
 # RF 433MHz
 
-### Unbranded weather station
+## Unbranded weather station
 - 29 symbols, if startmark is counted (1 + 4 + 8 + 12 + 2 + 1 + 1)
 - mark duration is constant, space varies
 - mark: 440us (other measurements was 442us and 447us)
@@ -20,7 +20,7 @@ value | startmark | parity | serial number | temperature x 10 in celcius | chann
 - sum up all nibbles and substract 1 and leave 4 last bits
 - e.g. 1111 + 1000 + 0000 + 1110 + 1010 + 0111 = (11)0110 &#x21d2; 0110 - 1 = **0101**
 
-### Motonet
+## Motonet
 Motonet Kauko-ohjattava ulkopistorasia IP44 3600W (38-4663) / EMAX 6867 ja 68671
 
 - 230V AC, 50Hz
@@ -49,7 +49,7 @@ All off | 01100011101001100000 1000 1101 1100 00
 - 1 (long): mark 815µs + space 326µs
 - Remote sends code 6 times. About 10ms between codes.
 
-### LIDL
+## LIDL
 TR-502MSV
 - Code is 21 bits
 - 0 (short): space 1300µs + mark 600µs
