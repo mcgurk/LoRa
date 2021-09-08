@@ -1,7 +1,7 @@
 # RF 433MHz
 
 ### Unbranded weather station
-- 29 bits (1 + 4 + 8 + 12 + 2 + 1 + 1)
+- 29 bits, if startmark is counted (1 + 4 + 8 + 12 + 2 + 1 + 1)
 - sends 7 + 1 times (I don't know what last one is, maybe some kind of check)
 - mark duration is constant, space varies
 - mark: 440us (other measurements was 442us and 447us)
@@ -10,10 +10,10 @@
 - startmark (mark+space): 10ms
 - sends about every 35s
 
-value | mark | parity | serial number | temperature x 10 in celcius | channel | battery | mode
+value | startmark | parity | serial number | temperature x 10 in celcius | channel | battery | mode
 --- | --- | --- | --- | --- | --- | --- | ----
-23,4 | 1 | 0101 | 11111000 | 000011101010 | 01 | 1 | 1
-22,0 | 1 | 0110 | 11111000 | 000011011100 | 01 | 1 | 1
+23,4 | M | 0101 | 11111000 | 000011101010 | 01 | 1 | 1
+22,0 | M | 0110 | 11111000 | 000011011100 | 01 | 1 | 1
 
 #### Generating checksum
 - leave out mark and parity
