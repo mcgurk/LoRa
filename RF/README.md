@@ -1,7 +1,7 @@
 # RF 433MHz
 
 ### Unbranded weather station
-- 29 bits, if startmark is counted (1 + 4 + 8 + 12 + 2 + 1 + 1)
+- 29 symbols, if startmark is counted (1 + 4 + 8 + 12 + 2 + 1 + 1)
 - mark duration is constant, space varies
 - mark: 440us (other measurements was 442us and 447us)
 - symbol "0" (mark+space): 2442us (other measurement was 2442us)
