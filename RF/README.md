@@ -29,7 +29,7 @@ Motonet Kauko-ohjattava ulkopistorasia IP44 3600W (38-4663) / EMAX 6867 ja 68671
 - Protection: IP44
 - For some reason, Arduino IDE rc-switch library example (simple and advance) didn't get anything.
 
-button | code (0 = short, 1 = long)
+button | code (0 = "short", 1 = "long")
 --- | ---
 A on |  01100011101001100000 1111 1101 1000 00
 A off | 01100011101001100000 1110 1101 1001 00
@@ -45,8 +45,8 @@ All off | 01100011101001100000 1000 1101 1100 00
 - Code is 34 bits
 - 34 bits take 38.8ms
 - One bit takes 1.141ms
-- 0 (short): mark 300µs + space 841µs
-- 1 (long): mark 815µs + space 326µs
+- 0 ("short"): mark 300µs + space 841µs
+- 1 ("long"): mark 815µs + space 326µs
 - Remote sends code 6 times. About 10ms between codes.
 
 ## LIDL
