@@ -2,6 +2,12 @@
 
 ### Unbranded weather station
 - 29 bits (1 + 4 + 8 + 12 + 2 + 1 + 1)
+- sends 7 + 1 times (I don't know what last one is, maybe some kind of check)
+- mark: 442us/447us/440us
+- symbol "0" (mark+space): 2442us/2442us
+- symbol "1" (mark+space): 5010us/5005us
+- startmark (mark+space): 10ms
+- sends about every 35s
 
 value | mark | parity | serial number | temperature x 10 in celcius | channel | battery | mode
 --- | --- | --- | --- | --- | --- | --- | ----
