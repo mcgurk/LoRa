@@ -12,8 +12,8 @@
 
 value | startmark | parity | serial number | temperature x 10 in celcius | channel | battery | mode
 --- | --- | --- | --- | --- | --- | --- | ----
-23,4 | M | 0101 | 11111000 | 000011101010 | 01 | 1 | 1
-22,0 | M | 0110 | 11111000 | 000011011100 | 01 | 1 | 1
+23,4 | startmark | 0101 | 11111000 | 000011101010 | 01 | 1 | 1
+22,0 | startmark | 0110 | 11111000 | 000011011100 | 01 | 1 | 1
 
 #### Generating checksum
 - leave out mark and parity
