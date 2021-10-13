@@ -138,5 +138,6 @@ void loop() {
   }
   #endif
 
+  lora.sleep();
   ESP.deepSleep((SLEEP+random(10))*1000*1000);
 }
