@@ -37,7 +37,7 @@ Select right board from board settings (in my case "LOLIN(WEMOS) D1 R2 & mini").
 #### LED (D4/GPIO2) and D1/GPIO5 for free use and I<sup>2</sup>C unaccessible
 RFM95 | Direction | ESP8266/Wemos/NodeMCU | ESP32 | ESP-201
 --- | --- | --- | --- | ---
-MISO/SDO (SPI) (brown ![#brown](https://via.placeholder.com/15/c68c53/000000?text=+)) | &leftarrow; | D6 (GPIO12) (SPI MISO) | GPIO19 (VSPI MISO) | IO12
+MISO/SDO (SPI) (brown ![#brown](https://via.placeholder.com/10/c68c53/000000?text=+)) | &leftarrow; | D6 (GPIO12) (SPI MISO) | GPIO19 (VSPI MISO) | IO12
 MOSI/SDI (SPI) (orange ![#orange](https://via.placeholder.com/10/ff8000/000000?text=+)) | &rightarrow; | D7 (GPIO13) (SPI MOSI) | GPIO23 (VSPI MOSI) | IO13
 SCK/SCLK (SPI) (yellow ![#yellow](https://via.placeholder.com/10/ffff00/000000?text=+)) | &leftarrow; | D5 (GPIO14) (SPI SCLK) | GPIO18 (VSPI SCLK) | IO14
 NSS/SS/CS (SPI) (green ![#green](https://via.placeholder.com/10/00ff00/000000?text=+)) | &leftarrow; | D3 (GPIO0) | GPIO22 | IO0
