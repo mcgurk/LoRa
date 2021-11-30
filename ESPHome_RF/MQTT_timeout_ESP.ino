@@ -54,13 +54,13 @@ void callback(char* topic, byte* payload, unsigned int length) {
   Serial.println();
 
   // Switch on the LED if an 1 was received as first character
-  if ((char)payload[0] == '1') {
+  /*if ((char)payload[0] == '1') {
     digitalWrite(BUILTIN_LED, LOW);   // Turn the LED on (Note that LOW is the voltage level
     // but actually the LED is on; this is because
     // it is active low on the ESP-01)
   } else {
     digitalWrite(BUILTIN_LED, HIGH);  // Turn the LED off by making the voltage HIGH
-  }
+  }*/
 
 }
 
@@ -72,16 +72,11 @@ void reconnect() {
     Serial.println(clientId);
     // Attempt to connect
     Serial.print("Attempting MQTT connection...");
-    //if (client.connect(clientId.c_str())) {
     client.setKeepAlive(5);
     if (client.connect(clientId.c_str(), mqtt_username, mqtt_password, mqtt_topic, 0, false, "offline")) {
       Serial.println("connected");
       // Once connected, publish an announcement...
       client.publish(mqtt_topic, "online", false);
-      /*char* message = "online";
-      int length = strlen(message);
-      boolean retained = true;
-      client.publish("kellokytkin", (byte*)message, length, retained);*/
       // ... and resubscribe
       client.subscribe("inTopic");
     } else {
@@ -89,13 +84,17 @@ void reconnect() {
       Serial.print(client.state());
       Serial.println(" try again in 5 seconds");
       // Wait 2 seconds before retrying
-      delay(2000);
+      digitalWrite(BUILTIN_LED, LOW); // LED on
+      delay(100);
+      digitalWrite(BUILTIN_LED, HIGH); // LED off
+      delay(1000);
     }
   }
 }
 
 void setup() {
   pinMode(BUILTIN_LED, OUTPUT);     // Initialize the BUILTIN_LED pin as an output
+  digitalWrite(BUILTIN_LED, HIGH); // LED off
   Serial.begin(115200);
   setup_wifi();
   client.setServer(mqtt_server, 1883);
@@ -105,17 +104,17 @@ void setup() {
 void loop() {
 
   if (!client.connected()) {
+    digitalWrite(BUILTIN_LED, HIGH); // LED off
     reconnect();
-  }
+  } else digitalWrite(BUILTIN_LED, LOW); // LED on
   client.loop();
 
-  /*unsigned long now = millis();
-  if (now - lastMsg > 2000) {
-    lastMsg = now;
-    ++value;
-    snprintf(msg, MSG_BUFFER_SIZE, "hello world #%ld", value);
-    Serial.print("Publish message: ");
-    Serial.println(msg);
-    //client.publish("kellokytkin", msg, true);
-  }*/
+  unsigned long now = millis();
+  if (now - lastMsg > 30L*1000L) {
+    lastMsg = now;    
+    client.publish(mqtt_topic, "online", false);
+    digitalWrite(BUILTIN_LED, HIGH); // LED off
+    delay(100);
+    digitalWrite(BUILTIN_LED, LOW); // LED on
+  }
 }
