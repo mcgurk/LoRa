@@ -24,12 +24,24 @@ api:
 
 ota:
 
-switch:
+light:
+  - platform: binary
+    name: "RF-remote LED"
+    output: output_led
+
+output:
   - platform: gpio
-    name: "RF-remote-LED"
-    pin:
-      number: D4
-      inverted: yes
+    id: output_led
+    inverted: true
+    pin: D4
+    
+switch:
+  #- platform: gpio
+  #  name: "RF-remote-LED"
+  #  #id: rf_remote_led
+  #  pin:
+  #    number: D4
+  #    inverted: yes
 
   - platform: custom
     lambda: |-
