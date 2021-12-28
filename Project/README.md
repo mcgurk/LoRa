@@ -21,6 +21,7 @@
 - AMS1117[OUT-GND] -> INA219[GND]
 - INA219[VCC/GND/SDA/SCL] -> AM2320[VCC/GND/SDA/SCL] + ESP[VCC/GND/SDA/SCL]
 - ESP8266[D0/GPIO16] -> ESP8266[RST]
+- for deepsleep, connect D0 -> RST in ESP8266
 
 #### Wiring to ESP8266 NodeMCU devboard
 INA219/AM2320 | ESP8266 NodeMCU devboard
@@ -29,6 +30,7 @@ SCL (I<sup>2</sup>C) (orange ![#orange](https://via.placeholder.com/10/ff8000/00
 SDA (I<sup>2</sup>C) (brown ![#brown](https://via.placeholder.com/10/c68c53/000000?text=+)) | D2
 GND (black ![#black](https://via.placeholder.com/10/000000/000000?text=+)) | G
 VCC (3.3V) (red ![#red](https://via.placeholder.com/10/ff0000/000000?text=+)) | 3V
+| for deepsleep, connect D0 -> RST in ESP8266
  
 ### CRC check in receiver
 ```
