@@ -28,7 +28,7 @@ INA219/AM2320 | ESP8266 NodeMCU devboard
 SCL (I<sup>2</sup>C) (orange ![#orange](https://via.placeholder.com/10/ff8000/000000?text=+)) | D1
 SDA (I<sup>2</sup>C) (brown ![#brown](https://via.placeholder.com/10/c68c53/000000?text=+)) | D2
 GND (black ![#black](https://via.placeholder.com/10/000000/000000?text=+)) | G
-VCC (red ![#red](https://via.placeholder.com/10/ff0000/000000?text=+)) | 3V
+VCC (3.3V) (red ![#red](https://via.placeholder.com/10/ff0000/000000?text=+)) | 3V
  
 ### CRC check in receiver
 ```
