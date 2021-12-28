@@ -30,7 +30,7 @@ SCL (I<sup>2</sup>C) (orange ![#orange](https://via.placeholder.com/10/ff8000/00
 SDA (I<sup>2</sup>C) (brown ![#brown](https://via.placeholder.com/10/c68c53/000000?text=+)) | D2
 GND (black ![#black](https://via.placeholder.com/10/000000/000000?text=+)) | G
 VCC (3.3V) (red ![#red](https://via.placeholder.com/10/ff0000/000000?text=+)) | 3V
-- | for deepsleep, connect D0 -> RST in ESP8266
+--- | for deepsleep, connect D0 -> RST in ESP8266
  
 ### CRC check in receiver
 ```
