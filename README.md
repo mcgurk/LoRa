@@ -82,12 +82,12 @@ D0 | GPIO16 | in/out | No interrupts, no pullup feature, no PWM. Used to wake up
 D1 | GPIO5 | in/out/SCL | I<sup>2</sup>C (ESP32: GPIO22) | IO5
 D2 | GPIO4 | in/out/SDA | I<sup>2</sup>C (ESP32: GPIO21) | IO4
 D3 | GPIO0 | out | Flash-mode. Flash-button in some modules. Must be high at boot up (boot mode selection). | IO0
-D4 | GPIO2 | out/led | Must be high at boot up (boot mode selection). Blue led in Wemos and NodeMCU. (I<sup>2</sup>S word select) | IO2
+D4 | GPIO2 | out/led | Must be high at boot up (boot mode selection). Blue led in Wemos and NodeMCU. (I<sup>2</sup>S "LRCK" word select) | IO2
 D5 | GPIO14 | in/out/SCK | SPI | IO14
 D6 | GPIO12 | in/out/MISO | SPI | IO12
 D7 | GPIO13 | in/out/MOSI | SPI, if serial port flow control is used, this is CTS. | IO13
-D8 | GPIO15 | out | Must be low at boot up (boot mode selection). If serial port flow control is used, this is RTS. (I<sup>2</sup>S bitclock) | IO15
-D9 | GPIO3 | x | Serial RX. (I<sup>2</sup>S data) | RX
+D8 | GPIO15 | out | Must be low at boot up (boot mode selection). If serial port flow control is used, this is RTS. (I<sup>2</sup>S "BCK" bitclock) | IO15
+D9 | GPIO3 | x | Serial RX. (I<sup>2</sup>S "DIN" data) | RX
 D10 | GPIO1 | x | Serial TX. | TX
 
 #### Using D9/GPIO/RX for your own uses (TX is D10/GPIO1)
