@@ -6,18 +6,14 @@
 #include <WiFiManager.h> // from library manager (https://github.com/tzapu/WiFiManager) (https://github.com/tzapu/WiFiManager/issues/656)
 #include <rBase64.h> // from library manager (https://github.com/boseji/rBASE64)
 
-/*#include "Adafruit_Sensor.h"
-#include "Adafruit_AM2320.h"
-Adafruit_AM2320 am2320 = Adafruit_AM2320();*/
-
 #define LORA_SYNCWORD 0x77
 #define TRIGGER_PIN D1
 #define MYTZ TZ_Europe_Helsinki
+#define DEFAULT_KEEPALIVE 30*60 // in seconds
 
 #include <RadioLib.h> // from library manager (https://github.com/jgromes/RadioLib)
 SX1276 lora = new Module(D8, D2, D3); // NSS, DIO0, RST, DIO1
 void ICACHE_RAM_ATTR setFlag(void); // Mandatory for ESP (without this ESP crashes "ISR not in IRAM!")
-//byte byteArr[100];
 
 //#define SAVE_DEFAULT_CONFIG_TO_FILE_AND_HALT
 #define CONFIG_FILENAME "config.json"
@@ -52,15 +48,18 @@ WiFiManagerParameter custom_mqtt_password;
 WiFiManagerParameter custom_mqtt_topic;
 WiFiManagerParameter custom_mqtt_clientid;
 PubSubClient client(espClient);
-char msg[1024];
+//char msg[1024];
+DynamicJsonDocument doc(1024);
 unsigned long lastMsg = 0;
 unsigned int value = 0;
+unsigned int keepalive = DEFAULT_KEEPALIVE;
+time_t last_keepalive;
 
 void setup_lora() {
   Serial.print(F("Initializing SX1276..."));
   //int state = lora.begin(868, 125, 9, 7, 0x64); // Freq[MHz], BW[kHz], SF, CR, syncword, preambleLength
   int state = lora.begin(868, 125, 10, 8, LORA_SYNCWORD); 
-  if (state == ERR_NONE) {
+  if (state == RADIOLIB_ERR_NONE) {
     Serial.println(F("Initialized successfully!"));
   } else {
     Serial.print(F("Initializing failed, code "));
@@ -70,7 +69,7 @@ void setup_lora() {
   lora.setDio0Action(setFlag);
   Serial.print(F("Begin to listen LoRa-packets. "));
   state = lora.startReceive();
-  if (state == ERR_NONE) {
+  if (state == RADIOLIB_ERR_NONE) {
     Serial.println(F("Listening mode success!"));
   } else {
     Serial.print(F("Listening mode failed, code "));
@@ -142,19 +141,25 @@ void reconnect() {
     // Attempt to connect
     //auto result = client.connect(Config.mqtt.clientid);
     int result;
+    char topic[100+3+4+1];
+    sprintf(topic, "%s/0x%02X/state", Config.mqtt.topic, LORA_SYNCWORD);
     if (Config.mqtt.username[0]) {
-      char topic[100+3+4+1];
-      sprintf(topic, "%s/0x%02X/state", Config.mqtt.topic, LORA_SYNCWORD);
       result = client.connect(Config.mqtt.clientid, Config.mqtt.username, Config.mqtt.password, topic, 0, true, "offline"); //LWT
     } else {
-      result = client.connect(Config.mqtt.clientid);
+      result = client.connect(Config.mqtt.clientid, topic, 0, true, "offline");
     }
     if (result) {
       Serial.println("connected");
       // Once connected, publish an announcement...
-      char topic[100+3+4+1];
+      //char topic[100+3+4+1];
       sprintf(topic, "%s/0x%02X/log", Config.mqtt.topic, LORA_SYNCWORD);
-      client.publish(topic, "ESP8266-LoRa-MQTT-bridge started!", true); //greetings message
+      char msg[200];
+      time_t now = time(nullptr);
+      char *date = ctime(&now);
+      date[strcspn(date, "\r\n")] = 0; //remove \r and/or \n
+      sprintf(msg, "ESP8266-LoRa-MQTT-bridge connected to MQTT-broker at %s.", date);  
+      //client.publish(topic, "ESP8266-LoRa-MQTT-bridge started!", true); //greetings message
+      client.publish(topic, msg, true); //greetings message
       sprintf(topic, "%s/0x%02X/state", Config.mqtt.topic, LORA_SYNCWORD);
       client.publish(topic, "online", true);
       // ... and resubscribe
@@ -176,6 +181,7 @@ void reconnect() {
 
 void setup() {  
   pinMode(BUILTIN_LED, OUTPUT);     // Initialize the BUILTIN_LED pin as an output
+  digitalWrite(BUILTIN_LED, HIGH);  // LED off (active low)
   pinMode(TRIGGER_PIN, INPUT_PULLUP);
   Serial.begin(115200);
   while(!Serial);
@@ -227,18 +233,25 @@ void setup() {
     
   setup_wifi();
 
-  client.setBufferSize(1024); //default = 128
-  client.setServer(Config.mqtt.server, 1883);
-  client.setCallback(callback);
-
   //implement NTP update of timekeeping (with automatic hourly updates)
   //configTime(timezone * 3600, dst * 0, "pool.ntp.org", "time.nist.gov");
   //configTime(0, 0, "pool.ntp.org", "time.nist.gov");
   configTime(MYTZ, "pool.ntp.org", "time.nist.gov");
   // info to convert UNIX time to local time (including automatic DST update)
   // setenv("TZ", "EST+5EDT,M3.2.0/2:00:00,M11.1.0/2:00:00", 1);
+  Serial.println("Waiting to get initial NTP time...");
+  while (time(nullptr) < 1000000000) delay(50);
+  time_t now = time(nullptr);
+  char *date = ctime(&now);
+  date[strcspn(date, "\r\n")] = 0; //remove \r and/or \n
+  Serial.print("Got date and time: "); Serial.println(date);
+  
+  last_keepalive = millis();
 
-  //am2320.begin();
+  client.setBufferSize(1024); //default = 128
+  client.setServer(Config.mqtt.server, 1883);
+  client.setCallback(callback);
+
   setup_lora();
 }
 
@@ -256,36 +269,31 @@ void loop() {
   poll_lora();
   
   if (!client.connected()) {
+    //Serial.println("MQTT-client not connected. Reconnecting.");
+    //Serial.println(client.connected());
     reconnect();
   }
   client.loop();
 
-  /*unsigned long now = millis();
-  if (now - lastMsg > 2000) {
-    lastMsg = now;
-    ++value;
-    //snprintf(msg, MSG_BUFFER_SIZE, "hello world #%ld", value);
-    Serial.print("Publish message: ");
-    time_t now = time(nullptr);
-    char *date = ctime(&now);
-    date[strcspn(date, "\r\n")] = 0; //remove \r and/or \n
-    DynamicJsonDocument doc(1024); //heap https://arduinojson.org/v6/how-to/reuse-a-json-document/
-    doc["client"] = Config.mqtt.clientid;
-    doc["counter"] = value;
-    doc["time"] = now;
-    doc["date"] = date;
-    doc["data"] = "sdgsgsdfsf";
-    //doc["temperature"] = am2320.readTemperature();
-    //doc["humidity"] = am2320.readHumidity();
-    JsonObject docesp = doc.createNestedObject("ESP");
-    docesp["chipId"] = ESP.getChipId();
-    docesp["freeHeap"] = ESP.getFreeHeap();
-    serializeJson(doc, msg);
-    Serial.println(msg);
-    client.publish(Config.mqtt.topic, msg);
-  }*/
-  
   checkButton(); //WIFIManager
+
+  if (keepalive != 0) {
+    if ( (millis() - last_keepalive) > (((time_t)keepalive)*1000) ) {
+      Serial.println("keepAlive triggered!");
+      keepalive = 0;
+      //client.publish("lora/0x77/3", "{ \"lora\": { \"online\": false } }", true);
+      digitalWrite(BUILTIN_LED, HIGH);
+      initDoc();
+      JsonObject doclora = doc.createNestedObject("lora");
+      byte loraID = 3;
+      doclora["id"] = loraID;
+      doclora["online"] = false;
+      sendMQTT(loraID, doc, RADIOLIB_ERR_NONE);
+    }
+  }
+  //Serial.print(keepalive); Serial.print(" "); Serial.print(last_keepalive); Serial.print(" "); Serial.println(millis());
+  //delay(100);
+  
 }
 
 void SPIFFS_dir() {
@@ -326,14 +334,15 @@ void save_default_settings_to_file() {
   while(true) delay(100);
 }
 
- void checkButton(){
+ void checkButton() {
   // check for button press
   if ( digitalRead(TRIGGER_PIN) == LOW ) {
+    Serial.println("Button press detected. 50ms 'debounce'...");
     // poor mans debounce/press-hold, code not ideal for production
     delay(50);
     if( digitalRead(TRIGGER_PIN) == LOW ){
       Serial.println("Button Pressed");
-      // still holding button for 3000 ms, reset settings, code not ideaa for production
+      // still holding button for 3000 ms, reset settings, code not ideal for production
       delay(3000); // reset delay hold
       if( digitalRead(TRIGGER_PIN) == LOW ){
         Serial.println("Button Held");
@@ -406,7 +415,7 @@ void poll_lora() {
     int state = lora.readData(buf, length);
     Serial.print(F("Receive state:\t\t")); Serial.println(state);
 
-    if (state == ERR_NONE) {
+    if (state == RADIOLIB_ERR_NONE) {
       Serial.println(F("LoRa-packet successfully received!"));
       //Serial.print(F("Packet length:\t\t")); Serial.println(lora.getPacketLength());
 
@@ -428,7 +437,7 @@ void poll_lora() {
       Serial.print(lora.getFrequencyError());
       Serial.println(F(" Hz"));
 
-    } else if (state == ERR_CRC_MISMATCH) {
+    } else if (state == RADIOLIB_ERR_CRC_MISMATCH) {
       Serial.println(F("CRC-tarkistussumma virhe!"));
     } else { // jokin muu virhe kuin CRC-virhe
       Serial.print(F("Paketin vastaanotto epäonnistui, koodi "));
@@ -440,20 +449,8 @@ void poll_lora() {
     // reactivate interrupt
     enableInterrupt = true;
 
-    //create json message and send it with mqtt
-    ++value;
-    //Serial.print("Publish message: ");
-    time_t now = time(nullptr);
-    char *date = ctime(&now);
-    date[strcspn(date, "\r\n")] = 0; //remove \r and/or \n
-    DynamicJsonDocument doc(1024); //heap https://arduinojson.org/v6/how-to/reuse-a-json-document/
-    doc["client"] = Config.mqtt.clientid;
-    doc["counter"] = value;
-    doc["time"] = now;
-    doc["date"] = date;
-    JsonObject docesp = doc.createNestedObject("ESP");
-    docesp["chipId"] = ESP.getChipId();
-    docesp["freeHeap"] = ESP.getFreeHeap();
+    initDoc();
+    //JsonObject doclora = doc["lora"];
     JsonObject doclora = doc.createNestedObject("lora");
     rbase64.encode(buf, length);
     doclora["data"] = rbase64.result();
@@ -477,10 +474,6 @@ void poll_lora() {
         float current = c/100.0;
         float temperature = t/100.0;
         float humidity = h/100.0;
-        /*if (v == 32767) voltage = "err";
-        if (c == 32767) current = "err";
-        if (t == 32767) temperature = "err";
-        if (h == 32767) humidity = "err";*/
         if (v != 32767) doclora["voltage"] = voltage; else doclora["voltage"] = "err";
         if (c != 32767) doclora["current"] = current; else doclora["current"] = "err";
         if (t != 32767) doclora["temperature"] = temperature; else doclora["temperature"] = "err";
@@ -488,25 +481,67 @@ void poll_lora() {
         }
         break;
       case 2:
+        {
+        float t = *((float*)&buf[1]);
+        float h = *((float*)&buf[5]);
+        doclora["temperature"] = t;
+        doclora["humidity"] = h; 
+        }
+        break;
+      case 3:
+        {
+        word k = *((word*)&buf[1]);
+        doclora["keepAlive"] = k;
+        doclora["online"] = true;
+        if (state == RADIOLIB_ERR_NONE) {
+          keepalive = k;
+          last_keepalive = millis();
+          if (keepalive != 0) digitalWrite(BUILTIN_LED, LOW);
+        }
+        }
         break;
       default:
         break;
     }
     
-    serializeJson(doc, msg);
-    Serial.print("Server: \""); Serial.print(Config.mqtt.server); Serial.print("\", ");
-    char topic[100+3+4+1];
-    if (state == ERR_NONE) {
-      sprintf(topic, "%s/0x%02X/%i", Config.mqtt.topic, LORA_SYNCWORD, loraID);
-    } else {
-      sprintf(topic, "%s/0x%02X/error", Config.mqtt.topic, LORA_SYNCWORD);
-    }
-    Serial.print("Topic: \""); Serial.print(topic); Serial.println("\", Message:");
-    Serial.println(msg);
-    if(!client.publish(topic, msg, true)) {
-      Serial.println("Error publishing MQTT-message (message too big?)!");
-    }
-    // maximum message size: https://www.hivemq.com/blog/mqtt-client-library-encyclopedia-arduino-pubsubclient
-    
+    sendMQTT(loraID, doc, state);
   }  
+}
+
+void sendMQTT(byte loraID, DynamicJsonDocument doc, int state) {
+  static char msg[1024];
+  serializeJson(doc, msg);
+  Serial.print("Server: \""); Serial.print(Config.mqtt.server); Serial.print("\", ");
+  char topic[100+3+4+1];
+  if (state == RADIOLIB_ERR_NONE) {
+    sprintf(topic, "%s/0x%02X/%i", Config.mqtt.topic, LORA_SYNCWORD, loraID);
+  } else {
+    sprintf(topic, "%s/0x%02X/error", Config.mqtt.topic, LORA_SYNCWORD);
+  }
+  Serial.print("Topic: \""); Serial.print(topic); Serial.println("\", Message:");
+  Serial.println(msg);
+  if(!client.publish(topic, msg, true)) {
+    Serial.println("Error publishing MQTT-message (message too big?)!");
+  }
+  // maximum message size: https://www.hivemq.com/blog/mqtt-client-library-encyclopedia-arduino-pubsubclient
+}
+
+//DynamicJsonDocument createBaseDoc() {
+void initDoc() {
+  //create json message and send it with mqtt
+  ++value;
+  //Serial.print("Publish message: ");
+  time_t now = time(nullptr);
+  char *date = ctime(&now);
+  date[strcspn(date, "\r\n")] = 0; //remove \r and/or \n
+  //DynamicJsonDocument doc(1024); //heap https://arduinojson.org/v6/how-to/reuse-a-json-document/, https://arduinojson.org/v6/api/dynamicjsondocument/
+  doc.clear();
+  doc["client"] = Config.mqtt.clientid;
+  doc["counter"] = value;
+  doc["time"] = now;
+  doc["date"] = date;
+  JsonObject docesp = doc.createNestedObject("ESP");
+  docesp["chipId"] = ESP.getChipId();
+  docesp["freeHeap"] = ESP.getFreeHeap();
+  //JsonObject doclora = doc.createNestedObject("lora");
 }
