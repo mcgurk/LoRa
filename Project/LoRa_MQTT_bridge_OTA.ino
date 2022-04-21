@@ -17,6 +17,8 @@ credentials.h:
 
 #include <PubSubClient.h> //from library manager (https://pubsubclient.knolleary.net/)
 #include <ArduinoJson.h>  //from library manager (https://arduinojson.org/)
+// https://arduinojson.org/v6/how-to/configure-the-serialization-of-floats/
+// floating point "issue": https://github.com/bblanchon/ArduinoJson/issues/543
 #include <rBase64.h> // from library manager (https://github.com/boseji/rBASE64)
 
 #define LORA_SYNCWORD 0x77
