@@ -13,8 +13,8 @@ credentials.h:
 #include <ESP8266WiFi.h>
 #include <ESP8266mDNS.h>
 #include <ArduinoOTA.h>
-//#include <coredecls.h>  // settimeofday_cb()
 #include <TZ.h>
+
 #include <PubSubClient.h> //from library manager (https://pubsubclient.knolleary.net/)
 #include <ArduinoJson.h>  //from library manager (https://arduinojson.org/)
 #include <rBase64.h> // from library manager (https://github.com/boseji/rBASE64)
@@ -33,7 +33,8 @@ PubSubClient client(espClient);
 
 #include "credentials.h"
 
-DynamicJsonDocument doc(1024);
+char msg[1024];
+
 unsigned long lastMsg = 0;
 unsigned int value = 0;
 unsigned int keepalive = DEFAULT_KEEPALIVE;
@@ -145,10 +146,7 @@ void reconnect() {
       sprintf(topic, "%s/0x%02X/state", MQTT_TOPIC, LORA_SYNCWORD);
       client.publish(topic, "online", true);
       // ... and resubscribe
-      //String inTopic = Config.mqtt.topic;
-      //inTopic += "/set";
       sprintf(topic, "%s/0x%02X/set", MQTT_TOPIC, LORA_SYNCWORD);
-      //client.subscribe(inTopic.c_str());
       client.subscribe(topic);
     } else {
       Serial.print("failed, rc=");
@@ -219,17 +217,22 @@ void loop() {
       keepalive = 0;
       //client.publish("lora/0x77/3", "{ \"lora\": { \"online\": false } }", true);
       digitalWrite(BUILTIN_LED, HIGH);
-      initDoc();
+      DynamicJsonDocument doc = createBaseDoc();
       JsonObject doclora = doc.createNestedObject("lora");
       byte loraID = 3;
       doclora["id"] = loraID;
       doclora["online"] = false;
-      sendMQTT(loraID, doc, RADIOLIB_ERR_NONE);
+      serializeJson(doc, msg);
+      sendMQTT(loraID, RADIOLIB_ERR_NONE);
     }
   }
   //Serial.print(keepalive); Serial.print(" "); Serial.print(last_keepalive); Serial.print(" "); Serial.println(millis());
   //delay(100);
   
+}
+
+double round2(double value) {
+   return (int)(value * 100 + 0.5) / 100.0;
 }
 
 void poll_lora() {
@@ -252,9 +255,6 @@ void poll_lora() {
     if (state == RADIOLIB_ERR_NONE) {
       Serial.println(F("LoRa-packet successfully received!"));
       //Serial.print(F("Packet length:\t\t")); Serial.println(lora.getPacketLength());
-
-      //Serial.print(F("Data:\t\t"));
-      //Serial.println(byteArr);
 
       // print RSSI (Received Signal Strength Indicator)
       Serial.print(F("RSSI:\t\t"));
@@ -283,8 +283,7 @@ void poll_lora() {
     // reactivate interrupt
     enableInterrupt = true;
 
-    initDoc();
-    //JsonObject doclora = doc["lora"];
+    DynamicJsonDocument doc = createBaseDoc();
     JsonObject doclora = doc.createNestedObject("lora");
     rbase64.encode(buf, length);
     doclora["data"] = rbase64.result();
@@ -318,8 +317,12 @@ void poll_lora() {
         {
         float t = *((float*)&buf[1]);
         float h = *((float*)&buf[5]);
-        doclora["temperature"] = t;
-        doclora["humidity"] = h; 
+        /*doclora["temp1"] = String(buf[1], HEX);
+        doclora["temp2"] = String(buf[2], HEX);
+        doclora["temp3"] = String(buf[3], HEX);
+        doclora["temp4"] = String(buf[4], HEX);*/
+        doclora["temperature"] = round2(t);
+        doclora["humidity"] = round2(h);
         }
         break;
       case 3:
@@ -337,14 +340,13 @@ void poll_lora() {
       default:
         break;
     }
-    
-    sendMQTT(loraID, doc, state);
+    serializeJson(doc, msg);
+    sendMQTT(loraID, state);
   }  
 }
 
-void sendMQTT(byte loraID, DynamicJsonDocument doc, int state) {
-  static char msg[1024];
-  serializeJson(doc, msg);
+void sendMQTT(byte loraID, int state) {
+  //serializeJson(doc, msg);
   Serial.print("Server: \""); Serial.print(MQTT_SERVER); Serial.print("\", ");
   char topic[100+3+4+1];
   if (state == RADIOLIB_ERR_NONE) {
@@ -360,12 +362,11 @@ void sendMQTT(byte loraID, DynamicJsonDocument doc, int state) {
   // maximum message size: https://www.hivemq.com/blog/mqtt-client-library-encyclopedia-arduino-pubsubclient
 }
 
-//DynamicJsonDocument createBaseDoc() {
-void initDoc() {
+DynamicJsonDocument createBaseDoc() {
+  DynamicJsonDocument doc(1000);
   time_t now = time(nullptr);
   char *date = ctime(&now);
   date[strcspn(date, "\r\n")] = 0; //remove \r and/or \n
-  doc.clear();
   doc["client"] = MQTT_CLIENTID;
   doc["counter"] = value++;
   doc["time"] = now;
@@ -373,4 +374,5 @@ void initDoc() {
   JsonObject docesp = doc.createNestedObject("ESP");
   docesp["chipId"] = ESP.getChipId();
   docesp["freeHeap"] = ESP.getFreeHeap();
+  return doc;
 }
