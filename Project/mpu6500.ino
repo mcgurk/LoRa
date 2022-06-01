@@ -9,6 +9,11 @@ credentials.h:
 #define MQTT_CLIENTID "LoRa-MQTT-bridge"
 #define OTA_HOSTNAME MQTT_CLIENTID
 */
+
+/*
+mosquitto_pub -h mqtt_server -r -u mqtt_username -P mqtt_password -p 1883 -t "homeassistant/sensor/iot/pesukone/config" -m '{"name": "pesukone", "device_class": "frequency", "unit_of_measurement": "Hz", "state_topic": "iot/pesukone", "value_template": "{{ value_json.mpu6500.counter }}"}'
+*/
+
 #include "credentials.h"
 
 //#include <ESP8266WiFi.h> //ESP8266
