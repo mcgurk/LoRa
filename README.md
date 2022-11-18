@@ -67,7 +67,7 @@ ANA/ANT | | Antenna (86mm)
 #### Deepsleep
 ESP8266/Wemos/NodeMCU | Direction | ESP8266/Wemos/NodeMCU | notes
 --- | --- | --- | ---
-D0 (GPIO16) (violet ![#violet](https://via.placeholder.com/10/cc0066/000000?text=+)) | &rightarrow; | RST (ESP8266) | unconnect when flashing!
+D0 (GPIO16) ( $\colorbox{violet}{{\color{violet}{violet}}}$ ) | &rightarrow; | RST (ESP8266) | unconnect when flashing!
 
 #### Reset
 High-Z = normal, low (>100us) = reset. Notice that Wemos/NodeMCU has pullup resistor for D3 and D4 and pulldown resistor for D8, so those cannot be in High-Z-state.  Nevertheless it looks like D3 and D4 works for reset.
