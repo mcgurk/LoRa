@@ -43,7 +43,7 @@ SCK/SCLK (SPI) ( $\colorbox{yellow}{{\color{yellow}{yellow}}}$ ) | &leftarrow; |
 NSS/SS/CS (SPI) ( $\colorbox{green}{{\color{green}{green}}}$ ) | &leftarrow; | D3 (GPIO0) | GPIO22 | IO0
 RESET ( $\colorbox{blue}{{\color{blue}{blue}}}$ ) | &leftarrow; | D8 (GPIO15) | GPIO5 | IO15
 DIO0 (IRQ) ( $\colorbox{gray}{{\color{gray}{gray}}}$ ) | &rightarrow; | D2 (GPIO4) | GPIO21 | IO4
-GND ( $\colorbox{black{{\color{black}{black}}}$ ) | | G | GND | GND
+GND ( $\colorbox{black}{{\color{black}{black}}}$ ) | | G | GND | GND
 3.3V ( $\colorbox{red}{{\color{red}{red}}}$ ) | | 3V3 | 3V3 | 3.3V
 ANA/ANT | | Antenna (86mm) |
 
