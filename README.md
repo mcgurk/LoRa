@@ -40,7 +40,7 @@ RFM95 | Direction | ESP8266/Wemos/NodeMCU | ESP32 | ESP-201
 MISO/SDO (SPI) (brown ![#brown](https://via.placeholder.com/10/c68c53/000000?text=+)) | &leftarrow; | D6 (GPIO12) (SPI MISO) | GPIO19 (VSPI MISO) | IO12
 MOSI/SDI (SPI) (orange ![#orange](https://via.placeholder.com/10/ff8000/000000?text=+)) | &rightarrow; | D7 (GPIO13) (SPI MOSI) | GPIO23 (VSPI MOSI) | IO13
 SCK/SCLK (SPI) (yellow ![#yellow](https://via.placeholder.com/10/ffff00/000000?text=+)) | &leftarrow; | D5 (GPIO14) (SPI SCLK) | GPIO18 (VSPI SCLK) | IO14
-NSS/SS/CS (SPI) ($\colorbox{green}{{\color{green}{green}}}$) | &leftarrow; | D3 (GPIO0) | GPIO22 | IO0
+NSS/SS/CS (SPI) ($$\colorbox{green}{{\color{green}{green}}}$$) | &leftarrow; | D3 (GPIO0) | GPIO22 | IO0
 RESET (blue ![#blue](https://via.placeholder.com/10/0000ff/000000?text=+)) | &leftarrow; | D8 (GPIO15) | GPIO5 | IO15
 DIO0 (IRQ) (grey ![#grey](https://via.placeholder.com/10/999999/000000?text=+)) | &rightarrow; | D2 (GPIO4) | GPIO21 | IO4
 GND (black ![#black](https://via.placeholder.com/10/000000/000000?text=+)) | | G | GND | GND
