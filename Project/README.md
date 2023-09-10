@@ -26,10 +26,10 @@
 #### Wiring to ESP8266 NodeMCU devboard
 INA219/AM2320 | ESP8266 NodeMCU devboard
 --- | --- 
-SCL (I<sup>2</sup>C) ( $\colorbox{orange}{{\color{orange}{orange}}}$ ) | D1
-SDA (I<sup>2</sup>C) ( $\colorbox{brown}{{\color{brown}{brown}}}$ ) | D2
-GND ( $\colorbox{black}{{\color{black}{black}}}$ ) | G
-VCC (3.3V) ( $\colorbox{red}{{\color{red}{red}}}$ ) | 3V
+SCL (I<sup>2</sup>C) 🟠 | D1
+SDA (I<sup>2</sup>C) 🟤 | D2
+GND ⚫ | G
+VCC (3.3V) 🔴 | 3V
 --- | optional: for deepsleep, connect D0 -> RST
  
 ### CRC check in receiver
