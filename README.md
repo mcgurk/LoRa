@@ -37,27 +37,27 @@ Select right board from board settings (in my case "LOLIN(WEMOS) D1 R2 & mini").
 #### LED (D4/GPIO2) and D1/GPIO5 for free use and I<sup>2</sup>C unaccessible
 RFM95 | Direction | ESP8266/Wemos/NodeMCU | ESP32 | ESP-201
 --- | --- | --- | --- | ---
-MISO/SDO (SPI) ( $\colorbox{brown}{{\color{brown}{brown}}}$ ) | &leftarrow; | D6 (GPIO12) (SPI MISO) | GPIO19 (VSPI MISO) | IO12
-MOSI/SDI (SPI) ( $\colorbox{orange}{{\color{orange}{orange}}}$ ) | &rightarrow; | D7 (GPIO13) (SPI MOSI) | GPIO23 (VSPI MOSI) | IO13
-SCK/SCLK (SPI) ( $\colorbox{yellow}{{\color{yellow}{yellow}}}$ ) | &leftarrow; | D5 (GPIO14) (SPI SCLK) | GPIO18 (VSPI SCLK) | IO14
-NSS/SS/CS (SPI) ( $\colorbox{green}{{\color{green}{green}}}$ ) | &leftarrow; | D3 (GPIO0) | GPIO22 | IO0
-RESET ( $\colorbox{blue}{{\color{blue}{blue}}}$ ) | &leftarrow; | D8 (GPIO15) | GPIO5 | IO15
-DIO0 (IRQ) ( $\colorbox{gray}{{\color{gray}{gray}}}$ ) | &rightarrow; | D2 (GPIO4) | GPIO21 | IO4
-GND ( $\colorbox{black}{{\color{black}{black}}}$ ) | | G | GND | GND
-3.3V ( $\colorbox{red}{{\color{red}{red}}}$ ) | | 3V3 | 3V3 | 3.3V
+MISO/SDO (SPI) 🟤 | &leftarrow; | D6 (GPIO12) (SPI MISO) | GPIO19 (VSPI MISO) | IO12
+MOSI/SDI (SPI) 🟠 | &rightarrow; | D7 (GPIO13) (SPI MOSI) | GPIO23 (VSPI MOSI) | IO13
+SCK/SCLK (SPI) 🟡 | &leftarrow; | D5 (GPIO14) (SPI SCLK) | GPIO18 (VSPI SCLK) | IO14
+NSS/SS/CS (SPI) 🟢 | &leftarrow; | D3 (GPIO0) | GPIO22 | IO0
+RESET 🔵 | &leftarrow; | D8 (GPIO15) | GPIO5 | IO15
+DIO0 (IRQ) 🔘 | &rightarrow; | D2 (GPIO4) | GPIO21 | IO4
+GND ⚫ | | G | GND | GND
+3.3V 🔴 | | 3V3 | 3V3 | 3.3V
 ANA/ANT | | Antenna (86mm) |
 
 #### Alternative wiring for ESP8266: LED used as LoRa-RST and I<sup>2</sup>C (D1(GPIO5)/D2(GPIO4)) useable
 RFM95 | Direction | ESP8266/Wemos/NodeMCU | ESP-201
 --- | --- | --- | ---
-MISO/SDO (SPI) ( $\colorbox{brown}{{\color{brown}{brown}}}$ ) | &leftarrow; | D6 (GPIO12) (SPI MISO) | IO12
-MOSI/SDI (SPI) ( $\colorbox{orange}{{\color{orange}{orange}}}$ ) | &rightarrow; | D7 (GPIO13) (SPI MOSI) | IO13
-SCK/SCLK (SPI) ( $\colorbox{yellow}{{\color{yellow}{yellow}}}$ ) | &leftarrow; | D5 (GPIO14) (SPI SCLK) | IO14
-NSS/SS/CS (SPI) ( $\colorbox{green}{{\color{green}{green}}}$ ) | &leftarrow; | D3 (GPIO0) | IO0
-RESET ( $\colorbox{blue}{{\color{blue}{blue}}}$ ) | &leftarrow; | D4 (GPIO2) | IO2
-DIO0 (IRQ) ( $\colorbox{gray}{{\color{gray}{gray}}}$ ) | &rightarrow; | D8 (GPIO15) | IO15
-GND ( $\colorbox{black}{{\color{black}{black}}}$ ) | | G | GND
-3.3V ( $\colorbox{red}{{\color{red}{red}}}$ ) | | 3V3 | 3.3V
+MISO/SDO (SPI) 🟤 | &leftarrow; | D6 (GPIO12) (SPI MISO) | IO12
+MOSI/SDI (SPI) 🟠 | &rightarrow; | D7 (GPIO13) (SPI MOSI) | IO13
+SCK/SCLK (SPI) 🟡 | &leftarrow; | D5 (GPIO14) (SPI SCLK) | IO14
+NSS/SS/CS (SPI) 🟢 | &leftarrow; | D3 (GPIO0) | IO0
+RESET 🔵 | &leftarrow; | D4 (GPIO2) | IO2
+DIO0 (IRQ) 🔘 | &rightarrow; | D8 (GPIO15) | IO15
+GND ⚫ | | G | GND
+3.3V 🔴 | | 3V3 | 3.3V
 ANA/ANT | | Antenna (86mm)
 
 **Warning:** if DIO0 interrupt signal is triggered, ESP8266 doesn't boot up. This is safe wiring only if interrupt is not used.
